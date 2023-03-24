@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: <a href='#'>Affiliations</a>. Address. Contacts. Moto. Etc.
+subtitle: MSCS at UCSD
 
 profile:
   align: right
@@ -20,3 +20,4 @@ social: true  # includes social icons at the bottom of the page
 I am a first-year MSCS student at UCSD. I graduated from Central South University, Hunan, China. I intent to persue a Ph.D. in the future. My interest lies at the intersection of Computer Vision and Natual Language Processing. I am interested in utilizing multimodal data. I have prior experience in CV and NLP. During my undergraduate study, I did projects about analysing the interpretability of Convolutional Neural Networks and medical text classification using the BERT model. Recently, I have been conducting independent research with Prof. Zhiting Hu (http://zhiting.ucsd.edu/) with the topic of Generate Object-specific Image with Diffusion Model and RLPrompt. 
 
 Contact me at: xiw136@ucsd.edu
+

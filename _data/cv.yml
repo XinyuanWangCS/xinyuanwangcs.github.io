@@ -2,96 +2,102 @@
   type: map
   contents:
     - name: Full Name
-      value: Albert Einstein
+      value: Xinyuan Wang
     - name: Date of Birth
-      value: 14th March 1879
+      value: 26th June 1999
     - name: Languages
-      value: English, German
+      value: Chinese, English
 
 - title: Education
   type: time_table
   contents:
-    - title: PhD
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1905
-      description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Federal teaching diploma
-      institution: Eidgenössische Technische Hochschule, Zurich, Switzerland
-      year: 1900
-      description:
-        - Description 1.
-        - Description 2.
+    - title: Master of Science in Computer Science
+      institution: University of California, San Diego, California, USA
+      year: 2022 - Present
 
-- title: Experience
+    - title: Bachelor of Science in Computer Science and Technology 
+      institution: Central South University, Hunan, China
+      year: 2018-2022
+      description:
+        - "GPA: 90.97/100 (3.88/4.00)"
+        - Awarded the School of Computer Science and Engineering Annual Scholarship (2018 - 2021)
+        - Awarded 2022 Outstanding Graduates of Central South University (Jun. 2022)
+        - "Graduation Thesis: The Research on The Interpretability Method of Deep Neural Network Based on Average Image"
+
+- title: Research Experience
   type: time_table
   contents:
-    - title: Professor of Theoretical Physics
-      institution: Institute for Advanced Study, Princeton University
-      year: 1933 - 1955
+    - title: Generate Object-specific Image with Diffusion Model and RLPrompt
+      advisor: Prof. Zhiting Hu, Assistant Professor at UCSD
+      institution: University of California, San Diego, California, USA
+      year: 2022 - Present
       description:
-        - Description 1.
-        - Description 2.
-        - title: Description 3.
-          contents:
-            - Sub-description 1.
-            - Sub-description 2.
-    - title: Visiting Professor
-      institution: California Institute of Technology, Pasadena, California, US
-      year: 1933
+        - Independent research advised by Prof. Zhiting Hu, Assistant Professor at UCSD
+        - Text-to-image generating model like Diffusion model has the ability to generate abundant different images with different objects in the training data. However, it doesn’t have the ability to generate new images using a specific object/person/subject in a given image. This project aims to address this challenge by using a Reinforcement Learning method (RLPrompt) to search for the best hard prompt as an text identifier of the subject in several images. This identifier could be embedded in prompts or combined with other identifiers, thereby increasing flexibility and controllability during image generation.
+        - This project is still on-going advised by Prof. Zhiting.
+    - title: Interpretable Object Detection via Deep Learning
+      advisor: Research Assistant to Professor Ying Zhao, Sub-Dean of the Department of Computer Science and Technology
+      institution: Central South University, Hunan, China
+      year: Dec. 2020 – Jul. 2021
       description:
-        - Description 1.
-        - Description 2.
+        - This project aimed to improve the interpretability of CNN by visualization and provide guidance for feature transferring of high-value features in CNN
+        - Proposed a method called Average Image Analysis to discuss the low-frequency information learned in the network, which quantifies the influence of the input on the neurons by calculating the cosine distance of guided-backpropagation neural visualization results and average image of data sets.
+        - This method quantifies gradient-based CNN visualization methods, provides more understanding of high semantic information in different depths in the network, and could give guidance to feature transfer in the subsequent step.
+        - Software Copyright “A visual analysis and feature transfer method of internal feature importance in neural networks”, 2021-06-25
+        - "Graduation Thesis: “The Research on The Interpretability Method of Deep Neural Network Based on Average Image”, 2022-06-01"
 
-    - title: Director
-      institution: Kaiser Wilhelm Institute for Physics, Berlin, Germany.
-      year: 1917-1933
+    - title: Automatic Medical Triage System Based on Natural Language Processing
+      advisor: Prof. Ying Zhao, Sub-Dean of the Department of Computer Science and Technology at Central South University
+      institution: Central South University, Hunan, China
+      year: Jan. 2021 – Jun. 2021
+      description: 
+        - In line with solving practical medical problems, I assisted with researching medical triage issues in China and with my classmates, built an automatic medical triage system based on medical question answering data using Bidirectional Encoder Representation from Transformers
+        - Our system performs well when testing with 95% top-2 accuracy on 5 major disease data sets and 78.3% top-2 accuracy on 20 disease data sets, which is significantly higher than Sequence-to-Sequence models built by others
+        - "Output paper: “Reduce the medical burden: An automatic medical triage system using text classification BERT based on Transformer structure”, ICBASE 2021"
 
-    - title: Professor of Theoretical Physics
-      institution: Karl-Ferdinand University, Prague, Czechoslovakia
-      year: 1911 - 1917
+    - title: Detecting Malicious Webshells by Constructing Webshell Family Clusters
+      advisor: Prof. Ying Zhao, Sub-Dean of the Department of Computer Science and Technology at Central South University
+      institution: Central South University, Hunan, China
+      year: Dec. 2021 - May 2022
       description:
+        - Webshells are malicious scripts in web servers. This project aims to detect malicious webshells by constructing webshell families according to the clusters of their program call sequences. The main method is composed of  reducing the dimensionality of webshell code with Auto-encoders, clustering low-dimensional webshells and interactively constructing webshell families using Visualization techniques.
+        - I researched on text classification CNN, implemented and tested different CNN-based Auto-encoders and applied different clustering algorithms. I also merged dimensionality reduction and clustering into one model using Contrastive Dimensionality Reduction model.
+        - "Software Copyright: “Interactive Family-building Software of Malicious Webshell Files V1.0”, 2022-06-27"
+    - title: Visualization of minority structures in graphs
+      advisor: Prof. Fangfang Zhou, Professor at Central South University
+      institution: Central South University, Hunan, China
+      year: Nov. 2019 – Apr. 2020
+      description:
+        - Minority structures in a graph, like high degree nodes and bridges, are important for graph analysis and comprehension.
+        - I proposed two kinds of minority graph structures called super pivot and huge star and one algorithm to detect these structures by identifying triangle structures using depth-first-search. Experiments showed that this algorithm worked well on small- and middle-scale graphs with high accuracy, recall value and time efficiency.
+        - VINCI 2020 poster, “A fast method for detecting minority structures in a graph.”. In the proposal, We proposed four typical minority structures in graphs and two algorithms to detect these structures fast and efficiently.
 
-    - title: Associate Professor of Theoretical Physics
-      institution: University of Zurich, Zurich, Switzerland
-      year: 1909 - 1911
-
-- title: Open Source Projects
-  type: time_table
-  contents:
-    - title: <a href="https://github.com/alshedivat/al-folio">al-folio</a>
-      year: 2015-now
-      description: A beautiful, simple, clean, and responsive Jekyll theme for academics.
 
 - title: Honors and Awards
   type: time_table
   contents:
-    - year: 1921
+    - year: 2019
       items: 
-        - Nobel Prize in Physics 
-        - Matteucci Medal
-    - year: 2029
+        - School of Computer Science and Engineering Annual Scholarship
+    - year: 2020
       items: 
-        - Max Planck Medal
+        - School of Computer Science and Engineering Annual Scholarship
+    - year: 2021
+      items: 
+        - School of Computer Science and Engineering Annual Scholarship
+    - year: 2022
+      items: 
+        - 2022 Outstanding Graduates of Central South University
 
-- title: Academic Interests
+- title: Academic Interest
   type: nested_list
   contents:
-    - title: Topic 1.
+    - title: Natrual Language Processing and Computer Vision
       items: 
-        - Description 1.
-        - Description 2.
-    - title: Topic 2.
-      items:
-        - Description 1.
-        - Description 2.
+        - I am interested in the intersection of NLP and CV and how to utilize multimodal data. I intend to extract the concepts from the combination of Image and Language data.
+        
 
 - title: Other Interests
   type: list
   contents:
-    - <u>Hobbies:</u> Hobby 1, Hobby 2, etc.
+    - <u>Hobbies:</u> Skating, Basketball, Video Games.

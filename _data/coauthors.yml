@@ -14,9 +14,6 @@
   - firstname: ["Johann Sebastian", "J. S."]
     url: https://en.wikipedia.org/wiki/Johann_Sebastian_Bach
 
-  - firstname: ["Carl Philipp Emanuel", "C. P. E."]
-    url: https://en.wikipedia.org/wiki/Carl_Philipp_Emanuel_Bach
-
 "Przibram":
   - firstname: ["Karl"]
     url: https://link.springer.com/article/10.1007/s00016-019-00242-z
@@ -32,3 +29,33 @@
 "Planck":
   - firstname: ["Max"]
     url: https://en.wikipedia.org/wiki/Max_Planck
+
+"Zhou":
+  - firstname: ["Fangfang", "F."]
+
+"Chen":
+  - firstname: ["Qi'an", "Q."]
+
+"Cui":
+  - firstname: ["Yunlong", "Y."]
+
+"Wang":
+  - firstname: ["Xinyuan", "X."]
+
+"Ma":
+  - firstname: ["Hongxu", "H."]
+
+"Zhao":
+  - firstname: ["Ying", "Y."]
+
+"Li":
+  - firstname: ["Xiaoli", "X."]
+
+"Tao":
+  - firstname: ["Make", "M."]
+
+"Wang":
+  - firstname: ["Runpu", "R."]
+
+"Zhang":
+  - firstname: ["Likui", "L."]
