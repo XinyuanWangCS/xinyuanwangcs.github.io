@@ -24,7 +24,7 @@
     <!-- Fonts & Icons -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.4/css/all.min.css" integrity="sha256-mUZM63G8m73Mcidfrv5E+Y61y7a12O5mW4ezU3bxqW4=" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.1/css/academicons.min.css" integrity="sha256-i1+4qU2G2860dGGIOJscdC30s9beBXjFfzjWLjBRsBg=" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700%7CRoboto+Slab:100,300,400,500,700%7CMaterial+Icons">
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Roboto+Slab:100,300,400,500,700|Material+Icons">
 
     <!-- Code Syntax Highlighting -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jwarby/jekyll-pygments-themes@master/github.css" media="" id="highlight_theme_light">
@@ -108,7 +108,7 @@
         <div class="post">
 
           <header class="post-header">
-            <h1 class="post-title">cv <a href="/assets/pdf/CV_Xinyuan%20Wang.pdf" target="_blank" rel="noopener noreferrer" class="float-right"><i class="fas fa-file-pdf"></i></a>
+            <h1 class="post-title">cv <a href="/assets/pdf/CV_XinyuanWang.pdf" target="_blank" rel="noopener noreferrer" class="float-right"><i class="fas fa-file-pdf"></i></a>
 </h1>
             <p class="post-description"></p>
           </header>
@@ -153,7 +153,7 @@
           
             <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px;">
               <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px;">
-                2022 - Present
+                Sept. 2022 - Present
               </span>
             </div>
           
@@ -165,6 +165,16 @@
             <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem;">University of California, San Diego, California, USA</h6>
             
             
+              <ul class="items">
+                
+                  <li>
+                    
+                      <span class="item">GPA: 4.00/4.00</span>
+                    
+                  </li>
+                
+              </ul>
+            
             
           </div>
         </div>
@@ -175,7 +185,7 @@
           
             <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px;">
               <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px;">
-                2018-2022
+                Sept. 2018 - Jun. 2022
               </span>
             </div>
           
@@ -207,12 +217,6 @@
                     
                   </li>
                 
-                  <li>
-                    
-                      <span class="item">Graduation Thesis: The Research on The Interpretability Method of Deep Neural Network Based on Average Image</span>
-                    
-                  </li>
-                
               </ul>
             
             
@@ -236,13 +240,13 @@
           
             <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px;">
               <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px;">
-                2022 - Present
+                May 2023 - Present
               </span>
             </div>
           
           <div class="col-xs-10 cl-sm-10 col-md-10 mt-2 mt-md-0">
             
-            <h6 class="title font-weight-bold ml-1 ml-md-4">Generate Object-specific Image with Diffusion Model and RLPrompt</h6>
+            <h6 class="title font-weight-bold ml-1 ml-md-4">PromptAgent - Automatic LLM Prompt Optimization Framework</h6>
             
             
             <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem;">University of California, San Diego, California, USA</h6>
@@ -252,19 +256,119 @@
                 
                   <li>
                     
-                      <span class="item">Independent research advised by Prof. Zhiting Hu, Assistant Professor at UCSD</span>
+                      <span class="item">Motivation: Existing prompt optimization methods tend to overlook the depth of domain knowledge and struggle to efficiently explore the vast space of expert-level prompts using simple sampling or searching methods. PromptAgent formulates prompt optimization as a strategic planning problem and employs a principled planning algorithm to navigate the expert-level prompt space efficiently and effectively.</span>
                     
                   </li>
                 
                   <li>
                     
-                      <span class="item">Text-to-image generating model like Diffusion model has the ability to generate abundant different images with different objects in the training data. However, it doesn’t have the ability to generate new images using a specific object/person/subject in a given image. This project aims to address this challenge by using a Reinforcement Learning method (RLPrompt) to search for the best hard prompt as an text identifier of the subject in several images. This identifier could be embedded in prompts or combined with other identifiers, thereby increasing flexibility and controllability during image generation.</span>
+                      <span class="item">Methodology: Introduced a novel automatic prompt optmization agent that integrates Monte Carlo Tree Search (MCTS), a principle planning algorithm, to explore the prompt space. Additionally, by employing a trial-and-error approach, the domain knowledge in the data is incorporated into the optimzed prompt during optimizing.</span>
                     
                   </li>
                 
                   <li>
                     
-                      <span class="item">This project is still on-going advised by Prof. Zhiting.</span>
+                      <span class="item">Results: PromptAgent has been rigorously experimented on various tasks, covering BIG-Bench Hard, domain-specific, and general NLP tasks, showing it outperforms strong human prompting methods, such as Chain-of-Thought, as well as recent prompt optimization baselines. Analyses highlight its ability to craft expert-level, detailed, and domain-insightful prompts with superior performance and efficiency than other baselines. Moreover, the optimized prompts demonstrate better generalizability across models compared to those written by humans or other baselines.</span>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <span class="item">Output paper: PromptAgent - Strategic Planning with Language Models Enables Expert-level Prompt Optimization </span>
+                    
+                  </li>
+                
+              </ul>
+            
+            
+          </div>
+        </div>
+      </li>
+    
+      <li class="list-group-item">
+        <div class="row">
+          
+            <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px;">
+              <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px;">
+                May 2023 - Present
+              </span>
+            </div>
+          
+          <div class="col-xs-10 cl-sm-10 col-md-10 mt-2 mt-md-0">
+            
+            <h6 class="title font-weight-bold ml-1 ml-md-4">LLM Reasoners Library</h6>
+            
+            
+            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem;">University of California, San Diego, California, USA</h6>
+            
+            
+              <ul class="items">
+                
+                  <li>
+                    
+                      <span class="item">Motivation: LLM Reasoners is a library designed to enhance the reasoning capabilities of Large Language Models (LLMs) using advanced algorithms. It treats multi-step reasoning as a planning task, searching for the optimal reasoning chain. This approach aims to strike the right balance between exploration and exploitation, guided by concepts like the 'World Model' and 'Reward'.</span>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <span class="item">Methodology: The library is based on Reasoning via Planning. It offers the most up-to-date search algorithms for reasoning with LLMs, such as RAP-MCTS, Tree-of-Thoughts, Guided Decoding, and more. Additionally, the framework is compatible with various LLM platforms, including Huggingface transformers, OpenAI API, and others. I am responsible for 1. Managed experiments on Math datasets using various reasoning methods, including Least-to-Most Prompting, CoT, and RAP-MCTS. 2. Developed Tree-of-Thought searching algorithm.</span>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <span class="item">Results: This library integrates cutting-edge LLM reasoning algorithms, the latest LLM models, and intuitive visualization. It also offers accessible interfaces for all incorporated algorithms and models. Notably, among the recent LLM reasoning algorithms, our RAP-MCTS algorithm shows superior performance over other searching or prompting methods on Math, Logical, and Embodied tasks.</span>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <span class="item">Github Library: LLM Reasoners Github Stars: 521</span>
+                    
+                  </li>
+                
+              </ul>
+            
+            
+          </div>
+        </div>
+      </li>
+    
+      <li class="list-group-item">
+        <div class="row">
+          
+            <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px;">
+              <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px;">
+                July 2023 - Present
+              </span>
+            </div>
+          
+          <div class="col-xs-10 cl-sm-10 col-md-10 mt-2 mt-md-0">
+            
+            <h6 class="title font-weight-bold ml-1 ml-md-4">Refining Diffusion Model Loss with End-to-End Information</h6>
+            
+            
+            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem;">University of California, San Diego, California, USA</h6>
+            
+            
+              <ul class="items">
+                
+                  <li>
+                    
+                      <span class="item">Motivation: Diffusion models can generate photorealistic images, but they often make many semantic mistakes, such as twisted fingers and ears. This is because Diffusion models are trained with per-pixel loss (MSE) in an auto-regressive manner, which lacks end-to-end conceptual information. Incorporating end-to-end information into the training loss of diffusion models is essential to correct the conceptual errors and enhance performance of diffusion models.</span>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <span class="item">Methodology: A Generative Adversarial Model (GAN) is concurrently trained with the Diffusion Model, utilizing end-to-end synthesized data. The discriminator of GAN injects conceptual guidance into Diffusion models' training process. This approach allows the original per-pixel loss to be augmented with comprehensive set information.</span>
+                    
+                  </li>
+                
+                  <li>
+                    
+                      <span class="item">Results: Experiments show that the unconditional transformer-based Diffusion model, DiT, can generate images of higher fidelity (measured by FID) when trained with end-to-end conceptual guidance on CelebA-HQ Dataset.</span>
                     
                   </li>
                 
@@ -296,31 +400,31 @@
                 
                   <li>
                     
-                      <span class="item">This project aimed to improve the interpretability of CNN by visualization and provide guidance for feature transferring of high-value features in CNN</span>
+                      <span class="item">Motivation: CNNs are widely used as black boxes, while the interpretability of their features and feature importance is less explored. This project aimed to improve the interpretability of CNN by visualization and provide guidance for feature transferring of high-value features in CNN.</span>
                     
                   </li>
                 
                   <li>
                     
-                      <span class="item">Proposed a method called Average Image Analysis to discuss the low-frequency information learned in the network, which quantifies the influence of the input on the neurons by calculating the cosine distance of guided-backpropagation neural visualization results and average image of data sets.</span>
+                      <span class="item">Methodology: Proposed the Average Image Analysis method to evaluate the network's low-frequency information. It measures the input's influence on neurons by calculating the cosine distance between neuron's guided-backpropagation visualizations and the dataset's average image. </span>
                     
                   </li>
                 
                   <li>
                     
-                      <span class="item">This method quantifies gradient-based CNN visualization methods, provides more understanding of high semantic information in different depths in the network, and could give guidance to feature transfer in the subsequent step.</span>
+                      <span class="item">Results: This approach improves the clarity of gradient-based CNN visualizations, deepens insights into semantic information at different network depths, and provides guidance for subsequent feature transfer. Experiments reveal that pruning 40% of high-importance features dramatically reduces performance, while eliminating 40% of low-importance features has negligible impact on the model's performance.</span>
                     
                   </li>
                 
                   <li>
                     
-                      <span class="item">Software Copyright “A visual analysis and feature transfer method of internal feature importance in neural networks”, 2021-06-25</span>
+                      <span class="item">Software Copyright: A Visual Analysis of Internal Feature Importance and Feature Transfer Method in Convolutional Neural Networks, 2021-06-25</span>
                     
                   </li>
                 
                   <li>
                     
-                      <span class="item">Graduation Thesis: “The Research on The Interpretability Method of Deep Neural Network Based on Average Image”, 2022-06-01</span>
+                      <span class="item">Graduation Thesis: The Research on The Interpretability Method of Deep Neural Network Based on Average Image, 2022-06-01</span>
                     
                   </li>
                 
@@ -552,6 +656,12 @@
                     
                   </li>
                 
+                  <li>
+                    
+                      <span class="item">Guangyun Technology Scholarship</span>
+                    
+                  </li>
+                
               </ul>
             
           </div>
@@ -598,11 +708,33 @@
                     <ul class="card-text font-weight-light list-group list-group-flush">
     
       <li class="list-group-item">
-      <h5 class="font-italic">Natrual Language Processing and Computer Vision</h5>
+      <h5 class="font-italic">Large Language Models (LLMs) with World Models</h5>
       
         <ul class="subitems">
           
-            <li><span class="subitem">I am interested in the intersection of NLP and CV and how to utilize multimodal data. I intend to extract the concepts from the combination of Image and Language data.</span></li>
+            <li><span class="subitem">Augmenting LLMs with interfaces to world models and mechanisms to understand and process world information, thereby enabling them to address real-world challenges more effectively.</span></li>
+          
+        </ul>
+      
+      </li>
+    
+      <li class="list-group-item">
+      <h5 class="font-italic">Foundation Model Inference Enhancement</h5>
+      
+        <ul class="subitems">
+          
+            <li><span class="subitem">Foundation models demonstrate remarkable capabilities across a range of tasks. However, due to limitations in how we interact with them, their inference abilities are not fully exploited. One promising direction is to explore expert-level prompt optimization, bridging the gap between the model's inherent distribution and the specific distribution of tasks.</span></li>
+          
+        </ul>
+      
+      </li>
+    
+      <li class="list-group-item">
+      <h5 class="font-italic">Conceptual Enhancement of Generative Models</h5>
+      
+        <ul class="subitems">
+          
+            <li><span class="subitem">While large generative models can produce data with high fidelity and diversity, but they can only learn conceptual alignment implicitly. This can result in conceptual errors and incorrect heuristics. By focusing on conceptual enhancement, we can improve the reliability and interpretability of these models.</span></li>
           
         </ul>
       
