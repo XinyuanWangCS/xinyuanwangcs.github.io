@@ -2,7 +2,7 @@
 layout: about
 title: about
 permalink: /
-subtitle: MSCS at UCSD
+subtitle: Welcome!
 
 profile:
   align: right

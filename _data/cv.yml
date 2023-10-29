@@ -60,7 +60,7 @@
       description:
         - "Motivation: CNNs are widely used as black boxes, while the interpretability of their features and feature importance is less explored. This project aimed to improve the interpretability of CNN by visualization and provide guidance for feature transferring of high-value features in CNN."
         - "Methodology: Proposed the Average Image Analysis method to evaluate the network's low-frequency information. It measures the input's influence on neurons by calculating the cosine distance between neuron's guided-backpropagation visualizations and the dataset's average image. "
-        - "Results: This approach improves the clarity of gradient-based CNN visualizations, deepens insights into semantic information at different network depths, and provides guidance for subsequent feature transfer. Experiments reveal that pruning 40\% of high-importance features dramatically reduces performance, while eliminating 40\% of low-importance features has negligible impact on the model's performance."
+        - "Results: This approach improves the clarity of gradient-based CNN visualizations, deepens insights into semantic information at different network depths, and provides guidance for subsequent feature transfer. Experiments reveal that pruning 40% of high-importance features dramatically reduces performance, while eliminating 40% of low-importance features has negligible impact on the model's performance."
         - "Software Copyright: A Visual Analysis of Internal Feature Importance and Feature Transfer Method in Convolutional Neural Networks, 2021-06-25"
         - "Graduation Thesis: The Research on The Interpretability Method of Deep Neural Network Based on Average Image, 2022-06-01"
 
