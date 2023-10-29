@@ -13,38 +13,55 @@
   contents:
     - title: Master of Science in Computer Science
       institution: University of California, San Diego, California, USA
-      year: 2022 - Present
+      year: Sept. 2022 - Present
 
     - title: Bachelor of Science in Computer Science and Technology 
       institution: Central South University, Hunan, China
-      year: 2018-2022
+      year: Sept. 2018 - Jun. 2022
       description:
         - "GPA: 90.97/100 (3.88/4.00)"
         - Awarded the School of Computer Science and Engineering Annual Scholarship (2018 - 2021)
         - Awarded 2022 Outstanding Graduates of Central South University (Jun. 2022)
-        - "Graduation Thesis: The Research on The Interpretability Method of Deep Neural Network Based on Average Image"
 
 - title: Research Experience
   type: time_table
   contents:
-    - title: Generate Object-specific Image with Diffusion Model and RLPrompt
-      advisor: Prof. Zhiting Hu, Assistant Professor at UCSD
+    - title: PromptAgent: Automatic LLM Prompt Optimization Framework
+      advisor: Prof. [Zhiting Hu](http://zhiting.ucsd.edu/)
       institution: University of California, San Diego, California, USA
-      year: 2022 - Present
+      year: May 2023 - Present
       description:
-        - Independent research advised by Prof. Zhiting Hu, Assistant Professor at UCSD
-        - Text-to-image generating model like Diffusion model has the ability to generate abundant different images with different objects in the training data. However, it doesn’t have the ability to generate new images using a specific object/person/subject in a given image. This project aims to address this challenge by using a Reinforcement Learning method (RLPrompt) to search for the best hard prompt as an text identifier of the subject in several images. This identifier could be embedded in prompts or combined with other identifiers, thereby increasing flexibility and controllability during image generation.
-        - This project is still on-going advised by Prof. Zhiting.
+        - Motivation: Existing prompt optimization methods tend to overlook the depth of domain knowledge and struggle to efficiently explore the vast space of expert-level prompts using simple sampling or searching methods. PromptAgent formulates prompt optimization as a strategic planning problem and employs a principled planning algorithm to navigate the expert-level prompt space efficiently and effectively.
+        - Methodology: Introduced a novel automatic prompt optmization agent that integrates Monte Carlo Tree Search (MCTS), a principle planning algorithm, to explore the prompt space. Additionally, by employing a trial-and-error approach, the domain knowledge in the data is incorporated into the optimzed prompt during optimizing.
+        - Results: PromptAgent has been rigorously experimented on various tasks, covering BIG-Bench Hard, domain-specific, and general NLP tasks, showing it outperforms strong human prompting methods, such as Chain-of-Thought, as well as recent prompt optimization baselines. Analyses highlight its ability to craft expert-level, detailed, and domain-insightful prompts with superior performance and efficiency than other baselines. Moreover, the optimized prompts demonstrate better generalizability across models compared to those written by humans or other baselines.
+        - Output paper: PromptAgent: Strategic Planning with Language Models Enables Expert-level Prompt Optimization 
+    - title: LLM Reasoners Library
+      advisor: Prof. [Zhiting Hu](http://zhiting.ucsd.edu/)
+      institution: University of California, San Diego, California, USA
+      year: May 2023 - Present
+      description:
+        - Motivation: LLM Reasoners is a library designed to enhance the reasoning capabilities of Large Language Models (LLMs) using advanced algorithms. It treats multi-step reasoning as a planning task, searching for the optimal reasoning chain. This approach aims to strike the right balance between exploration and exploitation, guided by concepts like the 'World Model' and 'Reward'.
+        - Methodology: The library is based on Reasoning via Planning. It offers the most up-to-date search algorithms for reasoning with LLMs, such as RAP-MCTS, Tree-of-Thoughts, Guided Decoding, and more. Additionally, the framework is compatible with various LLM platforms, including Huggingface transformers, OpenAI API, and others. I am responsible for 1. Managed experiments on Math datasets using various reasoning methods, including Least-to-Most Prompting, CoT, and RAP-MCTS. 2. Developed Tree-of-Thought searching algorithm.
+        - Results: This library integrates cutting-edge LLM reasoning algorithms, the latest LLM models, and intuitive visualization. It also offers accessible interfaces for all incorporated algorithms and models. Notably, among the recent LLM reasoning algorithms, our RAP-MCTS algorithm shows superior performance over other searching or prompting methods on Math, Logical, and Embodied tasks.
+        - Github Library: LLM Reasoners (Github Stars 521)
+    - title: Refining Diffusion Model Loss with End-to-End Information
+      advisor: Prof. [Zhuowen Tu](https://pages.ucsd.edu/~ztu/)
+      institution: University of California, San Diego, California, USA
+      year: July 2023 - Present
+      description:
+        - Motivation: Diffusion models can generate photorealistic images, but they often make many semantic mistakes, such as twisted fingers and ears. This is because Diffusion models are trained with per-pixel loss (MSE) in an auto-regressive manner, which lacks end-to-end conceptual information. Incorporating end-to-end information into the training loss of diffusion models is essential to correct the conceptual errors and enhance performance of diffusion models.
+        - Methodology: A Generative Adversarial Model (GAN) is concurrently trained with the Diffusion Model, utilizing end-to-end synthesized data. The discriminator of GAN injects conceptual guidance into Diffusion models' training process. This approach allows the original per-pixel loss to be augmented with comprehensive set information.
+        - Results: Experiments show that the unconditional transformer-based Diffusion model, DiT, can generate images of higher fidelity (measured by FID) when trained with end-to-end conceptual guidance on CelebA-HQ Dataset.
     - title: Interpretable Object Detection via Deep Learning
       advisor: Research Assistant to Professor Ying Zhao, Sub-Dean of the Department of Computer Science and Technology
       institution: Central South University, Hunan, China
       year: Dec. 2020 – Jul. 2021
       description:
-        - This project aimed to improve the interpretability of CNN by visualization and provide guidance for feature transferring of high-value features in CNN
-        - Proposed a method called Average Image Analysis to discuss the low-frequency information learned in the network, which quantifies the influence of the input on the neurons by calculating the cosine distance of guided-backpropagation neural visualization results and average image of data sets.
-        - This method quantifies gradient-based CNN visualization methods, provides more understanding of high semantic information in different depths in the network, and could give guidance to feature transfer in the subsequent step.
-        - Software Copyright “A visual analysis and feature transfer method of internal feature importance in neural networks”, 2021-06-25
-        - "Graduation Thesis: “The Research on The Interpretability Method of Deep Neural Network Based on Average Image”, 2022-06-01"
+        - Motivation: CNNs are widely used as black boxes, while the interpretability of their features and feature importance is less explored. This project aimed to improve the interpretability of CNN by visualization and provide guidance for feature transferring of high-value features in CNN.
+        - Methodology: Proposed the Average Image Analysis method to evaluate the network's low-frequency information. It measures the input's influence on neurons by calculating the cosine distance between neuron's guided-backpropagation visualizations and the dataset's average image. 
+        - Results: This approach improves the clarity of gradient-based CNN visualizations, deepens insights into semantic information at different network depths, and provides guidance for subsequent feature transfer. Experiments reveal that pruning 40\% of high-importance features dramatically reduces performance, while eliminating 40\% of low-importance features has negligible impact on the model's performance.
+        - Software Copyright: A Visual Analysis of Internal Feature Importance and Feature Transfer Method in Convolutional Neural Networks, 2021-06-25
+        - Graduation Thesis: The Research on The Interpretability Method of Deep Neural Network Based on Average Image, 2022-06-01
 
     - title: Automatic Medical Triage System Based on Natural Language Processing
       advisor: Prof. Ying Zhao, Sub-Dean of the Department of Computer Science and Technology at Central South University
@@ -85,6 +102,7 @@
     - year: 2021
       items: 
         - School of Computer Science and Engineering Annual Scholarship
+        - Guangyun Technology Scholarship
     - year: 2022
       items: 
         - 2022 Outstanding Graduates of Central South University
@@ -92,10 +110,15 @@
 - title: Academic Interest
   type: nested_list
   contents:
-    - title: Natrual Language Processing and Computer Vision
+    - title: Large Language Models (LLMs) with World Models
       items: 
-        - I am interested in the intersection of NLP and CV and how to utilize multimodal data. I intend to extract the concepts from the combination of Image and Language data.
-        
+        - Augmenting LLMs with interfaces to world models and mechanisms to understand and process world information, thereby enabling them to address real-world challenges more effectively.
+    - title: Foundation Model Inference Enhancement
+      items: 
+        - Foundation models demonstrate remarkable capabilities across a range of tasks. However, due to limitations in how we interact with them, their inference abilities are not fully exploited. One promising direction is to explore expert-level prompt optimization, bridging the gap between the model's inherent distribution and the specific distribution of tasks.
+    - title: Conceptual Enhancement of Generative Models
+      items: 
+        - While large generative models can produce data with high fidelity and diversity, but they can only learn conceptual alignment implicitly. This can result in conceptual errors and incorrect heuristics. By focusing on conceptual enhancement, we can improve the reliability and interpretability of these models.
 
 - title: Other Interests
   type: list
