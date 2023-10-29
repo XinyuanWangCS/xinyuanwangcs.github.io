@@ -4,5 +4,5 @@ permalink: /cv/
 title: cv
 nav: true
 nav_order: 2
-cv_pdf: CV_Xinyuan Wang.pdf
+cv_pdf: CV_XinyuanWang.pdf
 ---

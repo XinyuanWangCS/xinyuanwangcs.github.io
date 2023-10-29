@@ -6,7 +6,7 @@ subtitle: MSCS at UCSD
 
 profile:
   align: right
-  image: me.jpg
+  image: me.png
   image_circular: false # crops the image to make it circular
   address: 
     <p>3869 Miramar st. Box 1214</p>
