@@ -21,9 +21,9 @@ Hi! I am now a second-year MSCS student at University of California, San Diego (
 
 Research Interests
 ------
-- **Large Language Models (LLMs) with World Models**: Augmenting LLMs with interfaces to world models and mechanisms to understand and process world information, thereby enabling them to address real-world challenges more effectively. ([LLM Reasoners](https://www.llm-reasoners.net/))
-- **Foundation Model Inference Enhancement**: Foundation models demonstrate remarkable capabilities across a range of tasks. However, due to limitations in how we interact with them, their inference abilities are not fully exploited. One promising direction is to explore expert-level prompt optimization, bridging the gap between the model's inherent distribution and the specific distribution of tasks ([PromptAgent](https://arxiv.org/abs/2310.16427))
-- **Conceptual Enhancement of Generative Models**: While large generative models can produce data with high fidelity and diversity, but they can only learn conceptual alignment implicitly. This can result in conceptual errors and incorrect heuristics. By focusing on conceptual enhancement, we can improve the reliability and interpretability of these models.
+- **Large Language Models (LLMs) with World Models**: Augmenting LLMs with a world model formulation to enable principled decision-making, planning, and simulation. Enhancing the LLM's abilities in reasoning, planning, and interacting with the world. ([LLM Reasoners](https://www.llm-reasoners.net/))
+- **Foundation Model Prompting**: Employing interpretable prompting to bridge the domain gap between user objectives and the outputs of foundation models. Effectively boosting the performance of foundation models on complex tasks through efficient and effective prompting. ([PromptAgent](https://arxiv.org/abs/2310.16427))
+- **Semantic Enhancement and Control of Generative Models**: Generative models, such as text-to-image models, sometimes exhibit semantic inconsistencies and challenges in control. My aim is to integrate semantic information into the models during training or inference to enhance their semantic fidelity, reliability, and controllability.
 
 Research Overview
 ------
