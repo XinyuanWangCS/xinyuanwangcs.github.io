@@ -1,8 +1,8 @@
 ---
 layout: about
-title: about
+title: Xinyuan Wang
 permalink: /
-subtitle: Welcome!
+subtitle: Hi! I am Xinyuan Wang 王心远.
 
 profile:
   align: right
@@ -17,7 +17,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-Hi! I am Xinyuan Wang. I am now an MSCS student at University of California, San Diego (UCSD), expected to graduate in Jun. 2024. And I plan to pursue a Ph.D. in the future. I am luckily to be mentored by professors at UCSD in both Natural Language Processing and Computer Vision, and have hands-on experiences in both fields. I am now mentored by Prof. [Zhiting Hu](http://zhiting.ucsd.edu/) and Postdoc. [Zhen Wang](https://zhenwang9102.github.io/) in Large Language Model (LLM) Reasoning, Agent, and Prompting. I am also mentored by Prof. [Zhuowen Tu](https://pages.ucsd.edu/~ztu/) in generative models (diffusion model). Before UCSD, I graduated from Central South University (CSU) in Hunan, China, mentored by Prof. [Ying Zhao](https://faculty.csu.edu.cn/zhaoying). 
+I am now an MSCS student at University of California, San Diego (UCSD), expected to graduate in Jun. 2024. And I plan to pursue a Ph.D. in the future. I am luckily to be mentored by professors at UCSD in both Natural Language Processing and Computer Vision, and have hands-on experiences in both fields. I am now mentored by Prof. [Zhiting Hu](http://zhiting.ucsd.edu/) and Postdoc. [Zhen Wang](https://zhenwang9102.github.io/) in Large Language Model (LLM) Reasoning, Agent, and Prompting. I am also mentored by Prof. [Zhuowen Tu](https://pages.ucsd.edu/~ztu/) in generative models (diffusion model). Before UCSD, I graduated from Central South University (CSU) in Hunan, China, mentored by Prof. [Ying Zhao](https://faculty.csu.edu.cn/zhaoying). 
 
 Research Interests
 ------
