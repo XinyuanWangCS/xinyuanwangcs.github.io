@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-PromptAgent is accepted by [ICLR 2024](https://iclr.cc/)! 
+**PromptAgent** is accepted by [ICLR 2024](https://iclr.cc/) (The Twelfth International Conference on Learning Representations)! 

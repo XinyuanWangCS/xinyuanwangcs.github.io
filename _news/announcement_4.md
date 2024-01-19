@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Paper published on Arxiv! PromptAgent: Strategic Planning with Language Models Enables Expert-level Prompt Optimization
+Paper published on Arxiv! [PromptAgent: Strategic Planning with Language Models Enables Expert-level Prompt Optimization](https://arxiv.org/abs/2310.16427)

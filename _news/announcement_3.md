@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Start MSCS program at UCSD.
+Start my Master of Science Computer Science program at UC San Diego!

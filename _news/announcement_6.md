@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-PromptAgent is presented at [SoCal NLP 2023](https://socalnlp.github.io/symp23/index.html) at UCLA, Los Angeles, CA!
+**PromptAgent**'s [poster](assets\pdf\promptagnet_poster_2023.pdf) is presented at [SoCal NLP 2023](https://socalnlp.github.io/symp23/index.html) at UCLA, Los Angeles, CA!
