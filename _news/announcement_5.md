@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-Paper accepted by ICLR 2024! PromptAgent: Strategic Planning with Language Models Enables Expert-level Prompt Optimization
+PromptAgent is accepted by [ICLR 2024](https://iclr.cc/)! 
