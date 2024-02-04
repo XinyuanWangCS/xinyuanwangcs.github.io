@@ -1,8 +1,8 @@
 ---
 layout: about
-title: Xinyuan Wang
+title: about
 permalink: /
-subtitle: Hi! I am Xinyuan Wang 王心远.
+subtitle: Hi! I am Xinyuan Wang (王心远).
 
 profile:
   align: right
