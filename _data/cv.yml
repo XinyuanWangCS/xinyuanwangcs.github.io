@@ -13,7 +13,7 @@
   contents:
     - title: Master of Science in Computer Science
       institution: University of California, San Diego, California, USA
-      year: Sept. 2022 - Present
+      year: Sept. 2022 - June 2024
       description:
         - "GPA: 4.00/4.00"
     - title: Bachelor of Science in Computer Science and Technology 
@@ -30,7 +30,7 @@
     - title: PromptAgent - Automatic LLM Prompt Optimization Framework
       advisor: Prof. [Zhiting Hu](http://zhiting.ucsd.edu/)
       institution: University of California, San Diego, California, USA
-      year: May 2023 - Present
+      year: May 2023 - Feb. 2024
       description:
         - "Motivation: Existing prompt optimization methods tend to overlook the depth of domain knowledge and struggle to efficiently explore the vast space of expert-level prompts using simple sampling or searching methods. PromptAgent formulates prompt optimization as a strategic planning problem and employs a principled planning algorithm to navigate the expert-level prompt space efficiently and effectively."
         - "Methodology: Introduced a novel automatic prompt optmization agent that integrates Monte Carlo Tree Search (MCTS), a principle planning algorithm, to explore the prompt space. Additionally, by employing a trial-and-error approach, the domain knowledge in the data is incorporated into the optimzed prompt during optimizing."
@@ -39,16 +39,17 @@
     - title: LLM Reasoners Library
       advisor: Prof. [Zhiting Hu](http://zhiting.ucsd.edu/)
       institution: University of California, San Diego, California, USA
-      year: May 2023 - Present
+      year: May 2023 - Feb. 2024
       description:
         - "Motivation: LLM Reasoners is a library designed to enhance the reasoning capabilities of Large Language Models (LLMs) using advanced algorithms. It treats multi-step reasoning as a planning task, searching for the optimal reasoning chain. This approach aims to strike the right balance between exploration and exploitation, guided by concepts like the 'World Model' and 'Reward'."
         - "Methodology: The library is based on Reasoning via Planning. It offers the most up-to-date search algorithms for reasoning with LLMs, such as RAP-MCTS, Tree-of-Thoughts, Guided Decoding, and more. Additionally, the framework is compatible with various LLM platforms, including Huggingface transformers, OpenAI API, and others. I am responsible for 1. Managed experiments on Math datasets using various reasoning methods, including Least-to-Most Prompting, CoT, and RAP-MCTS. 2. Developed Tree-of-Thought searching algorithm."
         - "Results: This library integrates cutting-edge LLM reasoning algorithms, the latest LLM models, and intuitive visualization. It also offers accessible interfaces for all incorporated algorithms and models. Notably, among the recent LLM reasoning algorithms, our RAP-MCTS algorithm shows superior performance over other searching or prompting methods on Math, Logical, and Embodied tasks."
         - "Github Library: LLM Reasoners Github Stars: 521"
+        - "Paper: New Evaluation, Library, and Analysis of Step-by-Step Reasoning with Large Language Models"
     - title: Refining Diffusion Model Loss with End-to-End Information
       advisor: Prof. [Zhuowen Tu](https://pages.ucsd.edu/~ztu/)
       institution: University of California, San Diego, California, USA
-      year: July 2023 - Present
+      year: July 2023 - Dec. 2023
       description:
         - "Motivation: Diffusion models can generate photorealistic images, but they often make many semantic mistakes, such as twisted fingers and ears. This is because Diffusion models are trained with per-pixel loss (MSE) in an auto-regressive manner, which lacks end-to-end conceptual information. Incorporating end-to-end information into the training loss of diffusion models is essential to correct the conceptual errors and enhance performance of diffusion models."
         - "Methodology: A Generative Adversarial Model (GAN) is concurrently trained with the Diffusion Model, utilizing end-to-end synthesized data. The discriminator of GAN injects conceptual guidance into Diffusion models' training process. This approach allows the original per-pixel loss to be augmented with comprehensive set information."
@@ -107,21 +108,3 @@
     - year: 2022
       items: 
         - 2022 Outstanding Graduates of Central South University
-
-- title: Academic Interest
-  type: nested_list
-  contents:
-    - title: Large Language Models (LLMs) with World Models
-      items: 
-        - Augmenting LLMs with interfaces to world models and mechanisms to understand and process world information, thereby enabling them to address real-world challenges more effectively.
-    - title: Foundation Model Inference Enhancement
-      items: 
-        - Foundation models demonstrate remarkable capabilities across a range of tasks. However, due to limitations in how we interact with them, their inference abilities are not fully exploited. One promising direction is to explore expert-level prompt optimization, bridging the gap between the model's inherent distribution and the specific distribution of tasks.
-    - title: Conceptual Enhancement of Generative Models
-      items: 
-        - While large generative models can produce data with high fidelity and diversity, but they can only learn conceptual alignment implicitly. This can result in conceptual errors and incorrect heuristics. By focusing on conceptual enhancement, we can improve the reliability and interpretability of these models.
-
-- title: Other Interests
-  type: list
-  contents:
-    - <u>Hobbies:</u> Skating, Basketball, Video Games.

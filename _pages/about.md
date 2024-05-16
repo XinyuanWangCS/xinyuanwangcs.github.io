@@ -8,22 +8,23 @@ profile:
   align: right
   image: me.png
   image_circular: false # crops the image to make it circular
-  address: 
-    <p>3869 Miramar st. Box 1214</p>
-    <p>La Jolla, California, USA, 92092</p>
+  #address: 
+  #  <p>3869 Miramar st. Box 1214</p>
+  #  <p>La Jolla, California, USA, 92092</p>
 
 news: true  # includes a list of news items
 selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I am now an MSCS student at University of California, San Diego (UCSD), expected to graduate in Jun. 2024. And I plan to pursue a Ph.D. in the future. I am luckily to be mentored by professors at UCSD in both Natural Language Processing and Computer Vision, and have hands-on experiences in both fields. I am now mentored by Prof. [Zhiting Hu](http://zhiting.ucsd.edu/) and Postdoc. [Zhen Wang](https://zhenwang9102.github.io/) in Large Language Model (LLM) Reasoning, Agent, and Prompting. I am also mentored by Prof. [Zhuowen Tu](https://pages.ucsd.edu/~ztu/) in generative models (diffusion model). Before UCSD, I graduated from Central South University (CSU) in Hunan, China, mentored by Prof. [Ying Zhao](https://faculty.csu.edu.cn/zhaoying). 
+I am an incoming Ph.D. student at HKU, mentored by Prof. [Tao Yu](https://taoyds.github.io/). I obtained my master's degree from University of California, San Diego (UCSD). I was luckily to be mentored two distinguished professors at UCSD in Natural Language Processing and Computer Vision - Prof. [Zhiting Hu](http://zhiting.ucsd.edu/) and Prof. [Zhuowen Tu](https://pages.ucsd.edu/~ztu/). Prior to my study at UCSD, I graduated from Central South University (CSU) in Hunan, China, where I was mentored by Prof. [Ying Zhao](https://faculty.csu.edu.cn/zhaoying). 
 
 Research Interests
 ------
+- **Artificial Intelligence Agents**: Designing and developing LLM/VLM based agent system that can execute in real-world environments.
 - **Large Language Models (LLMs) with World Models**: Augmenting LLMs with a world model formulation to enable principled decision-making, planning, and simulation. Enhancing the LLM's abilities in reasoning, planning, and interacting with the world. ([LLM Reasoners](https://www.llm-reasoners.net/))
 - **Foundation Model Prompting**: Employing interpretable prompting to bridge the domain gap between user objectives and the outputs of foundation models. Effectively boosting the performance of foundation models on complex tasks through efficient and effective prompting. ([PromptAgent](https://arxiv.org/abs/2310.16427))
-- **Semantic Enhancement and Control of Generative Models**: Generative models, such as text-to-image models, sometimes exhibit semantic inconsistencies and challenges in control. My aim is to integrate semantic information into the models during training or inference to enhance their semantic fidelity, reliability, and controllability.
+
 
 Research Overview
 ------
