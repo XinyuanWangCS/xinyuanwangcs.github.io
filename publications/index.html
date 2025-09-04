@@ -129,11 +129,11 @@
         <div class="author">
         
 
-        Xinyuan Wang, Bowen Wang, Dunjie Lu, and
-          <span class="more-authors" title="click to view 8 more authors" onclick="
+        Xinyuan Wang, Bowen Wang, Dunjie Lu, Junlin Yang, Tianbao Xie, and
+          <span class="more-authors" title="click to view 6 more authors" onclick="
                 var element = $(this);
                 element.attr('title', '');
-                var more_authors_text = element.text() == '8 more authors' ? 'Junlin Yang, Tianbao Xie, Junli Wang, Jiaqi Deng, Xiaole Guo, Yiheng Xu, Chen Henry Wu,  others' : '8 more authors';
+                var more_authors_text = element.text() == '6 more authors' ? 'Junli Wang, Jiaqi Deng, Xiaole Guo, Yiheng Xu, Chen Henry Wu,  others' : '6 more authors';
                 var cursorPosition = 0;
                 var textAdder = setInterval(function(){
                   element.text(more_authors_text.substring(0, cursorPosition + 1));
@@ -141,7 +141,7 @@
                     clearInterval(textAdder);
                   }
               }, '10');
-              ">8 more authors</span>
+              ">6 more authors</span>
 </div>
 
         <!-- Journal/Book title and date -->
@@ -199,11 +199,11 @@
         <div class="author">
         
 
-        Tianbao Xie, Jiaqi Deng, Xiaochuan Li, and
-          <span class="more-authors" title="click to view 8 more authors" onclick="
+        Tianbao Xie, Jiaqi Deng, Xiaochuan Li, Junlin Yang, Haoyuan Wu, and
+          <span class="more-authors" title="click to view 6 more authors" onclick="
                 var element = $(this);
                 element.attr('title', '');
-                var more_authors_text = element.text() == '8 more authors' ? 'Junlin Yang, Haoyuan Wu, Jixuan Chen, Wenjing Hu, Xinyuan Wang, Yuhui Xu, Zekun Wang,  others' : '8 more authors';
+                var more_authors_text = element.text() == '6 more authors' ? 'Jixuan Chen, Wenjing Hu, Xinyuan Wang, Yuhui Xu, Zekun Wang,  others' : '6 more authors';
                 var cursorPosition = 0;
                 var textAdder = setInterval(function(){
                   element.text(more_authors_text.substring(0, cursorPosition + 1));
@@ -211,7 +211,7 @@
                     clearInterval(textAdder);
                   }
               }, '10');
-              ">8 more authors</span>
+              ">6 more authors</span>
 </div>
 
         <!-- Journal/Book title and date -->
@@ -226,6 +226,7 @@
 
           <!-- Links/Buttons -->
           <div class="links">
+            <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>
             <a href="https://arxiv.org/abs/2505.13227" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">PDF</a>
             <a href="https://github.com/xlang-ai/OSWorld-G" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">Code</a>
             <a href="https://osworld-grounding.github.io/" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">Website</a>
@@ -236,14 +237,29 @@
               <span class="__dimensions_badge_embed__" data-pmid="" data-hide-zero-citations="true" data-style="small_rectangle" data-legend="hover-right" style="margin-bottom: 6px;"></span>
           </div>
 
-          
+          <!-- Hidden abstract block -->
+          <div class="abstract hidden">
+            <p>GUI Grounding, the ability to map natural language instructions to specific actions on graphical user interfaces, remains a critical bottleneck in computer use agent development. Current benchmarks oversimplify grounding tasks as short referring expressions, failing to capture the complexity of real-world interactions that require software commonsense, layout understanding, and fine-grained manipulation capabilities.To address these limitations, we introduce OSWorld-G, a comprehensive benchmark comprising 564 finely annotated samples across diverse task types including text matching, element recognition, layout understanding, and precise manipulation. Additionally, we synthesize and release the largest computer use grounding dataset Jedi, which contains 4 million examples through multi-perspective decoupling of tasks. Our multi-scale models trained on Jedi demonstrate its effectiveness by outperforming existing approaches on ScreenSpot-v2, ScreenSpot-Pro, and our new benchmark. Furthermore, we demonstrate that improved grounding with Jedi directly enhances agentic capabilities of general foundation models on complex computer tasks, improving from 5% to 27% in OSWorld. Through detailed ablation studies, we identify key factors contributing to grounding performance and verify that combining specialized data for different interface elements enables compositional generalization to novel interfaces. All data, checkpoints, and code are open-sourced and available for future research.</p>
+          </div>
         </div>
       </div>
 </li>
 <li>
 <!-- _layouts/bib.html -->
       <div class="row">
-        <div class="col-sm-2 abbr"></div>
+        <div class="col-sm-2 preview">
+<figure>
+
+  <picture>
+    
+
+    <!-- Fallback to the original file -->
+    <img src="/assets/img/publication_preview/kimivl.png" class="preview z-depth-1 rounded" width="auto" height="auto" alt="kimivl.png" onerror="this.onerror=null; $('.responsive-img-srcset').remove();">
+
+  </picture>
+
+</figure>
+</div>
 
         <!-- Entry bib key -->
         <div id="team2025kimi" class="col-sm-8">
@@ -253,11 +269,11 @@
         <div class="author">
         
 
-        Kimi Team, Angang Du, Bohong Yin, and
-          <span class="more-authors" title="click to view 8 more authors" onclick="
+        Kimi Team, Angang Du, Bohong Yin, Bowei Xing, Bowen Qu, and
+          <span class="more-authors" title="click to view 6 more authors" onclick="
                 var element = $(this);
                 element.attr('title', '');
-                var more_authors_text = element.text() == '8 more authors' ? 'Bowei Xing, Bowen Qu, Bowen Wang, Cheng Chen, Chenlin Zhang, Chenzhuang Du, Chu Wei,  others' : '8 more authors';
+                var more_authors_text = element.text() == '6 more authors' ? 'Bowen Wang, Cheng Chen, Chenlin Zhang, Chenzhuang Du, Chu Wei,  others' : '6 more authors';
                 var cursorPosition = 0;
                 var textAdder = setInterval(function(){
                   element.text(more_authors_text.substring(0, cursorPosition + 1));
@@ -265,7 +281,7 @@
                     clearInterval(textAdder);
                   }
               }, '10');
-              ">8 more authors</span>
+              ">6 more authors</span>
 </div>
 
         <!-- Journal/Book title and date -->
@@ -280,7 +296,9 @@
 
           <!-- Links/Buttons -->
           <div class="links">
+            <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>
             <a href="https://arxiv.org/abs/2504.07491" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">PDF</a>
+            <a href="https://github.com/MoonshotAI/Kimi-VL" class="btn btn-sm z-depth-0" role="button" rel="external nofollow noopener" target="_blank">Code</a>
           </div>
           
           <div class="badges">
@@ -288,7 +306,10 @@
               <span class="__dimensions_badge_embed__" data-pmid="" data-hide-zero-citations="true" data-style="small_rectangle" data-legend="hover-right" style="margin-bottom: 6px;"></span>
           </div>
 
-          
+          <!-- Hidden abstract block -->
+          <div class="abstract hidden">
+            <p>We present Kimi-VL, an efficient open-source Mixture-of-Experts (MoE) vision-language model (VLM) that offers advanced multimodal reasoning, long-context understanding, and strong agent capabilities - all while activating only 2.8B parameters in its language decoder (Kimi-VL-A3B). Kimi-VL demonstrates strong performance across challenging domains: as a general-purpose VLM, Kimi-VL excels in multi-turn agent tasks (e.g., OSWorld), matching flagship models. Furthermore, it exhibits remarkable capabilities across diverse challenging vision language tasks, including college-level image and video comprehension, OCR, mathematical reasoning, and multi-image understanding. In comparative evaluations, it effectively competes with cutting-edge efficient VLMs such as GPT-4o-mini, Qwen2.5-VL-7B, and Gemma-3-12B-IT, while surpassing GPT-4o in several key domains. Kimi-VL also advances in processing long contexts and perceiving clearly. With a 128K extended context window, Kimi-VL can process diverse long inputs, achieving impressive scores of 64.5 on LongVideoBench and 35.1 on MMLongBench-Doc. Its native-resolution vision encoder, MoonViT, further allows it to see and understand ultra-high-resolution visual inputs, achieving 83.2 on InfoVQA and 34.5 on ScreenSpot-Pro, while maintaining lower computational cost for common tasks. Building upon Kimi-VL, we introduce an advanced long-thinking variant: Kimi-VL-Thinking-2506. Developed through long chain-of-thought (CoT) supervised fine-tuning (SFT) and reinforcement learning (RL), the latest model exhibits strong long-horizon reasoning capabilities (64.0 on MMMU, 46.3 on MMMU-Pro, 56.9 on MathVision, 80.1 on MathVista, 65.2 on VideoMMMU) while obtaining robust general abilities.</p>
+          </div>
         </div>
       </div>
 </li>
@@ -321,11 +342,11 @@
         <div class="author">
         
 
-        Shibo Hao, Yi Gu, Haotian Luo, and
-          <span class="more-authors" title="click to view 8 more authors" onclick="
+        Shibo Hao, Yi Gu, Haotian Luo, Tianyang Liu, Xiyan Shao, and
+          <span class="more-authors" title="click to view 6 more authors" onclick="
                 var element = $(this);
                 element.attr('title', '');
-                var more_authors_text = element.text() == '8 more authors' ? 'Tianyang Liu, Xiyan Shao, Xinyuan Wang, Shuhua Xie, Haodi Ma, Adithya Samavedhi, Qiyue Gao,  others' : '8 more authors';
+                var more_authors_text = element.text() == '6 more authors' ? 'Xinyuan Wang, Shuhua Xie, Haodi Ma, Adithya Samavedhi, Qiyue Gao,  others' : '6 more authors';
                 var cursorPosition = 0;
                 var textAdder = setInterval(function(){
                   element.text(more_authors_text.substring(0, cursorPosition + 1));
@@ -333,7 +354,7 @@
                     clearInterval(textAdder);
                   }
               }, '10');
-              ">8 more authors</span>
+              ">6 more authors</span>
 </div>
 
         <!-- Journal/Book title and date -->
@@ -390,11 +411,11 @@
         <div class="author">
         
 
-        Xinyuan Wang, Chenxi Li, Zhen Wang, and
-          <span class="more-authors" title="click to view 6 more authors" onclick="
+        Xinyuan Wang, Chenxi Li, Zhen Wang, Fan Bai, Haotian Luo, and
+          <span class="more-authors" title="click to view 4 more authors" onclick="
                 var element = $(this);
                 element.attr('title', '');
-                var more_authors_text = element.text() == '6 more authors' ? 'Fan Bai, Haotian Luo, Jiayou Zhang, Nebojsa Jojic, Eric P Xing, Zhiting Hu' : '6 more authors';
+                var more_authors_text = element.text() == '4 more authors' ? 'Jiayou Zhang, Nebojsa Jojic, Eric P Xing, Zhiting Hu' : '4 more authors';
                 var cursorPosition = 0;
                 var textAdder = setInterval(function(){
                   element.text(more_authors_text.substring(0, cursorPosition + 1));
@@ -402,7 +423,7 @@
                     clearInterval(textAdder);
                   }
               }, '10');
-              ">6 more authors</span>
+              ">4 more authors</span>
 </div>
 
         <!-- Journal/Book title and date -->
@@ -463,20 +484,7 @@
         <div class="author">
         
 
-        Xinyuan Wang, Make Tao, Runpu Wang, and
-          <span class="more-authors" title="click to view 1 more author" onclick="
-                var element = $(this);
-                element.attr('title', '');
-                var more_authors_text = element.text() == '1 more author' ? 'Likui Zhang' : '1 more author';
-                var cursorPosition = 0;
-                var textAdder = setInterval(function(){
-                  element.text(more_authors_text.substring(0, cursorPosition + 1));
-                  if (++cursorPosition == more_authors_text.length){
-                    clearInterval(textAdder);
-                  }
-              }, '10');
-              ">1 more author</span>
-</div>
+        Xinyuan Wang, Make Tao, Runpu Wang, and Likui Zhang</div>
 
         <!-- Journal/Book title and date -->
         
@@ -533,11 +541,11 @@
         <div class="author">
         
 
-        Fangfang Zhou, Qi’an Chen, Yunlong Cui, and
-          <span class="more-authors" title="click to view 4 more authors" onclick="
+        Fangfang Zhou, Qi’an Chen, Yunlong Cui, Xinyuan Wang, Hongxu Ma, and
+          <span class="more-authors" title="click to view 2 more authors" onclick="
                 var element = $(this);
                 element.attr('title', '');
-                var more_authors_text = element.text() == '4 more authors' ? 'Xinyuan Wang, Hongxu Ma, Ying Zhao, Xiaoli Li' : '4 more authors';
+                var more_authors_text = element.text() == '2 more authors' ? 'Ying Zhao, Xiaoli Li' : '2 more authors';
                 var cursorPosition = 0;
                 var textAdder = setInterval(function(){
                   element.text(more_authors_text.substring(0, cursorPosition + 1));
@@ -545,7 +553,7 @@
                     clearInterval(textAdder);
                   }
               }, '10');
-              ">4 more authors</span>
+              ">2 more authors</span>
 </div>
 
         <!-- Journal/Book title and date -->
