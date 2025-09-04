@@ -17,7 +17,7 @@ selected_papers: true # includes a list of papers marked as "selected={true}"
 social: true  # includes social icons at the bottom of the page
 ---
 
-I am an Ph.D. student at HKU, mentored by Prof. [Tao Yu](https://taoyds.github.io/). I obtained my master's degree from University of California, San Diego (UCSD). I was luckily to be mentored two distinguished professors at UCSD in Natural Language Processing and Computer Vision - Prof. [Zhiting Hu](http://zhiting.ucsd.edu/) and Prof. [Zhuowen Tu](https://pages.ucsd.edu/~ztu/). Prior to my study at UCSD, I graduated from Central South University (CSU) in Hunan, China, where I was mentored by Prof. [Ying Zhao](https://faculty.csu.edu.cn/zhaoying). 
+I am a Ph.D. student at HKU, mentored by Prof. [Tao Yu](https://taoyds.github.io/). I obtained my master's degree from University of California, San Diego (UCSD). I was luckily to be mentored two distinguished professors at UCSD in Natural Language Processing and Computer Vision - Prof. [Zhiting Hu](http://zhiting.ucsd.edu/) and Prof. [Zhuowen Tu](https://pages.ucsd.edu/~ztu/). Prior to my study at UCSD, I graduated from Central South University (CSU) in Hunan, China, where I was mentored by Prof. [Ying Zhao](https://faculty.csu.edu.cn/zhaoying). 
 
 Research Interests
 ------
