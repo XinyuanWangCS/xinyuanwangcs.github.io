@@ -21,14 +21,14 @@ I am an Ph.D. student at HKU, mentored by Prof. [Tao Yu](https://taoyds.github.i
 
 Research Interests
 ------
-- **Agent Foundation Model**: Designing and developing LLM/VLM based agent foundation model capable of interpreting and executing actions across real-world, digital, and simulated environments.
+- **Agent Foundation Model**: Designing and developing LLM/VLM based agent foundation model capable of interpreting and executing actions across real-world, digital, and simulated environments ([OpenCUA](https://opencua.xlang.ai/), [Kimi-VL](https://arxiv.org/pdf/2504.07491)).
 - **Language Model Reasoning**: Improving the planning, reasoning, decision-making capability of VLM/LLMs . ([LLM Reasoners](https://www.llm-reasoners.net/))
 - **Foundation Model Prompting**: Employing interpretable prompting to bridge the domain gap between user objectives and the outputs of foundation models. Effectively boosting the performance of foundation models on complex tasks through efficient and effective prompting. ([PromptAgent](https://arxiv.org/abs/2310.16427))
 
 
 Research Overview
 ------
-I am now working on computer-use agent foundation model, supervised by Prof. Tao Yu. I am working on agentic foundation models, including [OpenCUA](opencua.xlang.ai) and [Kimi-VL](https://arxiv.org/abs/2504.07491). In Prof. Zhiting Hu's group, I worked on automatic LLM prompt optimization with Zhen. Recently our paper [PromptAgent: Strategic Planning with Language Models Enables Expert-level Prompt Optimization](https://arxiv.org/abs/2310.16427) is accepted by [ICLR 2024](https://iclr.cc/). I am also working on LLM Reasoning by contributing to the [LLM Reasoners](https://www.llm-reasoners.net/) library, which ensembles the most recent LLM reasoning methods and models. In Prof. Zhuowen Tu's group, we are working on how to inprove diffusion models' conceptual performance with an end-to-end loss. During my undergraduate years, I was mentored by Prof. Ying Zhao and worked on Interpretation of Convolutional Neural Networks and Visualization. Here is my graduate thesis: [The Research on The Interpretability Method of DeepNeural Network Based on Average Image](assets\pdf\graduate_thesis.pdf)
+I am now working on agentic foundation models, expecially computer-use agent models, including [OpenCUA](opencua.xlang.ai) and [Kimi-VL](https://arxiv.org/abs/2504.07491). At UCSD, I worked on automatic LLM prompt optimization ([PromptAgent: Strategic Planning with Language Models Enables Expert-level Prompt Optimization](https://arxiv.org/abs/2310.16427)) and LLM Reasoning ([LLM Reasoners](https://www.llm-reasoners.net/)). I also worked in Prof. Zhuowen Tu's group, exploring how to improve diffusion models' conceptual performance with an end-to-end loss. During my undergraduate years, I was mentored by Prof. Ying Zhao and worked on Interpretation of Convolutional Neural Networks and Visualization. Here is my graduate thesis: [The Research on The Interpretability Method of DeepNeural Network Based on Average Image](assets\pdf\graduate_thesis.pdf)
 
 How to contact me
 ------
