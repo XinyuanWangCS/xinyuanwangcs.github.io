@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-[Kimi-VL Technical Report](https://arxiv.org/abs/2504.07491) is publish on Arxiv! I worked on its computer-use capability as a core contributor.
+[Kimi-VL Technical Report](https://arxiv.org/abs/2504.07491) is published on Arxiv! I worked on its computer-use capability as a core contributor.

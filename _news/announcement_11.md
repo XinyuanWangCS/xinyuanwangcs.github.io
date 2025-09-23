@@ -5,4 +5,4 @@ inline: true
 related_posts: false
 ---
 
-[OpenCUA](https://opencua.xlang.ai/) and [Jedi](https://osworld-grounding.github.io/) are accepted by NeurIPS as <span style="color: red;">Spotlight paper</span>!
+[OpenCUA](https://opencua.xlang.ai/) is accepted by COLM 2025 Workshop AIA as <span style="color: red;">Oral paper</span>!
