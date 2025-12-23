@@ -7,21 +7,21 @@
  * Themes
  ******************************************************************************/
 :root {
-  --global-bg-color: #f7f5f2;
-  --global-code-bg-color: rgba(15, 76, 92, 0.08);
-  --global-text-color: #1c1d20;
-  --global-text-color-light: #5f646b;
-  --global-theme-color: #0f4c5c;
-  --global-hover-color: #153d4a;
-  --global-footer-bg-color: #111517;
-  --global-footer-text-color: #d7dadc;
-  --global-footer-link-color: #f7f5f2;
-  --global-distill-app-color: #5f646b;
-  --global-divider-color: rgba(17, 21, 23, 0.12);
-  --global-card-bg-color: #fbfaf8;
-  --global-card-shadow: 0 10px 30px rgba(17, 21, 23, 0.08);
-  --global-bg-glow: radial-gradient(1200px 500px at 15% -10%, rgba(15, 76, 92, 0.10), transparent 60%),
-    radial-gradient(900px 400px at 80% 0%, rgba(74, 99, 94, 0.12), transparent 55%);
+  --global-bg-color: #edf6fb;
+  --global-code-bg-color: rgba(26, 117, 152, 0.08);
+  --global-text-color: #1b2a33;
+  --global-text-color-light: #566a75;
+  --global-theme-color: #1a7598;
+  --global-hover-color: #145c78;
+  --global-footer-bg-color: #0e1418;
+  --global-footer-text-color: #d5dde2;
+  --global-footer-link-color: #edf6fb;
+  --global-distill-app-color: #566a75;
+  --global-divider-color: rgba(18, 32, 40, 0.12);
+  --global-card-bg-color: #f6fbff;
+  --global-card-shadow: 0 10px 30px rgba(12, 24, 32, 0.08);
+  --global-bg-glow: radial-gradient(1200px 520px at 15% -10%, rgba(26, 117, 152, 0.12), transparent 60%),
+    radial-gradient(900px 420px at 85% 0%, rgba(122, 176, 200, 0.2), transparent 60%);
   --font-sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
   --font-serif: "Literata", "Times New Roman", serif;
   --font-mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace;
@@ -42,21 +42,21 @@
 }
 
 html[data-theme=dark] {
-  --global-bg-color: #101214;
-  --global-code-bg-color: rgba(120, 196, 214, 0.12);
-  --global-text-color: #e6e7ea;
-  --global-text-color-light: #b2b6bb;
-  --global-theme-color: #78c4d6;
-  --global-hover-color: #9dd6e2;
-  --global-footer-bg-color: #0d0f11;
-  --global-footer-text-color: #e6e7ea;
-  --global-footer-link-color: #e6e7ea;
-  --global-distill-app-color: #b2b6bb;
+  --global-bg-color: #0f1419;
+  --global-code-bg-color: rgba(129, 205, 224, 0.12);
+  --global-text-color: #e6eff4;
+  --global-text-color-light: #b6c4cc;
+  --global-theme-color: #81cde0;
+  --global-hover-color: #a9dce9;
+  --global-footer-bg-color: #0b1014;
+  --global-footer-text-color: #e6eff4;
+  --global-footer-link-color: #e6eff4;
+  --global-distill-app-color: #b6c4cc;
   --global-divider-color: rgba(255, 255, 255, 0.12);
-  --global-card-bg-color: #15181b;
+  --global-card-bg-color: #151d24;
   --global-card-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-  --global-bg-glow: radial-gradient(1100px 500px at 15% -15%, rgba(120, 196, 214, 0.12), transparent 60%),
-    radial-gradient(900px 500px at 85% -5%, rgba(94, 135, 143, 0.18), transparent 60%);
+  --global-bg-glow: radial-gradient(1100px 520px at 15% -15%, rgba(129, 205, 224, 0.12), transparent 60%),
+    radial-gradient(900px 520px at 85% -5%, rgba(85, 132, 150, 0.2), transparent 60%);
 }
 html[data-theme=dark] .fa-sun {
   padding-left: 10px;
@@ -122,6 +122,7 @@ body {
   line-height: 1.75;
   letter-spacing: 0.01em;
   text-rendering: optimizeLegibility;
+  font-weight: 400;
 }
 
 p,
@@ -147,7 +148,7 @@ h5,
 h6 {
   font-family: var(--font-sans);
   letter-spacing: 0.015em;
-  font-weight: 600;
+  font-weight: 500;
 }
 
 h1 {
@@ -303,9 +304,18 @@ blockquote {
 .navbar {
   box-shadow: none;
   border-bottom: 1px solid var(--global-divider-color);
-  background-color: rgba(247, 245, 242, 0.85);
-  backdrop-filter: blur(10px);
+  background-color: rgba(237, 246, 251, 0.62);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
   opacity: 1;
+}
+
+.navbar .container {
+  max-width: 1200px;
+}
+
+.navbar .container {
+  max-width: 1100px;
 }
 
 .navbar .dropdown-menu {
