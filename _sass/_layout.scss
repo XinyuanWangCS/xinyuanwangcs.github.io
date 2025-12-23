@@ -6,6 +6,9 @@ body {
   padding-bottom: 70px;
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
+  background-image: var(--global-bg-glow);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 
   h1, h2, h3, h4, h5, h6 {
     scroll-margin-top: 66px;

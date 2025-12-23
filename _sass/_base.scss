@@ -4,6 +4,17 @@
 
 // Typography
 
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-serif);
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  text-rendering: optimizeLegibility;
+}
+
 p,
 h1,
 h2,
@@ -17,6 +28,29 @@ li,
 span,
 strong {
   color: var(--global-text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+  letter-spacing: 0.015em;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: clamp(2.1rem, 4vw, 2.8rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
 }
 
 hr {
@@ -38,15 +72,25 @@ table {
 a,
 table.table a {
   color: var(--global-theme-color);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(15, 76, 92, 0.2);
+  transition: color 0.2s ease, border-color 0.2s ease;
 
   &:hover {
     color: var(--global-theme-color);
-    text-decoration: underline;
+    border-bottom-color: var(--global-theme-color);
   }
 
   &:hover:after :not(.nav-item.dropdown) {
     width: 100%;
   }
+}
+
+.navbar a,
+.navbar .nav-link,
+.btn,
+.badge a {
+  border-bottom: 0;
 }
 
 figure,
@@ -55,11 +99,12 @@ img {
 }
 
 blockquote {
-  background: var(--global-bg-color);
-  border-left: 2px solid var(--global-theme-color);
+  background: var(--global-card-bg-color);
+  border-left: 3px solid var(--global-theme-color);
+  border-radius: 10px;
   margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  font-size: 1.2rem;
+  padding: 0.75em 1rem;
+  font-size: 1.05rem;
 }
 
 // Math
@@ -82,6 +127,9 @@ blockquote {
 
 .card {
   background-color: var(--global-card-bg-color);
+  border-radius: 16px;
+  box-shadow: var(--global-card-shadow);
+  border: 1px solid var(--global-divider-color);
 
   img {
     width: 100%;
@@ -114,10 +162,16 @@ blockquote {
 .profile {
   width: 100%;
 
+  img {
+    border-radius: 16px;
+    box-shadow: var(--global-card-shadow);
+  }
+
   .address {
     margin-bottom: 5px;
     margin-top: 5px;
-    font-family: monospace;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
 
     p {
       display: inline-block;
@@ -149,6 +203,10 @@ blockquote {
 .post-description {
   margin-bottom: 2rem;
   font-size: 0.875rem;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--global-text-color-light);
 
   a {
     color: inherit;
@@ -166,8 +224,9 @@ blockquote {
 .navbar {
   box-shadow: none;
   border-bottom: 1px solid var(--global-divider-color);
-  background-color: var(--global-bg-color);
-  opacity: 0.95;
+  background-color: rgba(247, 245, 242, 0.85);
+  backdrop-filter: blur(10px);
+  opacity: 1;
 }
 
 .navbar .dropdown-menu {
@@ -205,10 +264,17 @@ blockquote {
 
   .navbar-brand {
     color: var(--global-text-color);
+    font-family: var(--font-sans);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    font-size: 0.85rem;
   }
 
   .navbar-nav .nav-item .nav-link {
     color: var(--global-text-color);
+    font-family: var(--font-sans);
+    letter-spacing: 0.02em;
+    font-size: 0.9rem;
 
     &:hover {
       color: var(--global-hover-color);
@@ -302,7 +368,7 @@ blockquote {
   text-align: center;
 
   .contact-icons {
-    font-size: 4rem;
+    font-size: 2.4rem;
 
     a {
       i::before {
@@ -533,7 +599,7 @@ footer.sticky-bottom {
   margin-top: 2rem;
 
   h1 {
-    color: var(--global-theme-color);
+    color: var(--global-text-color);
     font-size: 2rem;
     text-align: center;
     margin-top: 1em;
@@ -549,12 +615,16 @@ footer.sticky-bottom {
   }
 
   h2.year {
-    color: var(--global-divider-color);
+    color: var(--global-text-color-light);
     border-top: 1px solid var(--global-divider-color);
     padding-top: 1rem;
     margin-top: 2rem;
     margin-bottom: -2rem;
     text-align: right;
+    font-family: var(--font-sans);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: 0.75rem;
   }
 
   ol.bibliography {
@@ -563,12 +633,24 @@ footer.sticky-bottom {
     margin-top: 0;
 
     li {
-      margin-bottom: 1rem;
+      margin-bottom: 1.2rem;
+      padding: 1.2rem 1.2rem;
+      border-radius: 18px;
+      border: 1px solid var(--global-divider-color);
+      background-color: var(--global-card-bg-color);
+      box-shadow: var(--global-card-shadow);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+
+      &:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 34px rgba(17, 21, 23, 0.12);
+      }
 
       .preview {
         width: 100%;
         min-width: 80px;
         max-width: 200px;
+        border-radius: 12px;
       }
 
       .abbr {
@@ -597,10 +679,14 @@ footer.sticky-bottom {
       }
 
       .title {
-        font-weight: bolder;
+        font-family: var(--font-sans);
+        font-weight: 600;
+        letter-spacing: 0.01em;
       }
 
       .author {
+        color: var(--global-text-color-light);
+
         a {
           border-bottom: 1px dashed var(--global-theme-color);
 
@@ -631,10 +717,12 @@ footer.sticky-bottom {
         a.btn {
           color: var(--global-text-color);
           border: 1px solid var(--global-text-color);
-          padding-left: 1rem;
-          padding-right: 1rem;
-          padding-top: 0.25rem;
-          padding-bottom: 0.25rem;
+          padding: 0.2rem 0.9rem;
+          border-radius: 999px;
+          font-family: var(--font-sans);
+          font-size: 0.8rem;
+          letter-spacing: 0.04em;
+          text-transform: uppercase;
 
           &:hover {
             color: var(--global-theme-color);
@@ -710,6 +798,7 @@ pre {
   background-color: var(--global-code-bg-color);
   border-radius: 6px;
   padding: 6px 12px;
+  font-family: var(--font-mono);
 
   pre,
   code {
@@ -725,6 +814,7 @@ code {
   background-color: var(--global-code-bg-color);
   border-radius: 3px;
   padding: 3px 3px;
+  font-family: var(--font-mono);
 }
 
 
@@ -739,6 +829,12 @@ html.transition *:after {
 
 // Extra Markdown style (post Customization)
 .post {
+  .post-header {
+    border-bottom: 1px solid var(--global-divider-color);
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
   .post-meta {
     color: var(--global-text-color-light);
     font-size: 0.875rem;
