@@ -74,7 +74,7 @@ github_username: XinyuanWangCS # your GitHub user name
 gitlab_username: # your GitLab user name
 twitter_username: xywang626 # your Twitter handle
 mastodon_username: # your mastodon instance+username in the format instance.tld/@username
-linkedin_username: xinyuan-wang-4a5b1b24b # your LinkedIn user name
+linkedin_username: # your LinkedIn user name
 telegram_username: # your Telegram user name
 scholar_userid: CXi9eHwAAAAJ # your Google Scholar ID
 semanticscholar_id: # your Semantic Scholar ID
@@ -98,7 +98,7 @@ spotify_id: # your spotify id
 pinterest_id: # your pinterest id
 unsplash_id: # your unsplash id
 instagram_id: # your instagram id
-facebook_id: 100084957264417 # your facebook id
+facebook_id: # your facebook id
 youtube_id: # your youtube channel id (youtube.com/@<youtube_id>)
 discord_id: # your discord id (18-digit unique numerical identifier)
 

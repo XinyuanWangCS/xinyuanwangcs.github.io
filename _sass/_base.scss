@@ -42,7 +42,7 @@ h6 {
 }
 
 h1 {
-  font-size: clamp(2.1rem, 4vw, 2.8rem);
+  font-size: clamp(2.7rem, 5.4vw, 3.6rem);
 }
 
 h2 {
@@ -274,7 +274,8 @@ blockquote {
     color: var(--global-text-color);
     font-family: var(--font-sans);
     letter-spacing: 0.02em;
-    font-size: 0.9rem;
+    font-size: 1.05rem;
+    padding: 0.6rem 0.9rem;
 
     &:hover {
       color: var(--global-hover-color);
@@ -387,6 +388,28 @@ blockquote {
   .contact-note {
     font-size: 0.8rem;
   }
+}
+
+.hero-social {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-social a {
+  border-bottom: 0;
+}
+
+.hero-social i::before {
+  font-size: 1.8rem;
+  color: var(--global-text-color);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.hero-social a:hover i::before {
+  color: var(--global-theme-color);
+  transform: translateY(-1px);
 }
 
 
@@ -649,7 +672,7 @@ footer.sticky-bottom {
       .preview {
         width: 100%;
         min-width: 80px;
-        max-width: 200px;
+        max-width: none;
         border-radius: 12px;
       }
 
@@ -786,6 +809,24 @@ footer.sticky-bottom {
       }
     }
   }
+}
+
+.publications .col-sm-4.preview {
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.publications img.preview {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: contain;
+  background-color: var(--global-card-bg-color);
+  transition: transform 0.35s ease;
+}
+
+.publications li:hover img.preview {
+  transform: scale(1.05);
 }
 
 // Rouge Color Customization
