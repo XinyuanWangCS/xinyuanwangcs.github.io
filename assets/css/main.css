@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
 /*******************************************************************************
  * Variables used throughout the theme.
  * To adjust anything, simply edit the variables below and rebuild the theme.
@@ -6,18 +7,24 @@
  * Themes
  ******************************************************************************/
 :root {
-  --global-bg-color: #ffffff;
-  --global-code-bg-color: rgba(181, 9, 172, 0.05);
-  --global-text-color: #000000;
-  --global-text-color-light: #828282;
-  --global-theme-color: #B509AC;
-  --global-hover-color: #B509AC;
-  --global-footer-bg-color: #1C1C1D;
-  --global-footer-text-color: #e8e8e8;
-  --global-footer-link-color: #ffffff;
-  --global-distill-app-color: #828282;
-  --global-divider-color: rgba(0,0,0,.1);
-  --global-card-bg-color: #ffffff;
+  --global-bg-color: #f7f5f2;
+  --global-code-bg-color: rgba(15, 76, 92, 0.08);
+  --global-text-color: #1c1d20;
+  --global-text-color-light: #5f646b;
+  --global-theme-color: #0f4c5c;
+  --global-hover-color: #153d4a;
+  --global-footer-bg-color: #111517;
+  --global-footer-text-color: #d7dadc;
+  --global-footer-link-color: #f7f5f2;
+  --global-distill-app-color: #5f646b;
+  --global-divider-color: rgba(17, 21, 23, 0.12);
+  --global-card-bg-color: #fbfaf8;
+  --global-card-shadow: 0 10px 30px rgba(17, 21, 23, 0.08);
+  --global-bg-glow: radial-gradient(1200px 500px at 15% -10%, rgba(15, 76, 92, 0.10), transparent 60%),
+    radial-gradient(900px 400px at 80% 0%, rgba(74, 99, 94, 0.12), transparent 55%);
+  --font-sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Literata", "Times New Roman", serif;
+  --font-mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace;
 }
 :root .fa-sun {
   display: none;
@@ -35,18 +42,21 @@
 }
 
 html[data-theme=dark] {
-  --global-bg-color: #1C1C1D;
-  --global-code-bg-color: #2c3237;
-  --global-text-color: #e8e8e8;
-  --global-text-color-light: #e8e8e8;
-  --global-theme-color: #2698BA;
-  --global-hover-color: #2698BA;
-  --global-footer-bg-color: #e8e8e8;
-  --global-footer-text-color: #1C1C1D;
-  --global-footer-link-color: #000000;
-  --global-distill-app-color: #e8e8e8;
-  --global-divider-color: #424246;
-  --global-card-bg-color: #212529;
+  --global-bg-color: #101214;
+  --global-code-bg-color: rgba(120, 196, 214, 0.12);
+  --global-text-color: #e6e7ea;
+  --global-text-color-light: #b2b6bb;
+  --global-theme-color: #78c4d6;
+  --global-hover-color: #9dd6e2;
+  --global-footer-bg-color: #0d0f11;
+  --global-footer-text-color: #e6e7ea;
+  --global-footer-link-color: #e6e7ea;
+  --global-distill-app-color: #b2b6bb;
+  --global-divider-color: rgba(255, 255, 255, 0.12);
+  --global-card-bg-color: #15181b;
+  --global-card-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+  --global-bg-glow: radial-gradient(1100px 500px at 15% -15%, rgba(120, 196, 214, 0.12), transparent 60%),
+    radial-gradient(900px 500px at 85% -5%, rgba(94, 135, 143, 0.18), transparent 60%);
 }
 html[data-theme=dark] .fa-sun {
   padding-left: 10px;
@@ -70,6 +80,9 @@ body {
   padding-bottom: 70px;
   color: var(--global-text-color);
   background-color: var(--global-bg-color);
+  background-image: var(--global-bg-glow);
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
 }
 body h1, body h2, body h3, body h4, body h5, body h6 {
   scroll-margin-top: 66px;
@@ -100,6 +113,17 @@ body.sticky-bottom-footer {
 /*******************************************************************************
  * Styles for the base elements of the theme.
  ******************************************************************************/
+html {
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-serif);
+  line-height: 1.75;
+  letter-spacing: 0.01em;
+  text-rendering: optimizeLegibility;
+}
+
 p,
 h1,
 h2,
@@ -113,6 +137,29 @@ li,
 span,
 strong {
   color: var(--global-text-color);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--font-sans);
+  letter-spacing: 0.015em;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: clamp(2.7rem, 5.4vw, 3.6rem);
+}
+
+h2 {
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+h3 {
+  font-size: clamp(1.25rem, 2.4vw, 1.6rem);
 }
 
 hr {
@@ -130,15 +177,25 @@ table td {
 a,
 table.table a {
   color: var(--global-theme-color);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(15, 76, 92, 0.2);
+  transition: color 0.2s ease, border-color 0.2s ease;
 }
 a:hover,
 table.table a:hover {
   color: var(--global-theme-color);
-  text-decoration: underline;
+  border-bottom-color: var(--global-theme-color);
 }
 a:hover:after :not(.nav-item.dropdown),
 table.table a:hover:after :not(.nav-item.dropdown) {
   width: 100%;
+}
+
+.navbar a,
+.navbar .nav-link,
+.btn,
+.badge a {
+  border-bottom: 0;
 }
 
 figure,
@@ -147,11 +204,12 @@ img {
 }
 
 blockquote {
-  background: var(--global-bg-color);
-  border-left: 2px solid var(--global-theme-color);
+  background: var(--global-card-bg-color);
+  border-left: 3px solid var(--global-theme-color);
+  border-radius: 10px;
   margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  font-size: 1.2rem;
+  padding: 0.75em 1rem;
+  font-size: 1.05rem;
 }
 
 .equation {
@@ -168,6 +226,9 @@ blockquote {
 
 .card {
   background-color: var(--global-card-bg-color);
+  border-radius: 16px;
+  box-shadow: var(--global-card-shadow);
+  border: 1px solid var(--global-divider-color);
 }
 .card img {
   width: 100%;
@@ -192,10 +253,15 @@ blockquote {
 .profile {
   width: 100%;
 }
+.profile img {
+  border-radius: 16px;
+  box-shadow: var(--global-card-shadow);
+}
 .profile .address {
   margin-bottom: 5px;
   margin-top: 5px;
-  font-family: monospace;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
 }
 .profile .address p {
   display: inline-block;
@@ -221,6 +287,10 @@ blockquote {
 .post-description {
   margin-bottom: 2rem;
   font-size: 0.875rem;
+  font-family: var(--font-sans);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--global-text-color-light);
 }
 .post-description a {
   color: inherit;
@@ -233,8 +303,9 @@ blockquote {
 .navbar {
   box-shadow: none;
   border-bottom: 1px solid var(--global-divider-color);
-  background-color: var(--global-bg-color);
-  opacity: 0.95;
+  background-color: rgba(247, 245, 242, 0.85);
+  backdrop-filter: blur(10px);
+  opacity: 1;
 }
 
 .navbar .dropdown-menu {
@@ -264,9 +335,17 @@ blockquote {
 }
 .navbar.navbar-light .navbar-brand {
   color: var(--global-text-color);
+  font-family: var(--font-sans);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  font-size: 0.85rem;
 }
 .navbar.navbar-light .navbar-nav .nav-item .nav-link {
   color: var(--global-text-color);
+  font-family: var(--font-sans);
+  letter-spacing: 0.02em;
+  font-size: 1.05rem;
+  padding: 0.6rem 0.9rem;
 }
 .navbar.navbar-light .navbar-nav .nav-item .nav-link:hover {
   color: var(--global-hover-color);
@@ -337,7 +416,7 @@ blockquote {
   text-align: center;
 }
 .social .contact-icons {
-  font-size: 4rem;
+  font-size: 2.4rem;
 }
 .social .contact-icons a i::before {
   color: var(--global-text-color);
@@ -348,6 +427,28 @@ blockquote {
 }
 .social .contact-note {
   font-size: 0.8rem;
+}
+
+.hero-social {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  margin-bottom: 1.5rem;
+}
+
+.hero-social a {
+  border-bottom: 0;
+}
+
+.hero-social i::before {
+  font-size: 1.8rem;
+  color: var(--global-text-color);
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.hero-social a:hover i::before {
+  color: var(--global-theme-color);
+  transform: translateY(-1px);
 }
 
 footer.fixed-bottom {
@@ -507,7 +608,7 @@ footer.sticky-bottom {
   margin-top: 2rem;
 }
 .publications h1 {
-  color: var(--global-theme-color);
+  color: var(--global-text-color);
   font-size: 2rem;
   text-align: center;
   margin-top: 1em;
@@ -520,12 +621,16 @@ footer.sticky-bottom {
   font-size: 1.5rem;
 }
 .publications h2.year {
-  color: var(--global-divider-color);
+  color: var(--global-text-color-light);
   border-top: 1px solid var(--global-divider-color);
   padding-top: 1rem;
   margin-top: 2rem;
   margin-bottom: -2rem;
   text-align: right;
+  font-family: var(--font-sans);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-size: 0.75rem;
 }
 .publications ol.bibliography {
   list-style: none;
@@ -533,12 +638,23 @@ footer.sticky-bottom {
   margin-top: 0;
 }
 .publications ol.bibliography li {
-  margin-bottom: 1rem;
+  margin-bottom: 1.2rem;
+  padding: 1.2rem 1.2rem;
+  border-radius: 18px;
+  border: 1px solid var(--global-divider-color);
+  background-color: var(--global-card-bg-color);
+  box-shadow: var(--global-card-shadow);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.publications ol.bibliography li:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 16px 34px rgba(17, 21, 23, 0.12);
 }
 .publications ol.bibliography li .preview {
   width: 100%;
   min-width: 80px;
-  max-width: 200px;
+  max-width: none;
+  border-radius: 12px;
 }
 .publications ol.bibliography li .abbr {
   height: 2rem;
@@ -561,7 +677,12 @@ footer.sticky-bottom {
   border: 1px solid var(--global-theme-color);
 }
 .publications ol.bibliography li .title {
-  font-weight: bolder;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  letter-spacing: 0.01em;
+}
+.publications ol.bibliography li .author {
+  color: var(--global-text-color-light);
 }
 .publications ol.bibliography li .author a {
   border-bottom: 1px dashed var(--global-theme-color);
@@ -586,10 +707,12 @@ footer.sticky-bottom {
 .publications ol.bibliography li .links a.btn {
   color: var(--global-text-color);
   border: 1px solid var(--global-text-color);
-  padding-left: 1rem;
-  padding-right: 1rem;
-  padding-top: 0.25rem;
-  padding-bottom: 0.25rem;
+  padding: 0.2rem 0.9rem;
+  border-radius: 999px;
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 .publications ol.bibliography li .links a.btn:hover {
   color: var(--global-theme-color);
@@ -640,6 +763,24 @@ footer.sticky-bottom {
   border-color: var(--global-text-color);
 }
 
+.publications .col-sm-4.preview {
+  overflow: hidden;
+  border-radius: 14px;
+}
+
+.publications img.preview {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3/2;
+  object-fit: contain;
+  background-color: var(--global-card-bg-color);
+  transition: transform 0.35s ease;
+}
+
+.publications li:hover img.preview {
+  transform: scale(1.05);
+}
+
 figure.highlight {
   margin: 0 0 1rem;
 }
@@ -649,6 +790,7 @@ pre {
   background-color: var(--global-code-bg-color);
   border-radius: 6px;
   padding: 6px 12px;
+  font-family: var(--font-mono);
 }
 pre pre,
 pre code {
@@ -663,6 +805,7 @@ code {
   background-color: var(--global-code-bg-color);
   border-radius: 3px;
   padding: 3px 3px;
+  font-family: var(--font-mono);
 }
 
 html.transition,
@@ -673,6 +816,11 @@ html.transition *:after {
   transition-delay: 0 !important;
 }
 
+.post .post-header {
+  border-bottom: 1px solid var(--global-divider-color);
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
 .post .post-meta {
   color: var(--global-text-color-light);
   font-size: 0.875rem;
