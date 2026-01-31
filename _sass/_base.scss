@@ -100,12 +100,17 @@ img {
 }
 
 blockquote {
-  background: var(--global-card-bg-color);
+  background-color: var(--global-glass-bg);
+  background-image: var(--global-glass-highlight);
+  border: 1px solid var(--global-glass-border);
   border-left: 3px solid var(--global-theme-color);
   border-radius: 10px;
   margin: 1.5em 10px;
   padding: 0.75em 1rem;
   font-size: 1.05rem;
+  box-shadow: var(--global-glass-shadow);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
 }
 
 // Math
@@ -127,10 +132,13 @@ blockquote {
 // Card
 
 .card {
-  background-color: var(--global-card-bg-color);
+  background-color: var(--global-glass-bg);
+  background-image: var(--global-glass-highlight);
   border-radius: 16px;
-  box-shadow: var(--global-card-shadow);
-  border: 1px solid var(--global-divider-color);
+  box-shadow: var(--global-glass-shadow);
+  border: 1px solid var(--global-glass-border);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
 
   img {
     width: 100%;
@@ -224,15 +232,17 @@ blockquote {
 
 .navbar {
   box-shadow: none;
-  border-bottom: 1px solid var(--global-divider-color);
-  background-color: rgba(237, 246, 251, 0.62);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--global-glass-border);
+  box-shadow: 0 10px 26px rgba(12, 24, 32, 0.1);
+  background-color: var(--global-glass-bg-strong);
+  background-image: var(--global-glass-highlight);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   opacity: 1;
 }
 
 .navbar .container {
-  max-width: 1200px;
+  max-width: 1100px;
 }
 
 .navbar .container {
@@ -240,8 +250,11 @@ blockquote {
 }
 
 .navbar .dropdown-menu {
-  background-color: var(--global-bg-color);
-  border: 1px solid var(--global-divider-color);
+  background-color: var(--global-glass-bg-strong);
+  background-image: var(--global-glass-highlight);
+  border: 1px solid var(--global-glass-border);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
 
   a:not(.active) {
     color: var(--global-text-color);
@@ -425,7 +438,11 @@ blockquote {
 
 // Footer
 footer.fixed-bottom {
-  background-color: var(--global-footer-bg-color);
+  background-color: var(--global-glass-bg-strong);
+  background-image: var(--global-glass-highlight);
+  border-top: 1px solid var(--global-glass-border);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
   font-size: 0.75rem;
 
   .container {
@@ -445,7 +462,11 @@ footer.fixed-bottom {
 }
 
 footer.sticky-bottom {
-  border-top: 1px solid var(--global-divider-color);
+  border-top: 1px solid var(--global-glass-border);
+  background-color: var(--global-glass-bg-strong);
+  background-image: var(--global-glass-highlight);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
   padding-top: 40px;
   padding-bottom: 40px;
   font-size: 0.9rem;
@@ -519,10 +540,16 @@ footer.sticky-bottom {
   padding: 0;
 
   li {
-    border-bottom: 1px solid var(--global-divider-color);
+    border: 1px solid var(--global-glass-border);
     list-style: none;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding: 2rem;
+    margin-bottom: 1.5rem;
+    border-radius: 18px;
+    background-color: var(--global-glass-bg);
+    background-image: var(--global-glass-highlight);
+    box-shadow: var(--global-glass-shadow);
+    backdrop-filter: blur(16px) saturate(160%);
+    -webkit-backdrop-filter: blur(16px) saturate(160%);
 
     .post-meta {
       color: var(--global-text-color-light);
