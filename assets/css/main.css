@@ -7,21 +7,27 @@
  * Themes
  ******************************************************************************/
 :root {
-  --global-bg-color: #edf6fb;
-  --global-code-bg-color: rgba(26, 117, 152, 0.08);
-  --global-text-color: #1b2a33;
-  --global-text-color-light: #566a75;
-  --global-theme-color: #1a7598;
-  --global-hover-color: #145c78;
+  --global-bg-color: #e6f1f7;
+  --global-code-bg-color: rgba(47, 95, 115, 0.09);
+  --global-text-color: #0f222b;
+  --global-text-color-light: #4a6b78;
+  --global-theme-color: #2b6d86;
+  --global-hover-color: #235a6f;
   --global-footer-bg-color: #0e1418;
-  --global-footer-text-color: #d5dde2;
-  --global-footer-link-color: #edf6fb;
+  --global-footer-text-color: var(--global-text-color);
+  --global-footer-link-color: var(--global-text-color);
   --global-distill-app-color: #566a75;
-  --global-divider-color: rgba(18, 32, 40, 0.12);
-  --global-card-bg-color: #f6fbff;
-  --global-card-shadow: 0 10px 30px rgba(12, 24, 32, 0.08);
-  --global-bg-glow: radial-gradient(1200px 520px at 15% -10%, rgba(26, 117, 152, 0.12), transparent 60%),
-    radial-gradient(900px 420px at 85% 0%, rgba(122, 176, 200, 0.2), transparent 60%);
+  --global-divider-color: rgba(15, 32, 40, 0.12);
+  --global-glass-bg: rgba(214, 236, 247, 0.38);
+  --global-glass-bg-strong: rgba(206, 231, 245, 0.55);
+  --global-glass-border: rgba(22, 60, 78, 0.2);
+  --global-glass-shadow: 0 24px 70px rgba(12, 26, 36, 0.16);
+  --global-glass-highlight: linear-gradient(135deg, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.12));
+  --global-card-bg-color: var(--global-glass-bg);
+  --global-card-shadow: var(--global-glass-shadow);
+  --global-bg-glow: radial-gradient(1200px 640px at 12% -10%, rgba(50, 124, 158, 0.26), transparent 60%),
+    radial-gradient(980px 640px at 90% -8%, rgba(120, 186, 205, 0.3), transparent 62%),
+    radial-gradient(620px 520px at 18% 86%, rgba(154, 214, 228, 0.22), transparent 62%);
   --font-sans: "Manrope", "Helvetica Neue", Arial, sans-serif;
   --font-serif: "Literata", "Times New Roman", serif;
   --font-mono: "JetBrains Mono", "SFMono-Regular", ui-monospace, monospace;
@@ -42,21 +48,27 @@
 }
 
 html[data-theme=dark] {
-  --global-bg-color: #0f1419;
-  --global-code-bg-color: rgba(129, 205, 224, 0.12);
-  --global-text-color: #e6eff4;
-  --global-text-color-light: #b6c4cc;
-  --global-theme-color: #81cde0;
-  --global-hover-color: #a9dce9;
+  --global-bg-color: #0c1115;
+  --global-code-bg-color: rgba(141, 193, 210, 0.18);
+  --global-text-color: #e8f1f5;
+  --global-text-color-light: #b6c8d2;
+  --global-theme-color: #8fc2d3;
+  --global-hover-color: #b1d7e4;
   --global-footer-bg-color: #0b1014;
-  --global-footer-text-color: #e6eff4;
-  --global-footer-link-color: #e6eff4;
+  --global-footer-text-color: var(--global-text-color);
+  --global-footer-link-color: var(--global-text-color);
   --global-distill-app-color: #b6c4cc;
-  --global-divider-color: rgba(255, 255, 255, 0.12);
-  --global-card-bg-color: #151d24;
-  --global-card-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
-  --global-bg-glow: radial-gradient(1100px 520px at 15% -15%, rgba(129, 205, 224, 0.12), transparent 60%),
-    radial-gradient(900px 520px at 85% -5%, rgba(85, 132, 150, 0.2), transparent 60%);
+  --global-divider-color: rgba(232, 241, 245, 0.12);
+  --global-glass-bg: rgba(9, 19, 25, 0.58);
+  --global-glass-bg-strong: rgba(9, 19, 25, 0.76);
+  --global-glass-border: rgba(143, 194, 211, 0.22);
+  --global-glass-shadow: 0 30px 80px rgba(0, 0, 0, 0.6);
+  --global-glass-highlight: linear-gradient(135deg, rgba(143, 194, 211, 0.2), rgba(255, 255, 255, 0.05));
+  --global-card-bg-color: var(--global-glass-bg);
+  --global-card-shadow: var(--global-glass-shadow);
+  --global-bg-glow: radial-gradient(1100px 640px at 15% -15%, rgba(104, 166, 187, 0.22), transparent 60%),
+    radial-gradient(980px 640px at 88% -10%, rgba(70, 112, 128, 0.32), transparent 62%),
+    radial-gradient(620px 640px at 10% 78%, rgba(60, 98, 112, 0.22), transparent 62%);
 }
 html[data-theme=dark] .fa-sun {
   padding-left: 10px;
@@ -205,12 +217,17 @@ img {
 }
 
 blockquote {
-  background: var(--global-card-bg-color);
+  background-color: var(--global-glass-bg);
+  background-image: var(--global-glass-highlight);
+  border: 1px solid var(--global-glass-border);
   border-left: 3px solid var(--global-theme-color);
   border-radius: 10px;
   margin: 1.5em 10px;
   padding: 0.75em 1rem;
   font-size: 1.05rem;
+  box-shadow: var(--global-glass-shadow);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
 }
 
 .equation {
@@ -226,10 +243,13 @@ blockquote {
 }
 
 .card {
-  background-color: var(--global-card-bg-color);
+  background-color: var(--global-glass-bg);
+  background-image: var(--global-glass-highlight);
   border-radius: 16px;
-  box-shadow: var(--global-card-shadow);
-  border: 1px solid var(--global-divider-color);
+  box-shadow: var(--global-glass-shadow);
+  border: 1px solid var(--global-glass-border);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
 }
 .card img {
   width: 100%;
@@ -303,15 +323,17 @@ blockquote {
 
 .navbar {
   box-shadow: none;
-  border-bottom: 1px solid var(--global-divider-color);
-  background-color: rgba(237, 246, 251, 0.62);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--global-glass-border);
+  box-shadow: 0 10px 26px rgba(12, 24, 32, 0.1);
+  background-color: var(--global-glass-bg-strong);
+  background-image: var(--global-glass-highlight);
+  backdrop-filter: blur(20px) saturate(160%);
+  -webkit-backdrop-filter: blur(20px) saturate(160%);
   opacity: 1;
 }
 
 .navbar .container {
-  max-width: 1200px;
+  max-width: 1100px;
 }
 
 .navbar .container {
@@ -319,8 +341,11 @@ blockquote {
 }
 
 .navbar .dropdown-menu {
-  background-color: var(--global-bg-color);
-  border: 1px solid var(--global-divider-color);
+  background-color: var(--global-glass-bg-strong);
+  background-image: var(--global-glass-highlight);
+  border: 1px solid var(--global-glass-border);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
 }
 .navbar .dropdown-menu a:not(.active) {
   color: var(--global-text-color);
@@ -462,7 +487,11 @@ blockquote {
 }
 
 footer.fixed-bottom {
-  background-color: var(--global-footer-bg-color);
+  background-color: var(--global-glass-bg-strong);
+  background-image: var(--global-glass-highlight);
+  border-top: 1px solid var(--global-glass-border);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
   font-size: 0.75rem;
 }
 footer.fixed-bottom .container {
@@ -479,7 +508,11 @@ footer.fixed-bottom a:hover {
 }
 
 footer.sticky-bottom {
-  border-top: 1px solid var(--global-divider-color);
+  border-top: 1px solid var(--global-glass-border);
+  background-color: var(--global-glass-bg-strong);
+  background-image: var(--global-glass-highlight);
+  backdrop-filter: blur(18px) saturate(160%);
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
   padding-top: 40px;
   padding-bottom: 40px;
   font-size: 0.9rem;
@@ -540,10 +573,16 @@ footer.sticky-bottom {
   padding: 0;
 }
 .post-list li {
-  border-bottom: 1px solid var(--global-divider-color);
+  border: 1px solid var(--global-glass-border);
   list-style: none;
-  padding-top: 2rem;
-  padding-bottom: 2rem;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border-radius: 18px;
+  background-color: var(--global-glass-bg);
+  background-image: var(--global-glass-highlight);
+  box-shadow: var(--global-glass-shadow);
+  backdrop-filter: blur(16px) saturate(160%);
+  -webkit-backdrop-filter: blur(16px) saturate(160%);
 }
 .post-list li .post-meta {
   color: var(--global-text-color-light);
