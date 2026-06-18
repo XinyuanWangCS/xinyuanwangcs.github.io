@@ -1,16 +1,5 @@
 ---
 ---
-@article{kimiteam2026kimik25visualagentic,
-  title={Kimi K2.5: Visual Agentic Intelligence},
-  author={Kimi Team},
-  year={2026},
-  pdf={https://arxiv.org/abs/2602.02276},
-  code={https://github.com/MoonshotAI/Kimi-K2.5},
-  preview={kimik25.png},
-  abbr={Kimi K2.5},
-  abstract={We introduce Kimi K2.5, an open-source multimodal agentic model designed to advance general agentic intelligence. K2.5 emphasizes the joint optimization of text and vision so that two modalities enhance each other. This includes a series of techniques such as joint text-vision pre-training, zero-vision SFT, and joint text-vision reinforcement learning. Building on this multimodal foundation, K2.5 introduces Agent Swarm, a self-directed parallel agent orchestration framework that dynamically decomposes complex tasks into heterogeneous sub-problems and executes them concurrently. Extensive evaluations show that Kimi K2.5 achieves state-of-the-art results across various domains including coding, vision, reasoning, and agentic tasks. Agent Swarm also reduces latency by up to 4.5× over single-agent baselines. We release the post-trained Kimi K2.5 model checkpoint to facilitate future research and real-world applications of agentic intelligence.},
-}
-
 @misc{lu2025videoagenttrekcomputerusepretraining,
       title={VideoAgentTrek: Computer Use Pretraining from Unlabeled Videos}, 
       author={Dunjie Lu and Yiheng Xu and Junli Wang and Haoyuan Wu and Xinyuan Wang and Zekun Wang and Junlin Yang and Hongjin Su and Jixuan Chen and Junda Chen and Yuchen Mao and Jingren Zhou and Junyang Lin and Binyuan Hui and Tao Yu},
@@ -22,15 +11,6 @@
       pdf={https://arxiv.org/abs/2510.19488},
       url={https://arxiv.org/abs/2510.19488}, 
       preview={videoagenttrek.png}
-}
-
-@article{kimiteam2026kimik2openagentic,
-  title={Kimi k2: Open agentic intelligence},
-  author={Kimi Team},
-  year={2025},
-  pdf={https://arxiv.org/pdf/2507.20534},
-  preview={kimik2.png},
-  abstract={We introduce Kimi K2, a Mixture-of-Experts (MoE) large language model with 32 billion activated parameters and 1 trillion total parameters. We propose the MuonClip optimizer, which improves upon Muon with a novel QK-clip technique to address training instability while enjoying the advanced token efficiency of Muon. Based on MuonClip, K2 was pre-trained on 15.5 trillion tokens with zero loss spike. During post-training, K2 undergoes a multi-stage post-training process, highlighted by a large-scale agentic data synthesis pipeline and a joint reinforcement learning (RL) stage, where the model improves its capabilities through interactions with real and synthetic environments. Kimi K2 achieves state-of-the-art performance among open-source non-thinking models, with strengths in agentic capabilities. Notably, K2 obtains 66.1 on Tau2-Bench, 76.5 on ACEBench (En), 65.8 on SWE-Bench Verified, and 47.3 on SWE-Bench Multilingual -- surpassing most open and closed-sourced baselines in non-thinking settings. It also exhibits strong capabilities in coding, mathematics, and reasoning tasks, with a score of 53.7 on LiveCodeBench v6, 49.5 on AIME 2025, 75.1 on GPQA-Diamond, and 27.1 on OJBench, all without extended thinking. These results position Kimi K2 as one of the most capable open-source large language models to date, particularly in software engineering and agentic tasks. We release our base and post-trained model checkpoints to facilitate future research and applications of agentic intelligence.}
 }
 
 @article{wang2025opencua,
@@ -67,17 +47,6 @@
   website={https://xlang.ai/blog/osworld-verified},
   url = "https://xlang.ai/blog/osworld-verified",
   preview={osworld-verified.png}
-}
-
-@article{team2025kimi,
-  title={Kimi-vl technical report},
-  author={Team, Kimi and Du, Angang and Yin, Bohong and Xing, Bowei and Qu, Bowen and Wang, Bowen and Chen, Cheng and Zhang, Chenlin and Du, Chenzhuang and Wei, Chu and others},
-  journal={arXiv preprint arXiv:2504.07491},
-  year={2025},
-  pdf={https://arxiv.org/abs/2504.07491},
-  code={https://github.com/MoonshotAI/Kimi-VL},
-  preview={kimivl.png},
-  abstract={We present Kimi-VL, an efficient open-source Mixture-of-Experts (MoE) vision-language model (VLM) that offers advanced multimodal reasoning, long-context understanding, and strong agent capabilities - all while activating only 2.8B parameters in its language decoder (Kimi-VL-A3B). Kimi-VL demonstrates strong performance across challenging domains: as a general-purpose VLM, Kimi-VL excels in multi-turn agent tasks (e.g., OSWorld), matching flagship models. Furthermore, it exhibits remarkable capabilities across diverse challenging vision language tasks, including college-level image and video comprehension, OCR, mathematical reasoning, and multi-image understanding. In comparative evaluations, it effectively competes with cutting-edge efficient VLMs such as GPT-4o-mini, Qwen2.5-VL-7B, and Gemma-3-12B-IT, while surpassing GPT-4o in several key domains. Kimi-VL also advances in processing long contexts and perceiving clearly. With a 128K extended context window, Kimi-VL can process diverse long inputs, achieving impressive scores of 64.5 on LongVideoBench and 35.1 on MMLongBench-Doc. Its native-resolution vision encoder, MoonViT, further allows it to see and understand ultra-high-resolution visual inputs, achieving 83.2 on InfoVQA and 34.5 on ScreenSpot-Pro, while maintaining lower computational cost for common tasks. Building upon Kimi-VL, we introduce an advanced long-thinking variant: Kimi-VL-Thinking-2506. Developed through long chain-of-thought (CoT) supervised fine-tuning (SFT) and reinforcement learning (RL), the latest model exhibits strong long-horizon reasoning capabilities (64.0 on MMMU, 46.3 on MMMU-Pro, 56.9 on MathVision, 80.1 on MathVista, 65.2 on VideoMMMU) while obtaining robust general abilities.},
 }
 
 @misc{wang2025computer,
