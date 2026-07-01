@@ -9,3 +9,11 @@ _site
 Gemfile.lock
 vendor
 
+
+# local design-exploration demos (not part of the published site)
+/creative-site/
+/pixel-site/
+/minimal-site/
+/cute-site/
+/reactbits-site/
+/gallery/

@@ -1,5 +1,45 @@
 ---
 ---
+@misc{tang2026phonebuddy,
+      title={PhoneBuddy: Training Open Models for Agentic Phone Use},
+      author={Zhengyang Tang and Xin Lai and Pengyuan Lyu and Xinyuan Wang and Tianyi Bai and Chenxin Li and Yiduo Guo and Huawen Shen and Yuxuan Liu and others},
+      year={2026},
+      eprint={2606.23049},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      website={https://phonebuddyai.github.io/},
+      pdf={https://arxiv.org/abs/2606.23049},
+      url={https://arxiv.org/abs/2606.23049},
+      abstract={Phones are becoming an important execution surface for general-purpose agents, but training open models for reliable phone use remains difficult because the deployment environment is slow, stateful, side-effectful, and hard to reset or verify, while scalable mock environments only approximate real behavior. We present PhoneBuddy, a training recipe and open-model line that combines a real-app environment with a mock-app environment, PhoneWorld, which reconstructs runnable mock apps from real GUI usage structure. PhoneBuddy first builds a shared supervised fine-tuning stage, then compares real-app RL against mixed RL across both environments. On a 150-task human evaluation, success improves from 36.67% (SFT) to 40.67% (real-app RL) to 45.33% (mixed RL); on AndroidWorld, from 60.3% to 77.2% to 83.2%. Mock-app training is not a replacement for real-app RL, but a complementary source of scalable, resettable, and automatically checked interaction.},
+      preview={phonebuddy.png}
+}
+
+@misc{tang2026privacy,
+      title={Do Phone-Use Agents Respect Your Privacy?},
+      author={Zhengyang Tang and Ke Ji and Xidong Wang and Zihan Ye and Xinyuan Wang and Yiduo Guo and Ziniu Li and Chenxin Li and Jingyuan Hu and others},
+      year={2026},
+      eprint={2604.00986},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR},
+      pdf={https://arxiv.org/abs/2604.00986},
+      url={https://arxiv.org/abs/2604.00986},
+      abstract={We investigate whether phone-use agents protect user privacy when carrying out routine mobile tasks. This has been hard to assess because privacy-compliant behavior was not well-defined for such agents, and standard apps do not expose what data agents enter into forms. We introduce MyPhoneBench, a verifiable evaluation framework for privacy behavior in mobile agents. It defines privacy-respecting phone use through three principles---permissioned access, minimal disclosure, and user-controlled memory---via a privacy contract called iMy, combined with instrumented mock apps and rule-based auditing. Evaluating five frontier models across 10 mobile apps and 300 tasks, we find task success, privacy-compliant completion, and reuse of saved preferences are separate capabilities, with no single model excelling at all three. The most common failure is poor data minimization. Privacy issues stem from over-helpful execution of benign tasks, and evaluating success alone overstates how deployment-ready these agents are.},
+      preview={phone_privacy.png}
+}
+
+@misc{luo2026gamecraft,
+      title={GameCraft-Bench: Can Agents Build Playable Games End-to-End in a Real Game Engine?},
+      author={Tongxu Luo and Rongsheng Wang and Jiaxi Bi and Chenming Xu and Zhengyang Tang and Jianlong Chen and Juhao Liang and Ke Ji and Shuqi Guo and Xinyuan Wang and others},
+      year={2026},
+      eprint={2606.17861},
+      archivePrefix={arXiv},
+      primaryClass={cs.CL},
+      pdf={https://arxiv.org/abs/2606.17861},
+      url={https://arxiv.org/abs/2606.17861},
+      abstract={We formalize end-to-end game generation, where coding agents must turn natural-language specifications into playable games within a game engine. Unlike traditional coding, scripts, scenes, assets, rendering, and runtime interactions must jointly produce coherent gameplay. We propose three desiderata---Engine Grounding, Artifact Completeness, and Interactive Verification---and introduce an evaluation framework using replayed demonstrations and rubric-guided multimodal judging. This is instantiated as GameCraft-Bench, a benchmark comprising 140 Godot tasks across 15 game families. The task remains difficult: the top agent reaches only 41.46%, with most below 40%. Agents implement recognizable mechanics but struggle with complete content, visual feedback, and presentation.},
+      preview={gamecraft.png}
+}
+
 @misc{lu2025videoagenttrekcomputerusepretraining,
       title={VideoAgentTrek: Computer Use Pretraining from Unlabeled Videos}, 
       author={Dunjie Lu and Yiheng Xu and Junli Wang and Haoyuan Wu and Xinyuan Wang and Zekun Wang and Junlin Yang and Hongjin Su and Jixuan Chen and Junda Chen and Yuchen Mao and Jingren Zhou and Junyang Lin and Binyuan Hui and Tao Yu},

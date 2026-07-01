@@ -1,34 +1,6 @@
-"Adams":
-  - firstname: ["Edwin", "E.", "E. P.", "Edwin Plimpton"]
-    url: https://en.wikipedia.org/wiki/Edwin_Plimpton_Adams
-
-"Podolsky":
-  - firstname: ["Boris", "B.", "B. Y.", "Boris Yakovlevich"]
-    url: https://en.wikipedia.org/wiki/Boris_Podolsky
-
-"Rosen":
-  - firstname: ["Nathan", "N."]
-    url: https://en.wikipedia.org/wiki/Nathan_Rosen
-
-"Bach": 
-  - firstname: ["Johann Sebastian", "J. S."]
-    url: https://en.wikipedia.org/wiki/Johann_Sebastian_Bach
-
-"Przibram":
-  - firstname: ["Karl"]
-    url: https://link.springer.com/article/10.1007/s00016-019-00242-z
-
-"Schrödinger":
-  - firstname: ["Erwin"]
-    url: https://en.wikipedia.org/wiki/Erwin_Schr%C3%B6dinger
-
-"Lorentz":
-  - firstname: ["Hendrik Antoon"]
-    url: https://en.wikipedia.org/wiki/Hendrik_Lorentz
-
-"Planck":
-  - firstname: ["Max"]
-    url: https://en.wikipedia.org/wiki/Max_Planck
+# Co-author metadata for publication rendering.
+# Maps last name -> known first-name variants (+ optional profile url),
+# used by _layouts/bib.html to link co-authors on the publications page.
 
 "Zhou":
   - firstname: ["Fangfang", "F."]
@@ -41,6 +13,7 @@
 
 "Wang":
   - firstname: ["Xinyuan", "X."]
+  - firstname: ["Runpu", "R."]
 
 "Ma":
   - firstname: ["Hongxu", "H."]
@@ -53,9 +26,6 @@
 
 "Tao":
   - firstname: ["Make", "M."]
-
-"Wang":
-  - firstname: ["Runpu", "R."]
 
 "Zhang":
   - firstname: ["Likui", "L."]
