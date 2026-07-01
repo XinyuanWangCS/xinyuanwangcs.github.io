@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Literata:opsz,wght@7..72,300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;500;600;700&family=Inter:wght@400;500;600;700&family=Literata:opsz,wght@7..72,300;400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap");
 /*******************************************************************************
  * Variables used throughout the theme.
  * To adjust anything, simply edit the variables below and rebuild the theme.
@@ -1087,6 +1088,345 @@ d-appendix a:hover, d-appendix a.footnote-backlink:hover {
   }
   d-article d-contents nav {
     grid-column: none;
+  }
+}
+/*******************************************************************************
+ * _enhance.scss — tasteful, additive polish on top of the existing theme.
+ * Loaded last from main.scss. Everything here is opt-in via classes/markup
+ * already present in the al-folio templates, so it degrades gracefully and
+ * can be removed by deleting the single @import "enhance" line.
+ ******************************************************************************/
+/* ------------------------------------------------------------------ *
+ * 0 · motion tokens
+ * ------------------------------------------------------------------ */
+/* ------------------------------------------------------------------ *
+ * 1 · slowly drifting background glow
+ *    (--global-bg-glow already paints the body; we just animate it)
+ * ------------------------------------------------------------------ */
+@keyframes enh-bg-drift {
+  0% {
+    background-position: 0% 0%, 100% 0%, 0% 100%;
+  }
+  50% {
+    background-position: 6% 4%, 94% 3%, 4% 96%;
+  }
+  100% {
+    background-position: 0% 0%, 100% 0%, 0% 100%;
+  }
+}
+body {
+  background-attachment: fixed;
+  animation: enh-bg-drift 32s ease-in-out infinite;
+}
+
+/* ------------------------------------------------------------------ *
+ * 2 · hero: gradient name + staggered intro
+ * ------------------------------------------------------------------ */
+.post-header .post-title {
+  background: linear-gradient(100deg, var(--global-text-color) 0%, var(--global-theme-color) 45%, var(--global-hover-color) 70%, var(--global-text-color) 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: enh-name-flow 9s ease-in-out infinite;
+}
+
+@keyframes enh-name-flow {
+  0%, 100% {
+    background-position: 0% 0;
+  }
+  50% {
+    background-position: 100% 0;
+  }
+}
+/* intro: fade/slide the about hero pieces in sequence */
+@keyframes enh-rise {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.post-header .post-title,
+.post-header .desc,
+.profile,
+article > .clearfix > p,
+.hero-social {
+  animation: enh-rise 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.post-header .desc {
+  animation-delay: 0.08s;
+}
+
+.profile {
+  animation-delay: 0.16s;
+}
+
+article > .clearfix > p {
+  animation-delay: 0.22s;
+}
+
+.hero-social {
+  animation-delay: 0.34s;
+}
+
+/* ------------------------------------------------------------------ *
+ * 3 · profile photo — rotating conic halo on hover
+ * ------------------------------------------------------------------ */
+.profile {
+  position: relative;
+}
+.profile img {
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  position: relative;
+  z-index: 1;
+}
+.profile::before {
+  content: "";
+  position: absolute;
+  inset: -6px;
+  border-radius: 20px;
+  background: conic-gradient(from 0deg, var(--global-theme-color), transparent 25%, var(--global-hover-color) 50%, transparent 75%, var(--global-theme-color));
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 0.5s ease, transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+  filter: blur(8px);
+}
+.profile:hover::before {
+  opacity: 0.85;
+  transform: scale(1);
+  animation: enh-spin 6s linear infinite;
+}
+.profile:hover img {
+  transform: translateY(-2px) scale(1.01);
+}
+
+@keyframes enh-spin {
+  to {
+    transform: rotate(360deg) scale(1);
+  }
+}
+/* ------------------------------------------------------------------ *
+ * 4 · navbar links — underline grows from left
+ * ------------------------------------------------------------------ */
+.navbar.navbar-light .navbar-nav .nav-item .nav-link {
+  position: relative;
+}
+.navbar.navbar-light .navbar-nav .nav-item .nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.9rem;
+  right: 0.9rem;
+  bottom: 0.35rem;
+  height: 2px;
+  background: linear-gradient(90deg, var(--global-theme-color), var(--global-hover-color));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  border-radius: 2px;
+}
+.navbar.navbar-light .navbar-nav .nav-item .nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar.navbar-light .navbar-nav .nav-item.active > .nav-link::after {
+  transform: scaleX(1);
+}
+
+/* ------------------------------------------------------------------ *
+ * 5 · section headings (News / Selected Publications) — gradient tick
+ * ------------------------------------------------------------------ */
+article > h2 {
+  position: relative;
+  padding-left: 0.85rem;
+}
+article > h2::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.15em;
+  bottom: 0.15em;
+  width: 4px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, var(--global-theme-color), var(--global-hover-color));
+  box-shadow: 0 0 12px rgba(9, 105, 218, 0.45);
+}
+
+/* ------------------------------------------------------------------ *
+ * 6 · scroll-reveal (driven by enhance.js adding .enh-in)
+ *    Targets: news rows + publication entries
+ * ------------------------------------------------------------------ */
+.news table tr,
+.publications ol.bibliography li {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.7s cubic-bezier(0.22, 1, 0.36, 1), transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  will-change: opacity, transform;
+}
+
+.news table tr.enh-in,
+.publications ol.bibliography li.enh-in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ------------------------------------------------------------------ *
+ * 7 · publication cards — gradient border glow + lift on hover
+ * ------------------------------------------------------------------ */
+.publications ol.bibliography li {
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.35s ease;
+}
+.publications ol.bibliography li::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  padding: 1px;
+  background: linear-gradient(130deg, var(--global-theme-color), transparent 40%, transparent 60%, var(--global-hover-color));
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: 2;
+  pointer-events: none;
+}
+.publications ol.bibliography li:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 24px 48px -24px rgba(9, 105, 218, 0.5);
+  border-color: transparent;
+}
+.publications ol.bibliography li:hover::before {
+  opacity: 1;
+}
+
+/* publication link buttons — sliding fill */
+.publications ol.bibliography li .links a.btn {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+  transition: color 0.3s ease, border-color 0.3s ease;
+}
+.publications ol.bibliography li .links a.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--global-theme-color), var(--global-hover-color));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: -1;
+}
+.publications ol.bibliography li .links a.btn:hover {
+  color: #fff !important;
+  border-color: transparent;
+}
+.publications ol.bibliography li .links a.btn:hover::before {
+  transform: scaleX(1);
+}
+
+/* ------------------------------------------------------------------ *
+ * 8 · hero social icons — springy hover
+ * ------------------------------------------------------------------ */
+.hero-social a i::before {
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease;
+  display: inline-block;
+}
+
+.hero-social a:hover i::before {
+  transform: translateY(-4px) scale(1.18) rotate(-6deg);
+}
+
+/* ------------------------------------------------------------------ *
+ * 9 · news scroll area — fade mask + sleeker scrollbar
+ * ------------------------------------------------------------------ */
+.news .table-responsive {
+  -webkit-mask-image: linear-gradient(180deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+  mask-image: linear-gradient(180deg, transparent 0, #000 14px, #000 calc(100% - 14px), transparent 100%);
+  scrollbar-width: thin;
+  scrollbar-color: var(--global-theme-color) transparent;
+}
+.news .table-responsive::-webkit-scrollbar {
+  width: 6px;
+}
+.news .table-responsive::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, var(--global-theme-color), var(--global-hover-color));
+  border-radius: 6px;
+}
+
+.news td a {
+  background-image: linear-gradient(var(--global-theme-color), var(--global-theme-color));
+  background-size: 0% 1px;
+  background-position: 0 100%;
+  background-repeat: no-repeat;
+  transition: background-size 0.35s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease;
+}
+.news td a:hover {
+  background-size: 100% 1px;
+}
+
+/* ------------------------------------------------------------------ *
+ * 10 · scroll progress bar — gradient instead of flat
+ * ------------------------------------------------------------------ */
+.progress-bar,
+progress::-webkit-progress-value {
+  background-image: linear-gradient(90deg, var(--global-theme-color), var(--global-hover-color), var(--global-theme-color));
+  box-shadow: 0 0 10px rgba(9, 105, 218, 0.6);
+}
+
+/* ------------------------------------------------------------------ *
+ * 11 · global niceties
+ * ------------------------------------------------------------------ */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  background: var(--global-theme-color);
+  color: #fff;
+}
+
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--global-theme-color);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ------------------------------------------------------------------ *
+ * 12 · respect reduced-motion
+ * ------------------------------------------------------------------ */
+@media (prefers-reduced-motion: reduce) {
+  body {
+    animation: none;
+  }
+  .post-header .post-title {
+    animation: none;
+  }
+  .post-header .post-title,
+  .post-header .desc,
+  .profile,
+  article > .clearfix > p,
+  .hero-social {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .news table tr,
+  .publications ol.bibliography li {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }
 
