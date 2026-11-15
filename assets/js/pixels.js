@@ -1,12 +1,16 @@
 /**
- * pixels.js — the site's pixel art, in two small scenes:
- *   1. at the top, a little robot (a computer-use agent) at its desk: on the
- *      screen its cursor searches the web, files documents and charts a sheet,
- *      one task after another, and the robot is pleased with each;
- *   2. on the footer rule, a quiet corner: books, a lamp that comes on at
- *      night over a cat asleep on a stack of books, a mug and a plant.
- * Both follow the theme, run on the wall clock (so they carry on from page to
- * page) and only animate while in view. No dependencies.
+ * pixels.js — the site's pixel art:
+ *   1. the sky at the top of every page: a halo of fine pixels around the dock
+ *      (an ordered dither of a soft light, so it reads as a glow from afar;
+ *      pixels near the pointer light up), and over it a sun and clouds by day,
+ *      a moon and twinkling stars by night;
+ *   2. beside the page's title, a little robot (a computer-use agent) at its
+ *      desk: on the screen its cursor searches the web, files documents and
+ *      charts a sheet, and the robot is pleased with each;
+ *   3. on the footer rule, a quiet shelf: books, a lamp that comes on at night
+ *      over a cat asleep on a stack of books, a mug and a plant.
+ * Everything follows the theme, runs on the wall clock (so it carries on from
+ * page to page) and only animates while in view. No dependencies.
  */
 (function () {
   "use strict";
@@ -20,6 +24,18 @@
   /* Colours, by day and by night ----------------------------------------- */
 
   var PALETTE = {
+    dot: ["5c7cb4", "a8c6ff"],
+    sun: ["ffd45a", "ffd45a"],
+    sunRim: ["f5a93a", "f5a93a"],
+    sunLit: ["fff3c4", "fff3c4"],
+    ray: ["ffc24a", "ffc24a"],
+    moon: ["f6f2dc", "f6f2dc"],
+    moonShade: ["d8d0ac", "d8d0ac"],
+    star: ["e6eeff", "e6eeff"],
+    spark: ["e0b65c", "f0cf80"],
+    cloud: ["ffffff", "1d2a43"],
+    cloudShade: ["e1eaf5", "18233a"],
+    cloudLine: ["bccbdf", "26344f"],
     line: ["4a5a72", "26344b"],
     rule: ["dde2e9", "16191f"],
     shadow: ["c9d1dc", "0c1018"],
@@ -92,6 +108,31 @@
   // One character per pixel ("." is clear); each sprite has its own legend.
   // Sprites with an `outline` colour get a soft edge, like ink round a cartoon.
   var SPRITES = {
+    sun: {
+      legend: { o: "sunRim", y: "sun", h: "sunLit" },
+      rows: ["..ooo..", ".ohhyo.", "ohhyyyo", "ohyyyyo", "oyyyyyo", ".oyyyo.", "..ooo.."]
+    },
+    moon: {
+      legend: { m: "moon", s: "moonShade" },
+      rows: ["..mmmm.", ".mmms..", "mmms...", "mms....", "mms....", "mmms...", ".mmms..", "..mmmm."]
+    },
+    cloud: {
+      outline: "cloudLine",
+      legend: { c: "cloud", s: "cloudShade" },
+      rows: [
+        ".......cccc.........",
+        "....ccccccccc.ccc...",
+        "..cccccccccccccccc..",
+        ".cccccccccccccccccc.",
+        "cccccccccccccccccccc",
+        ".ssssssssssssssssss."
+      ]
+    },
+    cloudSmall: {
+      outline: "cloudLine",
+      legend: { c: "cloud", s: "cloudShade" },
+      rows: ["..ccc....", ".cccccc..", "ccccccccc", ".sssssss."]
+    },
     robot: {
       outline: "line",
       legend: { w: "robot", s: "robotShade", v: "visor", e: "eye", a: "antenna" },
@@ -266,8 +307,28 @@
     }
   }
 
+  // A four-pointed sparkle: a dot, then a small cross, then a longer one.
+  function sparkle(x, y, phase, name, alpha) {
+    var s = Math.max(0, Math.sin(phase));
+    if (s <= 0.05) return;
+    ink(x, y, name, alpha);
+    var arm = s > 0.8 ? 2 : s > 0.35 ? 1 : 0;
+    for (var i = 1; i <= arm; i++) {
+      var a = alpha * (i === 1 ? 0.85 : 0.45);
+      ink(x - i, y, name, a);
+      ink(x + i, y, name, a);
+      ink(x, y - i, name, a);
+      ink(x, y + i, name, a);
+    }
+  }
+
   function ease(t) {
     return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  }
+
+  function smooth(a, b, v) {
+    var t = Math.min(Math.max((v - a) / (b - a), 0), 1);
+    return t * t * (3 - 2 * t);
   }
 
   function between(t, a, b) {
@@ -278,7 +339,267 @@
     return ((v % span) + span) % span;
   }
 
-  /* 1. The agent --------------------------------------------------------- */
+  /* 1. The sky ----------------------------------------------------------- */
+
+  var PITCH = 4; // CSS px between the halo's pixels
+  var DOT = 1.5; // CSS px per halo pixel
+  var PEAK = 0.6; // its density right under the dock
+  var ALPHA = 0.5;
+  var REACH = 140; // CSS px of pointer light
+
+  // 8 × 8 ordered-dither thresholds.
+  var BAYER8 = (function () {
+    var m = [[0]];
+    for (var n = 1; n < 8; n *= 2) {
+      var next = [];
+      for (var y = 0; y < 2 * n; y++) {
+        next[y] = [];
+        for (var x = 0; x < 2 * n; x++) {
+          next[y][x] = 4 * m[y % n][x % n] + [0, 2, 3, 1][(y < n ? 0 : 2) + (x < n ? 0 : 1)];
+        }
+      }
+      m = next;
+    }
+    return m;
+  })();
+
+  function lit(c, r, density) {
+    return density > (BAYER8[r & 7][c & 7] + 0.5) / 64;
+  }
+
+  // The sun (or moon), clouds and stars, in big pixels above the title.
+  function drawSky(view, t) {
+    var W = view.W, H = view.H, dock = view.dock, day = 1 - night, i;
+    var open = function (x, y, w, h) {
+      return x + w < dock.x0 || x > dock.x1 || y > dock.y1;
+    };
+    // the sun sets as the moon rises
+    if (day > 0.01) {
+      var sx = Math.round(W * 0.08), sy = 6;
+      if (!open(sx - 6, sy - 6, 19, 19)) sy = dock.y1 + 7;
+      sy += Math.round(night * 8);
+      for (i = 0; i < 8; i++) {
+        var angle = i * Math.PI / 4, reach = (i + Math.floor(t / 0.8)) % 2 ? 6 : 5;
+        ink(sx + 3 + Math.round(Math.cos(angle) * reach), sy + 3 + Math.round(Math.sin(angle) * reach), "ray", day);
+      }
+      stamp("sun", sx, sy, day);
+    }
+    if (night > 0.01) {
+      var mx = Math.round(W * 0.86), my = 4;
+      if (!open(mx, my, 7, 8)) my = dock.y1 + 3;
+      my += Math.round(day * 8);
+      glow(mx + 3, my + 4, 9, 9, "moon", 0.5 * night);
+      stamp("moon", mx, my, night);
+      view.stars.forEach(function (s) {
+        if (s[3] === 2) sparkle(s[0], s[1], t * 0.9 + s[2], "star", night);
+        else ink(s[0], s[1], "star", night * (0.4 + 0.6 * Math.max(0, Math.sin(t * 1.1 + s[2]))) * (s[3] ? 1 : 0.6));
+      });
+      // a falling star every so often
+      var fall = (t % 13) / 0.9;
+      if (fall < 1) {
+        var fx = W * 0.62 - fall * 26, fy = 3 + fall * 10;
+        for (i = 0; i < 7; i++) ink(fx + i, fy - i * 0.45, "star", night * (1 - i / 7) * (1 - fall * 0.6));
+      }
+    }
+    // clouds drift across, behind the dock
+    var span = W + 40;
+    stamp("cloud", wrap(t * 1.1 + W * 0.18, span) - 20, 5, 1 - 0.35 * night);
+    stamp("cloudSmall", wrap(t * 1.5 + W * 0.52, span) - 20, Math.min(H - 6, 20), 1 - 0.45 * night);
+    if (day > 0.01) {
+      [[0.3, 26, 0], [0.66, 10, 2], [0.92, 28, 4]].forEach(function (p) {
+        var x = Math.round(W * p[0]);
+        if (p[1] < H - 3 && open(x - 2, p[1] - 2, 5, 5)) sparkle(x, p[1], t * 1.2 + p[2], "spark", day);
+      });
+    }
+  }
+
+  // The halo is drawn dot by dot at full resolution; the sky over it is a
+  // small pixel buffer, scaled up.
+  function skyView(canvas, avoid) {
+    var view = { canvas: canvas, ctx: canvas.getContext("2d"), visible: true, stars: [] };
+    var ctx = view.ctx, base = document.createElement("canvas"), baseCtx = base.getContext("2d");
+    var art = document.createElement("canvas"), artCtx = art.getContext("2d");
+    var cols = 0, rows = 0, density = null, flares = [], dpr = 1, height = 0;
+    var pointer = { x: 0, y: 0, tx: 0, ty: 0, on: 0, target: 0, seen: false };
+
+    function dot(c2d, c, r, alpha) {
+      var rgb = tones.dot, size = Math.max(1, Math.round(DOT * dpr));
+      c2d.fillStyle = "rgba(" + Math.round(rgb[0]) + "," + Math.round(rgb[1]) + "," + Math.round(rgb[2]) + "," + alpha.toFixed(3) + ")";
+      c2d.fillRect(Math.round((c * PITCH + (PITCH - DOT) / 2) * dpr), Math.round((r * PITCH + (PITCH - DOT) / 2) * dpr), size, size);
+    }
+
+    function paintBase() {
+      baseCtx.clearRect(0, 0, base.width, base.height);
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          var d = density[r * cols + c];
+          if (lit(c, r, d)) dot(baseCtx, c, r, ALPHA * (0.55 + 0.45 * Math.min(1, d * 2)));
+        }
+      }
+    }
+
+    view.recolour = paintBase;
+
+    view.fit = function () {
+      var style = getComputedStyle(root), W = root.clientWidth, x, y, c, r;
+      var dockTop = parseFloat(style.getPropertyValue("--dock-top")) || 14;
+      var dockH = parseFloat(style.getPropertyValue("--dock-h")) || 48;
+      var cx = W / 2, cy = dockTop + dockH / 2;
+      var rx = Math.min(Math.max(W * 0.43, 260), 620), ry = Math.min(Math.max(rx * 0.48, 170), 300);
+      var first = document.querySelector(".site-main .sheet, .site-main .pub, .site-main .section");
+      height = Math.round(cy + ry);
+      if (first) height = Math.min(height, box(first).top - 12);
+      height = Math.max(height, Math.round(cy + 40));
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      canvas.style.height = height + "px";
+      canvas.width = base.width = Math.round(W * dpr);
+      canvas.height = base.height = Math.round(height * dpr);
+
+      // the halo: an ellipse of light round the dock, kept off the robot
+      var robot = avoid && avoid.style.display !== "none" && avoid.offsetWidth ? box(avoid) : null;
+      cols = Math.ceil(W / PITCH);
+      rows = Math.ceil(height / PITCH);
+      density = new Float32Array(cols * rows);
+      for (r = 0; r < rows; r++) {
+        for (c = 0; c < cols; c++) {
+          x = c * PITCH + PITCH / 2;
+          y = r * PITCH + PITCH / 2;
+          if (robot && x > robot.left - 10 && x < robot.right + 10 && y > robot.top - 10 && y < robot.bottom + 10) {
+            density[r * cols + c] = -1;
+            continue;
+          }
+          var d = Math.min(1, Math.hypot((x - cx) / rx, (y - cy) / ry));
+          density[r * cols + c] = PEAK * Math.pow(1 - d, 1.8) * (1 - smooth(height - 48, height, y));
+        }
+      }
+      flares = [];
+      paintBase();
+
+      // the sky's motifs keep above the page's first words and pictures
+      var top = Infinity;
+      document.querySelectorAll(".hero__name, .hero__portrait, .page__title").forEach(function (el) {
+        top = Math.min(top, box(el).top);
+      });
+      var band = Math.min(height, top === Infinity ? 140 : top - 14);
+      view.scale = W < 600 ? 2 : 3;
+      view.W = Math.ceil(W / view.scale);
+      view.H = Math.max(8, Math.floor(band / view.scale));
+      art.width = view.W;
+      art.height = view.H;
+      view.image = artCtx.createImageData(view.W, view.H);
+      view.buffer = view.image.data;
+      var dock = document.querySelector(".dock"), b = dock ? dock.getBoundingClientRect() : null;
+      view.dock = b ? {
+        x0: Math.floor((b.left - 8) / view.scale),
+        x1: Math.ceil((b.right + 8) / view.scale),
+        y1: Math.ceil((b.bottom + 4) / view.scale)
+      } : { x0: 0, x1: -1, y1: -1 };
+      var seed = 11;
+      var rand = function () {
+        seed = (seed * 16807) % 2147483647;
+        return seed / 2147483647;
+      };
+      view.stars = [];
+      for (var i = 0; i < view.W / 9; i++) {
+        x = Math.floor(rand() * view.W);
+        y = 1 + Math.floor(rand() * Math.max(1, view.H - 4));
+        var kind = rand() > 0.82 ? 2 : rand() > 0.6 ? 1 : 0;
+        if (x >= view.dock.x0 - 1 && x <= view.dock.x1 + 1 && y <= view.dock.y1) continue;
+        if (Math.abs(x - view.W * 0.86 - 3) < 8 && y < 16) continue;
+        view.stars.push([x, y, rand() * 6.28, kind]);
+      }
+    };
+
+    view.render = function (now) {
+      var c, r;
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(base, 0, 0);
+      if (pointer.on > 0.01) {
+        // halo pixels near the pointer: more of them, and brighter
+        var c0 = Math.max(0, Math.floor((pointer.x - REACH) / PITCH)), c1 = Math.min(cols - 1, Math.ceil((pointer.x + REACH) / PITCH));
+        var r0 = Math.max(0, Math.floor((pointer.y - REACH) / PITCH)), r1 = Math.min(rows - 1, Math.ceil((pointer.y + REACH) / PITCH));
+        for (r = r0; r <= r1; r++) {
+          for (c = c0; c <= c1; c++) {
+            var k = 1 - Math.hypot(c * PITCH + PITCH / 2 - pointer.x, r * PITCH + PITCH / 2 - pointer.y) / REACH;
+            if (k <= 0 || density[r * cols + c] < 0) continue;
+            k = k * k * pointer.on;
+            if (lit(c, r, density[r * cols + c] + 0.45 * k * (1 - smooth(height - 48, height, r * PITCH)))) {
+              dot(ctx, c, r, ALPHA * (0.5 + 0.9 * k));
+            }
+          }
+        }
+      }
+      // a few halo pixels flare into small stars and fade again
+      flares = flares.filter(function (f) {
+        return now - f.start < f.length;
+      });
+      for (var tries = 0; flares.length < 3 && tries < 40; tries++) {
+        c = Math.floor(Math.random() * cols);
+        r = Math.floor(Math.random() * rows);
+        if (density[r * cols + c] > 0.12 && lit(c, r, density[r * cols + c])) {
+          flares.push({ c: c, r: r, start: now - Math.random() * 1500, length: 2200 + Math.random() * 1600 });
+        }
+      }
+      flares.forEach(function (f) {
+        var s = Math.sin(Math.PI * Math.min(Math.max((now - f.start) / f.length, 0), 1));
+        dot(ctx, f.c, f.r, Math.min(1, ALPHA + 0.5 * s));
+        if (s > 0.55) {
+          var arm = (s - 0.55) / 0.45 * 0.6;
+          dot(ctx, f.c - 1, f.r, arm);
+          dot(ctx, f.c + 1, f.r, arm);
+          dot(ctx, f.c, f.r - 1, arm);
+          dot(ctx, f.c, f.r + 1, arm);
+        }
+      });
+      // the sky over it
+      cur = view;
+      view.buffer.fill(0);
+      drawSky(view, now / 1000);
+      artCtx.putImageData(view.image, 0, 0);
+      ctx.imageSmoothingEnabled = false;
+      ctx.drawImage(art, 0, 0, Math.round(view.W * view.scale * dpr), Math.round(view.H * view.scale * dpr));
+      pointer.x += (pointer.tx - pointer.x) * 0.25;
+      pointer.y += (pointer.ty - pointer.y) * 0.25;
+      pointer.on += (pointer.target - pointer.on) * 0.12;
+    };
+
+    // while the pointer light moves, draw every frame
+    view.busy = function () {
+      return Math.abs(pointer.target - pointer.on) > 0.01 ||
+        (pointer.on > 0.01 && Math.hypot(pointer.tx - pointer.x, pointer.ty - pointer.y) > 0.5);
+    };
+
+    if (!reduceMotion.matches && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      var lastX = 0, lastY = 0;
+      var aim = function () {
+        pointer.tx = lastX;
+        pointer.ty = lastY + window.scrollY;
+        if (!pointer.seen) {
+          pointer.x = pointer.tx;
+          pointer.y = pointer.ty;
+          pointer.seen = true;
+        }
+        pointer.target = pointer.ty < height + REACH / 2 ? 1 : 0;
+        wake();
+      };
+      window.addEventListener("pointermove", function (event) {
+        lastX = event.clientX;
+        lastY = event.clientY;
+        aim();
+      }, { passive: true });
+      window.addEventListener("scroll", function () {
+        if (pointer.seen) aim();
+      }, { passive: true });
+      document.addEventListener("pointerleave", function () {
+        pointer.target = 0;
+        wake();
+      });
+    }
+    views.push(view);
+    return view;
+  }
+
+  /* 2. The agent --------------------------------------------------------- */
 
   // Where the cursor is on the 24 × 14 screen ([t, x, y]); it eases between.
   var PATH = [
@@ -442,25 +763,30 @@
     ink(rx + 10 + shift, ry + 10 + reach, "robotShade");
   }
 
-  /* 2. The shelf ------------------------------------------------------- */
+  /* 3. The shelf ------------------------------------------------------- */
 
-  // 70 × 24, standing on the footer rule: a row of books with one leaning, a
-  // lamp over a stack of books where the cat sleeps, a mug and a plant.
+  // Standing on the footer rule, spread along it: a row of books (one leaning)
+  // on the left; in the middle a lamp over a stack of books where the cat
+  // sleeps, and a mug; on the right two more books and a plant.
   var BOOKS = [[3, 12, "book1"], [2, 10, "book5"], [3, 13, "book2"], [2, 11, "book6"], [3, 12, "book3"]];
 
+  function book(x, g, w, h, name) {
+    rect(x, g - h, w, h, name);
+    rect(x, g - h + 2, w, 1, "band", 0.55);
+    rect(x, g - 3, w, 1, "band", 0.3);
+  }
+
   function drawShelf(view, t) {
-    var g = view.H, x = 1, i;
+    var g = view.H, W = view.W, x = 2, i;
     BOOKS.forEach(function (b) {
-      rect(x, g - b[1], b[0], b[1], b[2]);
-      rect(x, g - b[1] + 2, b[0], 1, "band", 0.55);
-      rect(x, g - 3, b[0], 1, "band", 0.3);
+      book(x, g, b[0], b[1], b[2]);
       x += b[0];
     });
     for (i = 0; i < 12; i++) rect(x + Math.floor(i * 0.5), g - 1 - i, 3, 1, "book4");
     rect(x + 5, g - 11, 3, 1, "band", 0.55);
 
     // the lamp, its shade tipped over the cat; lit at night
-    var lx = 21;
+    var lx = Math.round(W / 2) - 19;
     rect(lx, g - 1, 6, 1, "lamp");
     rect(lx + 2, g - 2, 2, 1, "lamp");
     for (i = 0; i < 10; i++) ink(lx + 3 + Math.floor(i * 0.4), g - 3 - i, "lamp");
@@ -471,7 +797,7 @@
     if (night > 0.02) glow(lx + 13, g - 4, 14, 12, "bulb", night * 0.8, g - 15);
 
     // a stack of books, and the cat asleep on it
-    var sx = 33, top = g - 8, breath = (t % 3.2) < 1.6 ? 0 : 1;
+    var sx = lx + 12, top = g - 8, breath = (t % 3.2) < 1.6 ? 0 : 1;
     rect(sx, g - 3, 18, 3, "book2");
     rect(sx, g - 2, 18, 1, "band", 0.35);
     rect(sx + 1, g - 6, 16, 3, "book1");
@@ -494,12 +820,16 @@
         stamp("zed", sx + 14 + Math.round(p * 3), top - 10 - Math.round(p * 8), night * Math.sin(p * Math.PI));
       }
     }
-
-    // a mug, still warm, and a plant
-    stamp("mug", 54, g - 3);
+    // a mug, still warm
+    stamp("mug", lx + 33, g - 3);
     var steam = (t * 1.5) % 3;
-    if (steam < 2) ink(55, g - 5 - Math.floor(steam * 2), "white", 0.6 * (1 - steam / 2));
-    stamp("plant", 59, g - 10);
+    if (steam < 2) ink(lx + 34, g - 5 - Math.floor(steam * 2), "white", 0.6 * (1 - steam / 2));
+
+    // two books and a plant
+    var rx = W - 19;
+    book(rx, g, 3, 9, "book6");
+    book(rx + 3, g, 2, 11, "book2");
+    stamp("plant", rx + 7, g - 10);
   }
 
   /* Scenes --------------------------------------------------------------- */
@@ -520,7 +850,7 @@
       canvas.style.display = "";
       view.scale = scaleFor();
       view.dpr = Math.min(window.devicePixelRatio || 1, 2);
-      view.W = cols;
+      view.W = cols === "fill" ? Math.max(70, Math.floor(spot.width / view.scale)) : cols;
       view.H = rows;
       var cssW = view.W * view.scale, cssH = view.H * view.scale;
       if (spot.left !== undefined) {
@@ -561,90 +891,94 @@
     return { left: x, top: y, right: x + el.offsetWidth, bottom: y + el.offsetHeight, width: el.offsetWidth };
   }
 
-  // Where the agent sits: above the portrait (beside it on phones), or at the
-  // end of an inner page's title — never under the dock.
+  // Where the agent sits: just after the page's title (the name, on the home
+  // page), standing on its baseline; on phones, where the name fills the
+  // line, beside the portrait instead.
+  var agentScale = 3;
+
   function agentSpot() {
-    var portrait = document.querySelector(".hero__portrait"), title = document.querySelector(".page__title");
-    var scale = agentScale(), w = 58 * scale, h = 32 * scale, spot;
-    if (portrait) {
-      var p = box(portrait), text = box(document.querySelector(".hero__text") || portrait);
-      if (p.left > text.left + 40) {
-        spot = { left: (p.left + p.right) / 2, bottom: p.top - 6, anchor: "center" };
-      } else {
-        var right = box(portrait.parentNode).right;
-        if (right - p.right < w + 8) return null;
-        spot = { left: (p.right + right) / 2, bottom: p.bottom, anchor: "center" };
-      }
-    } else if (title) {
-      // the title's text, not its box (which runs the full width)
+    var title = document.querySelector(".hero__name, .page__title");
+    if (title) {
       var range = document.createRange();
       range.selectNodeContents(title);
-      var textRight = range.getBoundingClientRect().right + window.scrollX, head = box(title.parentNode);
-      if (head.right - textRight < w + 24) return null;
-      spot = { left: head.right - 4, bottom: box(title).bottom, anchor: "right" };
-    } else {
-      return null;
-    }
-    var dock = document.querySelector(".dock");
-    if (dock) {
-      var d = dock.getBoundingClientRect(), left = spot.anchor === "center" ? spot.left - w / 2 : spot.left - w;
-      if (spot.bottom - h < d.bottom + 4 && left < d.right + 6 && left + w > d.left - 6) {
-        spot.left += d.right + 6 - left;
+      var lines = range.getClientRects(), last = lines[lines.length - 1];
+      var room = last ? box(title.parentNode).right - (last.right + window.scrollX) : 0;
+      agentScale = window.innerWidth >= 900 && room >= 58 * 3 + 28 ? 3 : 2;
+      if (room >= 58 * agentScale + 28) {
+        // Inter's ascent is 0.969 em and its descent 0.242 em
+        var style = getComputedStyle(title), size = parseFloat(style.fontSize);
+        var leading = (parseFloat(style.lineHeight) / size || 1.1) - 1.211;
+        var baseline = box(title).bottom - (leading / 2 + 0.242) * size;
+        return { left: last.right + window.scrollX + 24, bottom: baseline + agentScale };
       }
     }
-    return spot;
-  }
-
-  function agentScale() {
-    return window.innerWidth >= 900 ? 3 : 2;
+    var portrait = document.querySelector(".hero__portrait"), text = document.querySelector(".hero__text");
+    agentScale = 2;
+    if (portrait && text) {
+      var p = box(portrait), right = box(portrait.parentNode).right;
+      if (p.left < box(text).left + 40 && right - p.right >= 58 * 2 + 8) {
+        return { left: (p.right + right) / 2, bottom: p.bottom, anchor: "center" };
+      }
+    }
+    return null;
   }
 
   var agentCanvas = document.querySelector("[data-agent]");
-  if (agentCanvas && agentCanvas.getContext) scene(agentCanvas, 58, 32, agentScale, agentSpot, drawAgent);
+  if (agentCanvas && agentCanvas.getContext) {
+    scene(agentCanvas, 58, 32, function () {
+      return agentScale;
+    }, agentSpot, drawAgent);
+  }
+  var skyCanvas = document.querySelector("[data-sky]");
+  if (skyCanvas && skyCanvas.getContext) skyView(skyCanvas, agentCanvas);
   var shelf = document.querySelector("[data-shelf]");
   var shelfCanvas = shelf && shelf.querySelector("canvas");
   if (shelfCanvas && shelfCanvas.getContext) {
     shelf.classList.add("is-live");
-    scene(shelfCanvas, 70, 24, function () {
+    scene(shelfCanvas, "fill", 24, function () {
       return window.innerWidth >= 600 ? 3 : 2;
     }, function () {
-      return {};
+      return { width: shelf.clientWidth };
     }, drawShelf);
   }
   if (!views.length) return;
 
   /* Running -------------------------------------------------------------- */
 
-  var timer = 0, fade = null;
+  var rafId = 0, napId = 0, fade = null;
 
   function now() {
     return reduceMotion.matches ? (Math.floor(Date.now() / 1000 / LOOP) * LOOP + STILL) * 1000 : Date.now();
   }
 
   function frame() {
-    timer = 0;
+    rafId = 0;
     if (fade) {
       var f = Math.min(1, (performance.now() - fade.start) / 900);
       night = fade.from + (fade.to - fade.from) * f;
       if (f >= 1) fade = null;
       mixTones();
+      views.forEach(function (view) {
+        if (view.recolour) view.recolour();
+      });
     }
-    var any = false;
+    var any = false, busy = false;
     views.forEach(function (view) {
       if (!view.visible) return;
       view.render(now());
       any = true;
+      busy = busy || (view.busy && view.busy());
     });
-    if (any && !document.hidden && (!reduceMotion.matches || fade)) {
-      // pixel art moves in steps: about 15 frames a second is plenty
-      timer = setTimeout(function () {
-        timer = requestAnimationFrame(frame);
-      }, fade ? 0 : 66);
-    }
+    if (!any || document.hidden || (reduceMotion.matches && !fade)) return;
+    // pixel art moves in steps: about 15 frames a second is plenty, unless
+    // the theme is fading or the pointer light is moving
+    if (fade || busy) rafId = requestAnimationFrame(frame);
+    else napId = setTimeout(wake, 66);
   }
 
   function wake() {
-    if (!timer) timer = requestAnimationFrame(frame);
+    clearTimeout(napId);
+    if (!rafId) rafId = requestAnimationFrame(frame);
   }
 
   function refit() {
