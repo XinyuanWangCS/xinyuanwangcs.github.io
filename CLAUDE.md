@@ -10,8 +10,8 @@ Jekyll-based academic personal website built on the [al-folio](https://github.co
 
 ```bash
 bundle install                          # Install Ruby dependencies
-bundle exec jekyll serve --lsi          # Local dev server with live reload
-bundle exec jekyll build --lsi          # Production build (output: _site/)
+bundle exec jekyll serve                 # Local development server
+bundle exec jekyll build                 # Production build (output: _site/)
 docker-compose up                       # Run via Docker (prebuilt image)
 docker-compose -f docker-local.yml up   # Build and run local Docker image
 bin/cibuild                             # CI build wrapper

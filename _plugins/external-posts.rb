@@ -1,5 +1,3 @@
-require 'feedjira'
-require 'httparty'
 require 'jekyll'
 
 module ExternalPosts
@@ -8,7 +6,9 @@ module ExternalPosts
     priority :high
 
     def generate(site)
-      if site.config['external_sources'] != nil
+      if site.config['external_sources'] && !site.config['external_sources'].empty?
+        require 'feedjira'
+        require 'httparty'
         site.config['external_sources'].each do |src|
           p "Fetching external posts from #{src['name']}:"
           xml = HTTParty.get(src['rss_url']).body

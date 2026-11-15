@@ -125,7 +125,7 @@ bing_site_verification:  # out your bing-site-verification ID (Bing Webmaster)
 
 # Pagination
 pagination:
-  enabled: true
+  enabled: false
 
 related_blog_posts:
   enabled: true
@@ -154,9 +154,7 @@ disqus_shortname: al-folio # put your disqus shortname
 # External sources.
 # If you have blog posts published on medium.com or other exteranl sources,
 # you can display them in your blog by adding a link to the RSS feed.
-external_sources:
-  - name: medium.com
-    rss_url: https://medium.com/@al-folio/feed
+external_sources: []
 
 # -----------------------------------------------------------------------------
 # Collections
@@ -199,6 +197,14 @@ exclude:
   - Gemfile
   - Gemfile.lock
   - vendor
+  - CLAUDE.md
+  - docs
+  - creative-site
+  - pixel-site
+  - minimal-site
+  - cute-site
+  - reactbits-site
+  - gallery
 keep_files:
   - CNAME
   - .nojekyll
@@ -207,16 +213,12 @@ keep_files:
 # Plug-ins
 plugins:
   - jekyll-archives
-  - jekyll-diagrams
   - jekyll-email-protect
   - jekyll-feed
-  - jekyll-imagemagick
-  - jekyll-minifier
   - jekyll-paginate-v2
   - jekyll/scholar
   - jekyll-sitemap
   - jekyll-link-attributes
-  - jekyll-twitter-plugin
   - jemoji
 
 # Sitemap settings
@@ -258,8 +260,8 @@ display_tags: ['formatting', 'images', 'links', 'math', 'code'] # this tags will
 
 scholar:
 
-  last_name: [Einstein]
-  first_name: [Albert, A.]
+  last_name: [Wang]
+  first_name: [Xinyuan, X.]
 
   style: apa
   locale: en
@@ -280,13 +282,15 @@ scholar:
   details_link: Details
 
   query: "@*"
+  sort_by: [year, sortdate]
+  order: descending
 
 badges: # Display different badges for your pulications
-  altmetric_badge: true # Altmetric badge (https://www.altmetric.com/products/altmetric-badges/)
-  dimensions_badge: true # Dimensions badge (https://badge.dimensions.ai/)
+  altmetric_badge: false
+  dimensions_badge: false
 
 # Filter out certain bibtex entry keywords used internally from the bib output
-filtered_bibtex_keywords: [abbr, abstract, arxiv, bibtex_show, html, pdf, selected, supp, blog, code, poster, slides, website, preview, altmetric]
+filtered_bibtex_keywords: [abbr, abstract, arxiv, bibtex_show, html, pdf, selected, supp, blog, code, poster, slides, website, preview, altmetric, topic, summary, shorttitle, award, collaboration, sortdate, scholar_id, venue, featured_order]
 
 # Maximum number of authors to be shown for each publication (more authors are visible on click)
 max_author_limit: 5  # leave blank to always show all authors
