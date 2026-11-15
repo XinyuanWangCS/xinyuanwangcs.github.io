@@ -8,7 +8,8 @@
  *      content passes beneath, refracts its live backdrop instead.)
  *   2. tint — a faint white body;
  *   3. highlights — a specular outer rim whose brightest point faces the light
- *      (the pointer, via --glass-angle), a soft inner bevel, a glare;
+ *      (the pointer, via --glass-angle) and which lights evenly once the
+ *      light is overhead (--glass-focus), a soft inner bevel, a glare;
  *   4. depth — light caught in the edge and a soft floating shadow.
  ******************************************************************************/
 
@@ -18,10 +19,23 @@
   initial-value: -40deg;
 }
 
+// 1 while the light is off to one side, easing to 0 as it moves overhead
+// (the pointer over the middle), where the rim has no brightest side.
+@property --glass-focus {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+
 @property --glass-gleam {
   syntax: "<color>";
   inherits: true;
   initial-value: transparent;
+}
+
+// A rim colour: $side with the light to one side, $even with it overhead.
+@function rim($side, $even) {
+  @return color-mix(in srgb, $side calc(var(--glass-focus) * 100%), $even);
 }
 
 .glass {
@@ -30,7 +44,7 @@
   overflow: hidden;
   border-radius: var(--glass-radius, 22px);
   box-shadow: var(--glass-shadow);
-  transition: --glass-angle 0.7s var(--ease-out), --glass-gleam 0.5s ease;
+  transition: --glass-angle 0.7s var(--ease-out), --glass-focus 0.7s var(--ease-out), --glass-gleam 0.5s ease;
 
   // specular outer rim
   &::before {
@@ -42,13 +56,13 @@
     border-radius: inherit;
     background: conic-gradient(
       from var(--glass-angle),
-      var(--glass-rim),
-      transparent 11%,
-      transparent 39%,
-      var(--glass-rim-2) 50%,
-      transparent 61%,
-      transparent 89%,
-      var(--glass-rim)
+      rim(var(--glass-rim), var(--glass-rim-even)),
+      rim(transparent, var(--glass-rim-even)) 11%,
+      rim(transparent, var(--glass-rim-even)) 39%,
+      rim(var(--glass-rim-2), var(--glass-rim-even)) 50%,
+      rim(transparent, var(--glass-rim-even)) 61%,
+      rim(transparent, var(--glass-rim-even)) 89%,
+      rim(var(--glass-rim), var(--glass-rim-even))
     );
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
@@ -110,7 +124,7 @@
   letter-spacing: -0.006em;
   line-height: 1;
   white-space: nowrap;
-  transition: transform 0.35s var(--ease-spring), --glass-angle 0.7s var(--ease-out), --glass-gleam 0.5s ease;
+  transition: transform 0.35s var(--ease-spring), --glass-angle 0.7s var(--ease-out), --glass-focus 0.7s var(--ease-out), --glass-gleam 0.5s ease;
 
   .icon {
     width: 15px;
@@ -134,7 +148,7 @@
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  transition: --glass-angle 0.7s var(--ease-out);
+  transition: --glass-angle 0.7s var(--ease-out), --glass-focus 0.7s var(--ease-out);
 
   &::before,
   &::after {
@@ -147,16 +161,17 @@
   }
 
   &::before {
+    $even: rgb(255 255 255 / 0.36);
     padding: 1.5px;
     background: conic-gradient(
       from var(--glass-angle),
-      rgb(255 255 255 / 0.95),
-      rgb(255 255 255 / 0.1) 11%,
-      rgb(255 255 255 / 0.04) 39%,
-      rgb(255 255 255 / 0.42) 50%,
-      rgb(255 255 255 / 0.04) 61%,
-      rgb(255 255 255 / 0.1) 89%,
-      rgb(255 255 255 / 0.95)
+      rim(rgb(255 255 255 / 0.95), $even),
+      rim(rgb(255 255 255 / 0.1), $even) 11%,
+      rim(rgb(255 255 255 / 0.04), $even) 39%,
+      rim(rgb(255 255 255 / 0.42), $even) 50%,
+      rim(rgb(255 255 255 / 0.04), $even) 61%,
+      rim(rgb(255 255 255 / 0.1), $even) 89%,
+      rim(rgb(255 255 255 / 0.95), $even)
     );
     -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;

@@ -43,8 +43,9 @@
       opacity 0.8s var(--ease-out),
       transform 0.8s var(--ease-out),
       --glass-angle 0.7s var(--ease-out),
+      --glass-focus 0.7s var(--ease-out),
       --glass-gleam 0.5s ease;
-    transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0ms, 0ms;
+    transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0ms, 0ms, 0ms;
   }
 
   .js [data-reveal].is-visible {

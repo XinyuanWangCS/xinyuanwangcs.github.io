@@ -4,7 +4,8 @@
  *   2. liquid glass: each glass surface shows an aligned copy of the page
  *      wallpaper, frosted, and (in Chromium) refracted across a curved bezel;
  *      the dock refracts its live backdrop
- *   3. light: every glass rim turns its highlight toward the pointer
+ *   3. light: every glass rim turns its highlight toward the pointer, and
+ *      lights evenly while the pointer is over its middle
  *   4. dock: a glass lens glides to the hovered item; header state on scroll
  *   5. publication panels (abstract / BibTeX), author lists, copy BibTeX
  *   6. scroll reveal
@@ -348,12 +349,25 @@
     });
 
     var pointerX = -1, pointerY = -1, frame = 0;
+    var angles = new WeakMap();
     var shine = function () {
       frame = 0;
       lit.forEach(function (el) {
         var r = el.getBoundingClientRect();
-        var angle = Math.atan2(pointerX - (r.left + r.width / 2), r.top + r.height / 2 - pointerY) * 57.2958;
+        var dx = pointerX - (r.left + r.width / 2);
+        var dy = pointerY - (r.top + r.height / 2);
+        // atan2 wraps from 180deg to -180deg; step the shortest way from the
+        // last angle (at first the CSS initial value) so the transition never
+        // spins the highlight the long way round.
+        var last = angles.has(el) ? angles.get(el) : -40;
+        var angle = Math.atan2(dx, -dy) * 57.2958;
+        angle = last + ((angle - last) % 360 + 540) % 360 - 180;
+        angles.set(el, angle);
+        // Over the middle the light is overhead and has no direction: 0 there,
+        // easing to 1 at the edges and beyond.
+        var d = Math.min(1, Math.hypot(dx / (r.width / 2), dy / (r.height / 2)));
         el.style.setProperty("--glass-angle", angle.toFixed(1) + "deg");
+        el.style.setProperty("--glass-focus", (d * d * (3 - 2 * d)).toFixed(2));
         el.style.setProperty("--glass-x", Math.round(pointerX - r.left) + "px");
         el.style.setProperty("--glass-y", Math.round(pointerY - r.top) + "px");
       });
