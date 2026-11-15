@@ -65,6 +65,15 @@
   animation-timing-function: ease;
 }
 
+// The day/night switch shows its own live animation through a theme change.
+::view-transition-old(daynight) {
+  display: none;
+}
+
+::view-transition-new(daynight) {
+  animation: none;
+}
+
 // Fallback for browsers without view transitions.
 .theme-fade,
 .theme-fade *,
@@ -92,6 +101,7 @@
   .site-footer,
   .skip-link,
   .ambient,
+  .agent,
   .pub__links,
   .pub__plate,
   .section__more {

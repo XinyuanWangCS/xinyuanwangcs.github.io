@@ -124,6 +124,18 @@ a {
   filter: invert(1);
 }
 
+// The little pixel robot at its computer, placed and drawn by pixels.js.
+.agent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 0;
+  height: 0;
+  image-rendering: pixelated;
+  pointer-events: none;
+}
+
 /* ------------------------------------------------------------ text links -- */
 
 // Class-less anchors in running text; buttons and pills keep their own styles.

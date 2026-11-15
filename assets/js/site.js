@@ -1,5 +1,6 @@
 /**
- * site.js — the only script on the site. No dependencies.
+ * site.js — the site's behaviour (seaside.js draws the theme switch). No
+ * dependencies.
  *   1. theme toggle (crossfade via the View Transitions API)
  *   2. liquid glass: each glass surface shows an aligned copy of the page
  *      wallpaper, frosted, and (in Chromium) refracted across a curved bezel;
@@ -48,8 +49,12 @@
       if (reduceMotion.matches) {
         setTheme(next);
       } else if (document.startViewTransition) {
+        // The switch (seaside.js) animates itself through the crossfade.
+        root.classList.add("is-theming");
         document.startViewTransition(function () {
           setTheme(next);
+        }).finished.finally(function () {
+          root.classList.remove("is-theming");
         });
       } else {
         root.classList.add("theme-fade");
@@ -425,6 +430,15 @@
     dock.addEventListener("pointerleave", function () {
       placeLens(current);
     });
+    if (toggle) {
+      // The theme switch has no lens; hovering it returns the lens home.
+      toggle.addEventListener("pointerenter", function () {
+        placeLens(current);
+      });
+      toggle.addEventListener("focus", function () {
+        placeLens(current);
+      });
+    }
     dock.addEventListener("focusout", function (event) {
       if (!dock.contains(event.relatedTarget)) placeLens(current);
     });

@@ -20,8 +20,8 @@
         </ul>
         {%- if site.enable_darkmode %}
         <span class="dock__divider" aria-hidden="true"></span>
-        <button class="dock__item dock__theme" type="button" data-theme-toggle aria-label="Switch between dark and light theme" title="Switch theme">
-          {% include icon.html name="theme" %}
+        <button class="daynight" type="button" role="switch" aria-checked="false" aria-label="Dark theme" title="Switch theme" data-theme-toggle>
+          <canvas aria-hidden="true"></canvas>
         </button>
         {%- endif %}
       </nav>
