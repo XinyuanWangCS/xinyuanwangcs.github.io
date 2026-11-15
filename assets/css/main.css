@@ -53,6 +53,7 @@
   --glass-edge: rgb(13 17 23 / 0.06);
   --glass-rim: rgb(255 255 255 / 1);
   --glass-rim-2: rgb(255 255 255 / 0.75);
+  --glass-rim-even: rgb(255 255 255 / 0.55);
   --glass-rim-top: rgb(255 255 255 / 0.95);
   --glass-rim-bottom: rgb(255 255 255 / 0.5);
   --glass-thickness: rgb(255 255 255 / 0.28);
@@ -86,6 +87,7 @@
   --glass-edge: rgb(255 255 255 / 0.08);
   --glass-rim: rgb(255 255 255 / 0.9);
   --glass-rim-2: rgb(255 255 255 / 0.32);
+  --glass-rim-even: rgb(255 255 255 / 0.26);
   --glass-rim-top: rgb(255 255 255 / 0.32);
   --glass-rim-bottom: rgb(255 255 255 / 0.1);
   --glass-thickness: rgb(255 255 255 / 0.035);
@@ -291,13 +293,19 @@ a {
  *      content passes beneath, refracts its live backdrop instead.)
  *   2. tint — a faint white body;
  *   3. highlights — a specular outer rim whose brightest point faces the light
- *      (the pointer, via --glass-angle), a soft inner bevel, a glare;
+ *      (the pointer, via --glass-angle) and which lights evenly once the
+ *      light is overhead (--glass-focus), a soft inner bevel, a glare;
  *   4. depth — light caught in the edge and a soft floating shadow.
  ******************************************************************************/
 @property --glass-angle {
   syntax: "<angle>";
   inherits: true;
   initial-value: -40deg;
+}
+@property --glass-focus {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
 }
 @property --glass-gleam {
   syntax: "<color>";
@@ -310,7 +318,7 @@ a {
   overflow: hidden;
   border-radius: var(--glass-radius, 22px);
   box-shadow: var(--glass-shadow);
-  transition: --glass-angle 0.7s var(--ease-out), --glass-gleam 0.5s ease;
+  transition: --glass-angle 0.7s var(--ease-out), --glass-focus 0.7s var(--ease-out), --glass-gleam 0.5s ease;
 }
 .glass::before {
   content: "";
@@ -319,7 +327,7 @@ a {
   z-index: 1;
   padding: 1.25px;
   border-radius: inherit;
-  background: conic-gradient(from var(--glass-angle), var(--glass-rim), transparent 11%, transparent 39%, var(--glass-rim-2) 50%, transparent 61%, transparent 89%, var(--glass-rim));
+  background: conic-gradient(from var(--glass-angle), color-mix(in srgb, var(--glass-rim) calc(var(--glass-focus) * 100%), var(--glass-rim-even)), color-mix(in srgb, transparent calc(var(--glass-focus) * 100%), var(--glass-rim-even)) 11%, color-mix(in srgb, transparent calc(var(--glass-focus) * 100%), var(--glass-rim-even)) 39%, color-mix(in srgb, var(--glass-rim-2) calc(var(--glass-focus) * 100%), var(--glass-rim-even)) 50%, color-mix(in srgb, transparent calc(var(--glass-focus) * 100%), var(--glass-rim-even)) 61%, color-mix(in srgb, transparent calc(var(--glass-focus) * 100%), var(--glass-rim-even)) 89%, color-mix(in srgb, var(--glass-rim) calc(var(--glass-focus) * 100%), var(--glass-rim-even)));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -365,7 +373,7 @@ a {
   letter-spacing: -0.006em;
   line-height: 1;
   white-space: nowrap;
-  transition: transform 0.35s var(--ease-spring), --glass-angle 0.7s var(--ease-out), --glass-gleam 0.5s ease;
+  transition: transform 0.35s var(--ease-spring), --glass-angle 0.7s var(--ease-out), --glass-focus 0.7s var(--ease-out), --glass-gleam 0.5s ease;
 }
 .chip .icon {
   width: 15px;
@@ -384,7 +392,7 @@ a {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  transition: --glass-angle 0.7s var(--ease-out);
+  transition: --glass-angle 0.7s var(--ease-out), --glass-focus 0.7s var(--ease-out);
 }
 .glass-frame::before, .glass-frame::after {
   content: "";
@@ -396,7 +404,7 @@ a {
 }
 .glass-frame::before {
   padding: 1.5px;
-  background: conic-gradient(from var(--glass-angle), rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.1) 11%, rgba(255, 255, 255, 0.04) 39%, rgba(255, 255, 255, 0.42) 50%, rgba(255, 255, 255, 0.04) 61%, rgba(255, 255, 255, 0.1) 89%, rgba(255, 255, 255, 0.95));
+  background: conic-gradient(from var(--glass-angle), color-mix(in srgb, rgba(255, 255, 255, 0.95) calc(var(--glass-focus) * 100%), rgba(255, 255, 255, 0.36)), color-mix(in srgb, rgba(255, 255, 255, 0.1) calc(var(--glass-focus) * 100%), rgba(255, 255, 255, 0.36)) 11%, color-mix(in srgb, rgba(255, 255, 255, 0.04) calc(var(--glass-focus) * 100%), rgba(255, 255, 255, 0.36)) 39%, color-mix(in srgb, rgba(255, 255, 255, 0.42) calc(var(--glass-focus) * 100%), rgba(255, 255, 255, 0.36)) 50%, color-mix(in srgb, rgba(255, 255, 255, 0.04) calc(var(--glass-focus) * 100%), rgba(255, 255, 255, 0.36)) 61%, color-mix(in srgb, rgba(255, 255, 255, 0.1) calc(var(--glass-focus) * 100%), rgba(255, 255, 255, 0.36)) 89%, color-mix(in srgb, rgba(255, 255, 255, 0.95) calc(var(--glass-focus) * 100%), rgba(255, 255, 255, 0.36)));
   -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
   -webkit-mask-composite: xor;
   mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
@@ -454,7 +462,7 @@ a {
   pointer-events: auto;
   -webkit-backdrop-filter: blur(14px) saturate(170%);
   backdrop-filter: blur(14px) saturate(170%);
-  transition: box-shadow 0.4s ease, --glass-angle 0.7s var(--ease-out);
+  transition: box-shadow 0.4s ease, --glass-angle 0.7s var(--ease-out), --glass-focus 0.7s var(--ease-out);
 }
 .is-scrolled .dock {
   box-shadow: var(--glass-shadow), 0 8px 24px -10px rgba(0, 0, 0, 0.35);
@@ -1345,8 +1353,8 @@ a {
   .js [data-reveal] {
     opacity: 0;
     transform: translate3d(0, 12px, 0);
-    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out), --glass-angle 0.7s var(--ease-out), --glass-gleam 0.5s ease;
-    transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0ms, 0ms;
+    transition: opacity 0.8s var(--ease-out), transform 0.8s var(--ease-out), --glass-angle 0.7s var(--ease-out), --glass-focus 0.7s var(--ease-out), --glass-gleam 0.5s ease;
+    transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0ms, 0ms, 0ms;
   }
   .js [data-reveal].is-visible {
     opacity: 1;
