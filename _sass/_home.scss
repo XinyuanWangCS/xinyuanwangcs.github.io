@@ -1,0 +1,87 @@
+/*******************************************************************************
+ * Home: hero (name, greeting, bio, links, portrait).
+ ******************************************************************************/
+
+.hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(220px, 26vw, 284px);
+  gap: clamp(32px, 6vw, 72px);
+  align-items: center;
+  padding: calc(var(--dock-top) + var(--dock-h) + clamp(48px, 7vw, 88px)) 4px 0;
+}
+
+.hero__name {
+  font-size: clamp(38px, 2.4vw + 26px, 54px);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -0.038em;
+  // a faint tonal falloff, like light across a surface
+  background: linear-gradient(180deg, var(--fg) 30%, color-mix(in srgb, var(--fg) 74%, var(--bg)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.hero__greeting {
+  margin-top: 12px;
+  color: var(--fg-2);
+  font-size: clamp(17px, 0.3vw + 15.6px, 19px);
+  letter-spacing: -0.012em;
+}
+
+.hero__bio {
+  max-width: 35em;
+  margin-top: clamp(28px, 3.5vw, 40px);
+  color: var(--fg-2);
+  font-size: 16.5px;
+  line-height: 1.72;
+}
+
+.hero-social {
+  margin-top: 32px;
+}
+
+.social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.hero__portrait {
+  margin: 4px 0 0;
+  aspect-ratio: 4 / 5;
+  border-radius: 26px;
+  background: var(--line);
+  box-shadow: 0 0 0 1px var(--glass-edge), 0 34px 70px -34px rgb(0 0 0 / 0.7);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media (max-width: 719px) {
+  .hero {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .hero__portrait {
+    grid-row: 1;
+    width: min(56%, 220px);
+    margin: 0 0 32px;
+    border-radius: 22px;
+  }
+
+  .hero__bio {
+    margin-top: 24px;
+  }
+
+  .hero-social {
+    margin-top: 28px;
+  }
+}

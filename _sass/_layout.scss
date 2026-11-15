@@ -1,53 +1,323 @@
-/******************************************************************************
- * Content
+/*******************************************************************************
+ * Layout: container, floating dock, sections, page heads, footer.
  ******************************************************************************/
-
-body {
-  padding-bottom: 70px;
-  color: var(--global-text-color);
-  background-color: var(--global-bg-color);
-  background-image: var(--global-bg-glow);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-
-  h1, h2, h3, h4, h5, h6 {
-    scroll-margin-top: 66px;
-  }
-}
-
-body.fixed-top-nav {
-  // Add some padding for the nav-bar.
-  padding-top: 56px;
-}
-
-body.sticky-bottom-footer {
-  // Remove padding below footer.
-  padding-bottom: 0;
-}
 
 .container {
-  max-width: $max-content-width;
+  width: 100%;
+  max-width: calc(var(--page-max) + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
 }
 
-// Profile
-.profile {
-  img {
-    width: 100%;
+.site-main {
+  flex: 1 0 auto;
+}
+
+/* ------------------------------------------------------------------ dock -- */
+
+// A floating glass capsule with the navigation. A lighter "lens" marks the
+// current page and glides to whichever item is hovered.
+.site-header {
+  position: fixed;
+  top: var(--dock-top);
+  left: 0;
+  right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding-inline: 12px;
+  pointer-events: none;
+}
+
+.dock {
+  --glass-radius: 999px;
+  display: flex;
+  align-items: center;
+  height: var(--dock-h);
+  padding: 4px;
+  background: var(--glass-fill-dock);
+  pointer-events: auto;
+  -webkit-backdrop-filter: blur(14px) saturate(170%);
+  backdrop-filter: blur(14px) saturate(170%);
+  transition: box-shadow 0.4s ease, --glass-angle 0.7s var(--ease-out);
+
+  .is-scrolled & {
+    box-shadow: var(--glass-shadow), 0 8px 24px -10px rgb(0 0 0 / 0.35);
   }
 }
 
-// TODO: redefine content layout.
+.dock__list {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
 
+.dock__item {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  height: calc(var(--dock-h) - 8px);
+  padding: 0 15px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  color: var(--fg-2);
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.006em;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: color 0.3s ease;
 
-/******************************************************************************
- * Publications
- ******************************************************************************/
+  &:hover,
+  &[aria-current="page"] {
+    color: var(--fg);
+  }
+}
 
-// TODO: redefine publications layout.
+.dock__item--name {
+  color: var(--fg);
+  font-weight: 600;
+}
 
+.dock__divider {
+  width: 1px;
+  height: 18px;
+  margin: 0 4px;
+  background: var(--line-2);
+}
 
-/*****************************************************************************
-* Projects
-*****************************************************************************/
+.dock__theme {
+  width: calc(var(--dock-h) - 8px);
+  justify-content: center;
+  padding: 0;
 
-// TODO: redefine projects layout.
+  .icon {
+    width: 17px;
+    height: 17px;
+    transition: transform 0.7s var(--ease-out);
+  }
+
+  :root:not([data-theme="dark"]) & .icon {
+    transform: rotate(180deg);
+  }
+}
+
+.dock__lens {
+  position: absolute;
+  top: 4px;
+  left: 0;
+  width: var(--lens-w, 0);
+  height: calc(var(--dock-h) - 8px);
+  border-radius: 999px;
+  background: var(--lens-fill);
+  box-shadow: inset 0 1px 0 var(--lens-rim), inset 0 0 0 1px var(--glass-edge), 0 2px 10px -4px rgb(0 0 0 / 0.35);
+  opacity: 0;
+  transform: translateX(var(--lens-x, 0));
+  pointer-events: none;
+
+  &.is-ready {
+    opacity: 1;
+    transition: transform 0.55s var(--ease-spring), width 0.55s var(--ease-spring), opacity 0.3s ease;
+  }
+}
+
+@media (max-width: 420px) {
+  .dock__item {
+    padding: 0 11px;
+    font-size: 13.5px;
+  }
+}
+
+@media (max-width: 359px) {
+  .dock__item {
+    padding: 0 8px;
+    font-size: 13px;
+  }
+
+  .dock__theme {
+    width: 36px;
+  }
+}
+
+/* -------------------------------------------------------------- sections -- */
+
+.section {
+  margin-top: clamp(40px, 5vw, 56px);
+}
+
+.section__head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+  padding-inline: 4px;
+}
+
+.section__title {
+  font-size: 22px;
+  font-weight: 600;
+  line-height: 1.25;
+  letter-spacing: -0.022em;
+}
+
+.section__more {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--fg-3);
+  font-size: 13.5px;
+  font-weight: 500;
+  transition: color 0.25s ease;
+
+  .icon {
+    width: 14px;
+    height: 14px;
+    transition: transform 0.45s var(--ease-spring);
+  }
+
+  &:hover {
+    color: var(--fg);
+
+    .icon {
+      transform: translateX(3px);
+    }
+  }
+}
+
+// A glass sheet holding a list of rows.
+.sheet {
+  --glass-radius: 22px;
+  padding: 6px 0;
+}
+
+.sheet__prose {
+  padding: 16px 22px;
+}
+
+/* ------------------------------------------------------------ inner pages -- */
+
+.page__head {
+  padding: calc(var(--dock-top) + var(--dock-h) + clamp(56px, 8vw, 96px)) 4px 0;
+}
+
+.page__title {
+  font-size: clamp(34px, 2.4vw + 22px, 44px);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -0.032em;
+}
+
+.page__title--post {
+  max-width: 24em;
+  font-size: clamp(26px, 1.4vw + 18px, 32px);
+  line-height: 1.25;
+  letter-spacing: -0.024em;
+  text-wrap: balance;
+}
+
+.page__desc {
+  max-width: 40em;
+  margin-top: 12px;
+  color: var(--fg-2);
+  font-size: 16.5px;
+}
+
+.page__eyebrow {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 14px;
+  color: var(--fg-3);
+  font-size: 13.5px;
+  font-weight: 500;
+  font-variant-numeric: tabular-nums;
+
+  a {
+    color: var(--fg-2);
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--fg);
+    }
+  }
+}
+
+.page__actions {
+  margin-top: 24px;
+}
+
+.page__body {
+  margin-top: clamp(32px, 4vw, 48px);
+}
+
+.page__body > p,
+.page__body > .prose {
+  max-width: 40em;
+  padding-inline: 4px;
+  color: var(--fg-2);
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+// The first section on an inner page sits right under the page head.
+.page__body > .section:first-child,
+.page__body > div > .section:first-child {
+  margin-top: 0;
+}
+
+.post__card {
+  max-width: 44em;
+  padding: clamp(24px, 4vw, 36px);
+}
+
+.post__content {
+  color: var(--fg);
+  font-size: clamp(18px, 0.5vw + 15px, 21px);
+  line-height: 1.6;
+  letter-spacing: -0.012em;
+}
+
+.post__back {
+  margin-top: 28px;
+  padding-inline: 4px;
+
+  .section__more:hover .icon {
+    transform: translateX(-3px);
+  }
+}
+
+/* ---------------------------------------------------------------- footer -- */
+
+.site-footer {
+  margin-top: clamp(80px, 12vw, 140px);
+}
+
+.site-footer__inner {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 32px;
+  padding: 24px 4px 36px;
+  border-top: 1px solid var(--line);
+  color: var(--fg-3);
+  font-size: 13px;
+
+  a {
+    color: var(--fg-2);
+    text-decoration: underline;
+    text-decoration-color: var(--line-2);
+    text-underline-offset: 0.22em;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+
+    &:hover {
+      color: var(--fg);
+      text-decoration-color: currentColor;
+    }
+  }
+}

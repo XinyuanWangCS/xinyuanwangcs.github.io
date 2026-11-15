@@ -10,27 +10,25 @@
   </head>
 
   <!-- Body -->
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
+  <body class="layout-{{ page.layout | default: 'default' }}">
+    <div class="ambient" aria-hidden="true"></div>
+    <a class="skip-link" href="#main">Skip to content</a>
 
     <!-- Header -->
     {%- include header.html %}
 
     <!-- Content -->
-    <div class="container mt-5">
+    <main id="main" class="site-main">
       {{ content }}
-    </div>
+    </main>
 
     <!-- Footer -->
     {%- include footer.html %}
 
     <!-- JavaScripts -->
-    {% include scripts/jquery.html %}
-    {% include scripts/bootstrap.html %}
-    {% include scripts/masonry.html %}
-    {% include scripts/misc.html %}
-    {% include scripts/badges.html %}
+    {%- if page.math %}
     {% include scripts/mathjax.html %}
+    {%- endif %}
     {% include scripts/analytics.html %}
-    {% include scripts/progressBar.html %}
   </body>
 </html>

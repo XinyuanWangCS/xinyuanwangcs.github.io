@@ -1,0 +1,170 @@
+/*******************************************************************************
+ * CV: facts (map), timeline (time_table), plain lists — rows in glass sheets.
+ ******************************************************************************/
+
+%cv-row {
+  position: relative;
+  display: grid;
+  grid-template-columns: 11rem minmax(0, 1fr);
+  column-gap: 20px;
+  padding: 15px 22px;
+
+  & + &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 22px;
+    right: 22px;
+    height: 1px;
+    background: var(--line);
+  }
+}
+
+%cv-label {
+  padding-top: 0.14em;
+  color: var(--fg-3);
+  font-size: 13.5px;
+  line-height: 1.55;
+  font-variant-numeric: tabular-nums;
+}
+
+.facts {
+  margin: 0;
+}
+
+.facts__row {
+  @extend %cv-row;
+
+  dt {
+    @extend %cv-label;
+  }
+
+  dd {
+    margin: 0;
+    color: var(--fg);
+    font-size: 15.5px;
+  }
+}
+
+.timeline {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.timeline__item {
+  @extend %cv-row;
+  padding-block: 18px;
+}
+
+.timeline__when {
+  @extend %cv-label;
+}
+
+.timeline__title {
+  color: var(--fg);
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.4;
+  letter-spacing: -0.016em;
+}
+
+.timeline__where {
+  margin-top: 2px;
+  color: var(--fg-2);
+  font-size: 15px;
+}
+
+.timeline__details {
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+  color: var(--fg-3);
+  font-size: 14px;
+  line-height: 1.6;
+
+  li {
+    position: relative;
+    padding-left: 15px;
+  }
+
+  li + li {
+    margin-top: 2px;
+  }
+
+  li::before {
+    content: "";
+    position: absolute;
+    top: 0.72em;
+    left: 1px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: currentColor;
+    opacity: 0.6;
+  }
+
+  ul {
+    margin: 4px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+// Rows without a title (e.g. Honors and Awards) lead with their items.
+.timeline__details--lead {
+  margin-top: 0;
+  color: var(--fg);
+  font-size: 15.5px;
+
+  li {
+    padding-left: 0;
+  }
+
+  li::before {
+    display: none;
+  }
+
+  li + li {
+    margin-top: 6px;
+  }
+}
+
+.timeline__subtitle {
+  color: var(--fg-2);
+  font-weight: 500;
+}
+
+.plain-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  > li {
+    @extend %cv-row;
+    display: block;
+  }
+}
+
+.plain-list__title {
+  font-weight: 600;
+}
+
+@media (max-width: 599px) {
+  .facts__row,
+  .timeline__item {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 4px;
+    padding-inline: 18px;
+
+    & + &::before {
+      left: 18px;
+      right: 18px;
+    }
+  }
+
+  .facts__row dt,
+  .timeline__when {
+    padding-top: 0;
+  }
+}

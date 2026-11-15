@@ -1,59 +1,37 @@
-<ul class="card-text font-weight-light list-group list-group-flush">
-    {% for content in entry.contents %}
-      <li class="list-group-item">
-        <div class="row">
-          {% if content.year %}
-            <div class="col-xs-2 cl-sm-2 col-md-2 text-center" style="width: 75px;">
-              <span class="badge font-weight-bold danger-color-dark text-uppercase align-middle" style="min-width: 75px;">
-                {{ content.year }}
-              </span>
-            </div>
-          {% endif %}
-          <div class="col-xs-10 cl-sm-10 col-md-10 mt-2 mt-md-0">
-            {% if content.title %}
-            <h6 class="title font-weight-bold ml-1 ml-md-4">{{content.title}}</h6>
-            {% endif %}
-            {% if content.institution %}
-            <h6 class="ml-1 ml-md-4" style="font-size: 0.95rem;">{{content.institution}}</h6>
-            {% endif %}
-            {% if content.description %}
-              <ul class="items">
-                {% for item in content.description %}
-                  <li>
-                    {% if item.contents %}
-                      <span class="item-title">{{ item.title }}</span>
-                      <ul class="subitems">
-                      {% for subitem in item.contents %}
-                        <li><span class="subitem">{{ subitem }}</span></li>
-                      {% endfor %}
-                      </ul>
-                    {% else %}
-                      <span class="item">{{ item }}</span>
-                    {% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-            {% if content.items %}
-              <ul class="items">
-                {% for item in content.items %}
-                  <li>
-                    {% if item.contents %}
-                      <span class="item-title">{{ item.title }}</span>
-                      <ul class="subitems">
-                      {% for subitem in item.contents %}
-                        <li><span class="subitem">{{ subitem }}</span></li>
-                      {% endfor %}
-                      </ul>
-                    {% else %}
-                      <span class="item">{{ item }}</span>
-                    {% endif %}
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endif %}
-          </div>
-        </div>
-      </li>
-    {% endfor %}
-    </ul>
+<ol class="timeline" role="list">
+  {%- assign detail_keys = "description,items" | split: "," %}
+  {%- for content in entry.contents %}
+  <li class="timeline__item">
+    <p class="timeline__when">{{ content.year }}</p>
+    <div class="timeline__body">
+      {%- if content.title %}
+      <h3 class="timeline__title">{{ content.title }}</h3>
+      {%- endif %}
+      {%- if content.institution %}
+      <p class="timeline__where">{{ content.institution }}</p>
+      {%- endif %}
+      {%- for key in detail_keys %}
+      {%- assign details = content[key] %}
+      {%- if details %}
+      <ul class="timeline__details{% unless content.title %} timeline__details--lead{% endunless %}" role="list">
+        {%- for item in details %}
+        <li>
+          {%- if item.contents -%}
+          <span class="timeline__subtitle">{{ item.title }}</span>
+          <ul role="list">
+            {%- for subitem in item.contents %}
+            <li>{{ subitem }}</li>
+            {%- endfor %}
+          </ul>
+          {%- else -%}
+          {{ item }}
+          {%- endif -%}
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+      {%- endfor %}
+    </div>
+  </li>
+  {%- endfor %}
+</ol>

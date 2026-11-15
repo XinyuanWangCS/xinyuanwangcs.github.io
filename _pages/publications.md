@@ -8,11 +8,15 @@ nav: true
 nav_order: 1
 ---
 <!-- _pages/publications.md -->
-<div class="publications">
-
+<div class="publications publications--by-year">
 {%- for y in page.years %}
-  <h2 class="year">{{y}}</h2>
-  {% bibliography -f papers -q @*[year={{y}}]* %}
-{% endfor %}
-
+<section class="section" id="y{{ y }}" aria-labelledby="y{{ y }}-title">
+<header class="section__head">
+<h2 class="section__title section__title--year" id="y{{ y }}-title">{{ y }}</h2>
+</header>
+<div class="section__body">
+{% bibliography -f papers -q @*[year={{y}}]* %}
+</div>
+</section>
+{%- endfor %}
 </div>

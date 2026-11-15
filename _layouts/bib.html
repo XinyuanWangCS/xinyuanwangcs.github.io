@@ -1,233 +1,179 @@
 ---
 ---
 <!-- _layouts/bib.html -->
-      <div class="row">
-        <div class="col-sm-4 {% if entry.preview %}preview{% else %}abbr{% endif %}">
-        {%- if entry.preview -%}
-          {% if entry.preview contains '://' -%}
-          <img class="preview z-depth-1 rounded" src="{{ entry.preview }}">
-          {%- else -%}
-            {%- assign entry_path = entry.preview | prepend: '/assets/img/publication_preview/' -%}
-            {% include figure.html
-            path=entry_path
-            class="preview z-depth-1 rounded"
-            alt=entry.preview -%}
-          {%- endif -%}
-        {%- elsif entry.abbr -%}
-          {%- if site.data.venues[entry.abbr] -%}
-            {%- assign venue_style = nil -%}
-            {%- if site.data.venues[entry.abbr].color != blank -%}
-              {%- assign venue_style = site.data.venues[entry.abbr].color | prepend: 'style="background-color:' | append: '"' -%}
-            {%- endif -%}
-            <abbr class="badge" {% if venue_style %}{{venue_style}}{% endif %}><a href="{{site.data.venues[entry.abbr].url}}">{{entry.abbr}}</a></abbr>
-          {%- else -%}
-            <abbr class="badge">{{entry.abbr}}</abbr>
-          {%- endif -%}
-        {%- endif -%}
-        </div>
+{%- comment -%}
+  One publication, rendered by jekyll-scholar for every bibliography entry.
+  Liquid keeps assigned variables between entries, so everything that is set
+  conditionally is reset first.
+{%- endcomment -%}
+{%- assign primary_url = nil -%}
+{%- assign authors_short = nil -%}
+{%- assign hidden_count = 0 -%}
+{%- assign self_index = -1 -%}
 
-        <!-- Entry bib key -->
-        <div id="{{entry.key}}" class="col-sm-8">
-        <!-- Title -->
-        <div class="title">{{entry.title}}</div>
-        <!-- Author -->
-        <div class="author">
-        {% assign author_array_size = entry.author_array | size %}
+{%- comment -%} Where the title and figure point: project page first, then canonical URL. {%- endcomment -%}
+{%- assign primary_url = entry.website | default: entry.url | default: entry.html -%}
+{%- if primary_url == nil or primary_url == "" -%}
+  {%- if entry.arxiv -%}
+    {%- capture primary_url -%}https://arxiv.org/abs/{{ entry.arxiv }}{%- endcapture -%}
+  {%- elsif entry.doi -%}
+    {%- capture primary_url -%}https://doi.org/{{ entry.doi }}{%- endcapture -%}
+  {%- endif -%}
+{%- endif -%}
 
-        {% assign author_array_limit = author_array_size %}
-        {%- if site.max_author_limit and author_array_size > site.max_author_limit %}
-          {% assign author_array_limit = site.max_author_limit %}
-        {% endif %}
+{%- comment -%} Authors: find "me", then build the full list and, for long lists, a short one that still shows me. {%- endcomment -%}
+{%- assign authors = entry.author_array -%}
+{%- assign author_count = authors | size -%}
+{%- assign author_limit = site.max_author_limit | default: author_count -%}
+{%- for author in authors -%}
+  {%- assign author_last = author.last | remove: "¶" | remove: "&" | remove: "*" | remove: "†" | remove: "^" -%}
+  {%- if site.scholar.last_name contains author_last and site.scholar.first_name contains author.first -%}
+    {%- assign self_index = forloop.index0 -%}
+  {%- endif -%}
+{%- endfor -%}
 
-        {%- for author in entry.author_array limit: author_array_limit -%}
-          {%- assign author_is_self = false -%}
-          {%- assign author_last_name = author.last | remove: "¶" | remove: "&" | remove: "*" | remove: "†" | remove: "^" -%}
-          {%- if site.scholar.last_name contains author_last_name -%}
-            {%- if site.scholar.first_name contains author.first -%}
-              {%- assign author_is_self = true -%}
-            {%- endif -%}
-          {%- endif -%}
-          {%- assign coauthor_url = nil -%}
-          {%- if site.data.coauthors[author_last_name] -%}
-            {%- for coauthor in site.data.coauthors[author_last_name] -%}
-              {%- if coauthor.firstname contains author.first -%}
-                {%- assign coauthor_url = coauthor.url -%}
-                {%- break -%}
-              {%- endif -%}
-            {%- endfor -%}
-          {%- endif -%}
+{%- capture authors_full -%}
+  {%- for author in authors -%}
+    {%- assign author_name = author.first | append: " " | append: author.last | strip -%}
+    {%- if forloop.index0 == self_index -%}<span class="pub__self">{{ author_name }}</span>{%- else -%}{{ author_name }}{%- endif -%}
+    {%- unless forloop.last -%}, {% endunless -%}
+  {%- endfor -%}
+{%- endcapture -%}
 
-          {%- if forloop.length > 1 -%}
-            {%- if forloop.first == false -%},&nbsp;{%- endif -%}
-            {%- if forloop.last and author_array_limit == author_array_size -%}and&nbsp;{%- endif -%}
-          {%- endif -%}
-          {%- if author_is_self -%}
-            <em>{{author.first}} {{author.last}}</em>
-          {%- else -%}
-            {%- if coauthor_url -%}
-              <a href="{{coauthor_url}}">{{author.first}} {{author.last}}</a>
-            {%- else -%}
-              {{author.first}} {{author.last}}
-            {%- endif -%}
-          {%- endif -%}
-        {%- endfor -%}
-        {%- assign more_authors = author_array_size | minus: author_array_limit -%}
+{%- assign author_threshold = author_limit | plus: 1 -%}
+{%- if author_count > author_threshold -%}
+  {%- assign hidden_count = author_count | minus: author_limit -%}
+  {%- if self_index >= author_limit -%}
+    {%- assign hidden_count = hidden_count | minus: 1 -%}
+  {%- endif -%}
+  {%- capture authors_short -%}
+    {%- for author in authors limit: author_limit -%}
+      {%- assign author_name = author.first | append: " " | append: author.last | strip -%}
+      {%- if forloop.index0 == self_index -%}<span class="pub__self">{{ author_name }}</span>{%- else -%}{{ author_name }}{%- endif -%}
+      {%- unless forloop.last -%}, {% endunless -%}
+    {%- endfor -%}
+    {%- if self_index >= author_limit -%}
+      {%- assign self_author = authors[self_index] -%}
+      {%- assign author_name = self_author.first | append: " " | append: self_author.last | strip -%}
+      , &hellip; <span class="pub__self">{{ author_name }}</span>
+    {%- endif -%}
+  {%- endcapture -%}
+{%- endif -%}
 
-        {%- assign more_authors_hide = more_authors | append: " more author" -%}
-        {%- if more_authors > 0 -%}
-          {%- if more_authors > 1 -%}
-            {%- assign more_authors_hide = more_authors_hide | append: "s" -%}
-          {%- endif -%}
-          {%- assign more_authors_show = '' -%}
-          {%- for author in entry.author_array offset: author_array_limit -%}
-            {%- assign more_authors_show = more_authors_show | append: author.first | append: " " | append: author.last -%}
-            {%- unless forloop.last -%}
-              {%- assign more_authors_show = more_authors_show | append: ", " -%}
-            {%- endunless -%}
-          {%- endfor -%}
-          , and
-          <span
-              class="more-authors"
-              title="click to view {{more_authors_hide}}"
-              onclick="
-                var element = $(this);
-                element.attr('title', '');
-                var more_authors_text = element.text() == '{{more_authors_hide}}' ? '{{more_authors_show}}' : '{{more_authors_hide}}';
-                var cursorPosition = 0;
-                var textAdder = setInterval(function(){
-                  element.text(more_authors_text.substring(0, cursorPosition + 1));
-                  if (++cursorPosition == more_authors_text.length){
-                    clearInterval(textAdder);
-                  }
-              }, '{{site.more_authors_animation_delay}}');
-              "
-          >{{more_authors_hide}}</span>
-        {%- endif -%}
+{%- if entry.preview -%}
+  {%- if entry.preview contains '://' -%}
+    {%- assign preview_src = entry.preview -%}
+  {%- else -%}
+    {%- assign preview_src = entry.preview | prepend: '/assets/img/publication_preview/' | relative_url -%}
+  {%- endif -%}
+{%- endif %}
+<article class="pub glass" id="{{ entry.key }}" data-reveal data-light data-refract="card">
+  {%- if entry.preview and primary_url %}
+  <a class="pub__plate" href="{{ primary_url }}" tabindex="-1" aria-hidden="true">
+    <img src="{{ preview_src }}" alt="" loading="lazy" decoding="async">
+  </a>
+  {%- elsif entry.preview %}
+  <div class="pub__plate" aria-hidden="true">
+    <img src="{{ preview_src }}" alt="" loading="lazy" decoding="async">
+  </div>
+  {%- else %}
+  {%- comment -%} No figure: a typographic cover with the project's short name, toned by venue type. {%- endcomment -%}
+  {%- assign cover_name = entry.title | split: ":" | first | strip -%}
+  {%- if cover_name.size > 32 -%}{%- assign cover_name = entry.abbr | default: cover_name | truncate: 32 -%}{%- endif -%}
+  {%- case entry.abbr -%}
+    {%- when "Technical report" -%}{%- assign cover_tone = "report" -%}
+    {%- when "Model release" -%}{%- assign cover_tone = "model" -%}
+    {%- else -%}{%- assign cover_tone = "paper" -%}
+  {%- endcase %}
+  <div class="pub__plate pub__plate--cover pub__plate--{{ cover_tone }}" aria-hidden="true"><span>{{ cover_name }}</span></div>
+  {%- endif %}
 
-        </div>
+  <div class="pub__body">
+    <p class="pub__meta">
+      <span class="pub__venue">
+        {%- if entry.abbr %}{{ entry.abbr }}{% endif -%}
+        {%- if entry.year %}<span class="pub__year"> {{ entry.year }}</span>{% endif -%}
+      </span>
+      {%- if entry.note %}
+        {%- assign notes = entry.note | split: ";" -%}
+        {%- for note in notes %}
+      <span class="pub__award">{{ note | strip }}</span>
+        {%- endfor %}
+      {%- endif %}
+    </p>
 
-        <!-- Journal/Book title and date -->
-        {% assign proceedings = "inproceedings,incollection" | split: ','%}
-        {% assign thesis = "thesis,mastersthesis,phdthesis" | split: ','%}
-        {% if entry.type == "article" -%}
-          {%- capture entrytype -%}<em>{{entry.journal}}</em>{%- endcapture -%}
-        {%- elsif proceedings contains entry.type -%}
-          {%- capture entrytype -%}<em>In {{entry.booktitle}}</em> {%- endcapture -%}
-        {%- elsif thesis contains entry.type -%}
-          {%- capture entrytype -%}<em>{{entry.school}}</em> {%- endcapture -%}
-        {%- else -%}
-          {%- capture entrytype -%}{%- endcapture -%}
-        {%- endif -%}
-        {%- if entry.month -%}
-          {%- capture entrymonth -%}{{ " " }}{{ entry.month | capitalize }}{%- endcapture -%}
-        {%- endif -%}
-        {%- if entry.year -%}
-          {%- capture entryyear -%}{{ " " }}{{entry.year}}{%- endcapture -%}
-        {%- endif -%}
-        {% assign entrytype_text = entrytype | strip_html | strip %}
-        {%- capture periodical -%}{{ entrytype }}{%- if entrytype_text != "" and entryyear != "" -%}, {%- endif -%}{{ entrymonth }}{{ entryyear }}{%- endcapture -%}
-        <div class="periodical">
-          {{ periodical | strip }}
-        </div>
-        <div class="periodical">
-          {{ entry.note | strip }}
-        </div>
+    <h3 class="pub__title">
+      {%- if primary_url -%}
+      <a href="{{ primary_url }}">{{ entry.title }}</a>
+      {%- else -%}
+      {{ entry.title }}
+      {%- endif -%}
+    </h3>
 
-          <!-- Links/Buttons -->
-          <div class="links">
-          {%- if entry.abstract %}
-            <a class="abstract btn btn-sm z-depth-0" role="button">Abs</a>
-          {%- endif %}
-          {%- if entry.arxiv %}
-            <a href="http://arxiv.org/abs/{{ entry.arxiv }}" class="btn btn-sm z-depth-0" role="button">arXiv</a>
-          {%- endif %}
-          {%- if entry.bibtex_show %}
-            <a class="bibtex btn btn-sm z-depth-0" role="button">Bib</a>
-          {%- endif %}
-          {%- if entry.html %}
-            <a href="{{ entry.html }}" class="btn btn-sm z-depth-0" role="button">HTML</a>
-          {%- endif %}
-          {%- if entry.pdf %}
-            {% if entry.pdf contains '://' -%}
-            <a href="{{ entry.pdf }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
-            {%- else -%}
-            <a href="{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">PDF</a>
-            {%- endif %}
-          {%- endif %}
-          {%- if entry.supp %}
-            {% if entry.supp contains '://' -%}
-            <a href="{{ entry.supp }}" class="btn btn-sm z-depth-0" role="button">Supp</a>
-            {%- else -%}
-            <a href="{{ entry.supp | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Supp</a>
-            {%- endif %}
-          {%- endif %}
-          {%- if entry.blog %}
-            <a href="{{ entry.blog }}" class="btn btn-sm z-depth-0" role="button">Blog</a>
-          {%- endif %}
-          {%- if entry.code %}
-            <a href="{{ entry.code }}" class="btn btn-sm z-depth-0" role="button">Code</a>
-          {%- endif %}
-          {%- if entry.poster %}
-            {% if entry.poster contains '://' -%}
-            <a href="{{ entry.poster }}" class="btn btn-sm z-depth-0" role="button">Poster</a>
-            {%- else -%}
-            <a href="{{ entry.poster | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Poster</a>
-            {%- endif %}
-          {%- endif %}
-          {%- if entry.slides %}
-            {% if entry.slides contains '://' -%}
-            <a href="{{ entry.slides }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
-            {%- else -%}
-            <a href="{{ entry.slides | prepend: '/assets/pdf/' | relative_url }}" class="btn btn-sm z-depth-0" role="button">Slides</a>
-            {%- endif %}
-          {%- endif %}
-          {%- if entry.website %}
-            <a href="{{ entry.website }}" class="btn btn-sm z-depth-0" role="button">Website</a>
-          {%- endif %}
-          </div>
-          {% if site.badges %}
-          <div class="badges">
-            {%- if site.badges.altmetric_badge %}
-            <span class="altmetric-embed" data-hide-no-mentions="true" data-hide-less-than="15" data-badge-type="2" data-badge-popover="right"
-              {% if entry.eprint %}
-                data-arxiv-id="{{ entry.eprint }}"
-              {% elsif entry.doi %}
-                data-doi="{{ entry.doi }}"
-              {% elsif entry.altmetric %}
-                data-altmetric-id="{{ entry.altmetric }}"
-              {% elsif entry.pmid %}
-                data-pmid="{{ entry.pmid }}"
-              {% elsif entry.isbn %}
-                data-isbn="{{ entry.isbn }}"
-              {% endif %}
-              ></span>
-            {%- endif %}
-            {%- if site.badges.dimensions_badge %}
-              <span class="__dimensions_badge_embed__"
-              {% if entry.doi %}
-                data-doi="{{ entry.doi }}"
-              {% else if entry.pmid %}
-                data-pmid="{{ entry.pmid }}"
-              {% else %}
-                data-id="{{ entry.dimensions }}"
-              {% endif %}
-              data-hide-zero-citations="true" data-style="small_rectangle" data-legend="hover-right" style="margin-bottom: 6px;"></span>
-            {%- endif %}
-          </div>
-          {%- endif %}
+    <p class="pub__authors">
+      {%- if authors_short -%}
+      <span data-authors-short>{{ authors_short }}</span><span data-authors-full hidden>{{ authors_full }}</span>
+      <button type="button" class="pub__more" data-authors-toggle aria-expanded="false" data-label="+{{ hidden_count }} more">+{{ hidden_count }} more</button>
+      {%- else -%}
+      {{ authors_full }}
+      {%- endif -%}
+    </p>
 
-          {% if entry.abstract -%}
-          <!-- Hidden abstract block -->
-          <div class="abstract hidden">
-            <p>{{ entry.abstract }}</p>
-          </div>
-          {%- endif -%}
+    <div class="pub__links">
+      {%- if entry.abstract %}
+      <button type="button" class="pub__link" aria-expanded="false" aria-controls="{{ entry.key }}-abstract" data-panel>Abstract</button>
+      {%- endif %}
+      {%- if entry.arxiv %}
+      <a class="pub__link" href="https://arxiv.org/abs/{{ entry.arxiv }}">arXiv</a>
+      {%- endif %}
+      {%- if entry.pdf %}
+      <a class="pub__link" href="{% if entry.pdf contains '://' %}{{ entry.pdf }}{% else %}{{ entry.pdf | prepend: '/assets/pdf/' | relative_url }}{% endif %}">PDF</a>
+      {%- endif %}
+      {%- if entry.html %}
+      <a class="pub__link" href="{{ entry.html }}">{% if entry.html contains 'openreview.net' %}OpenReview{% else %}HTML{% endif %}</a>
+      {%- endif %}
+      {%- if entry.code %}
+      <a class="pub__link" href="{{ entry.code }}">Code</a>
+      {%- endif %}
+      {%- if entry.website %}
+      <a class="pub__link" href="{{ entry.website }}">Website</a>
+      {%- endif %}
+      {%- if entry.blog %}
+      <a class="pub__link" href="{{ entry.blog }}">Blog</a>
+      {%- endif %}
+      {%- if entry.poster %}
+      <a class="pub__link" href="{% if entry.poster contains '://' %}{{ entry.poster }}{% else %}{{ entry.poster | prepend: '/assets/pdf/' | relative_url }}{% endif %}">Poster</a>
+      {%- endif %}
+      {%- if entry.slides %}
+      <a class="pub__link" href="{% if entry.slides contains '://' %}{{ entry.slides }}{% else %}{{ entry.slides | prepend: '/assets/pdf/' | relative_url }}{% endif %}">Slides</a>
+      {%- endif %}
+      {%- if entry.supp %}
+      <a class="pub__link" href="{% if entry.supp contains '://' %}{{ entry.supp }}{% else %}{{ entry.supp | prepend: '/assets/pdf/' | relative_url }}{% endif %}">Supp</a>
+      {%- endif %}
+      {%- if entry.bibtex_show %}
+      <button type="button" class="pub__link" aria-expanded="false" aria-controls="{{ entry.key }}-bibtex" data-panel>BibTeX</button>
+      {%- endif %}
+    </div>
 
-          {% if entry.bibtex_show -%}
-          <!-- Hidden bibtex block -->
-          <div class="bibtex hidden">
-            {% highlight bibtex %}{{ entry.bibtex | hideCustomBibtex }}{% endhighlight %}
-          </div>
-          {%- endif %}
+    {%- if entry.abstract %}
+    <div class="pub__panel" id="{{ entry.key }}-abstract" hidden>
+      <div class="pub__panel-inner">
+        <p class="pub__abstract">{{ entry.abstract }}</p>
+      </div>
+    </div>
+    {%- endif %}
+
+    {%- if entry.bibtex_show %}
+    <div class="pub__panel" id="{{ entry.key }}-bibtex" hidden>
+      <div class="pub__panel-inner">
+        <div class="pub__bibtex">
+          <pre id="{{ entry.key }}-bibtex-code"><code>{{ entry.bibtex | hideCustomBibtex | escape }}</code></pre>
+          <button type="button" class="pub__copy" data-copy="{{ entry.key }}-bibtex-code" aria-label="Copy BibTeX">
+            {% include icon.html name="copy" %}<span>Copy</span>
+          </button>
         </div>
       </div>
+    </div>
+    {%- endif %}
+  </div>
+</article>

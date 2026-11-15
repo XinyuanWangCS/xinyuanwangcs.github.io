@@ -1,5 +1,8 @@
-
-          <div class="publications">
-            <!-- {% bibliography -f papers -q @*[selected=true]* %}  -->
-            {% bibliography -f papers --max 10 %}
+{%- comment -%}
+  Homepage list: entries marked selected={true} in papers.bib come first,
+  then the ten most recent of the rest.
+{%- endcomment %}
+          <div class="publications publications--selected">
+            {% bibliography -f papers -q @*[selected=true] %}
+            {% bibliography -f papers -q @*[selected!=true] --max 10 %}
           </div>

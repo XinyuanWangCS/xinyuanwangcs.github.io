@@ -1,0 +1,109 @@
+/*******************************************************************************
+ * Motion: a quiet entrance, scroll reveal, theme crossfade. The wallpaper
+ * stays still on purpose: glass only re-renders while the page scrolls.
+ * All of it is skipped when the visitor prefers reduced motion.
+ ******************************************************************************/
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 10px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero__name,
+  .hero__greeting,
+  .hero__bio,
+  .hero__portrait,
+  .page__head > * {
+    animation: rise 0.9s var(--ease-out) both;
+    animation-delay: calc(var(--d, 0) * 70ms + 60ms);
+  }
+
+  .page__head > :nth-child(2) {
+    --d: 1;
+  }
+
+  .page__head > :nth-child(3) {
+    --d: 2;
+  }
+
+  // Scroll reveal: site.js adds .is-visible. If it never runs, the inline
+  // bootstrap in head.html drops .js after a few seconds and nothing stays hidden.
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+    transition:
+      opacity 0.8s var(--ease-out),
+      transform 0.8s var(--ease-out),
+      --glass-angle 0.7s var(--ease-out),
+      --glass-gleam 0.5s ease;
+    transition-delay: var(--reveal-delay, 0ms), var(--reveal-delay, 0ms), 0ms, 0ms;
+  }
+
+  .js [data-reveal].is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  // Page-to-page and theme changes crossfade where supported.
+  @view-transition {
+    navigation: auto;
+  }
+}
+
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 0.45s;
+  animation-timing-function: ease;
+}
+
+// Fallback for browsers without view transitions.
+.theme-fade,
+.theme-fade *,
+.theme-fade *::before,
+.theme-fade *::after {
+  transition: background-color 0.45s ease, color 0.45s ease, border-color 0.45s ease, box-shadow 0.45s ease !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+@media print {
+  .site-header,
+  .site-footer,
+  .skip-link,
+  .ambient,
+  .pub__links,
+  .pub__plate,
+  .section__more {
+    display: none !important;
+  }
+
+  .js [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .glass {
+    box-shadow: none !important;
+    background: none !important;
+  }
+}

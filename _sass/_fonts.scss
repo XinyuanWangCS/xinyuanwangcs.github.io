@@ -1,0 +1,23 @@
+/*******************************************************************************
+ * Self-hosted fonts. Licenses: assets/fonts/OFL.txt
+ ******************************************************************************/
+
+// Inter, variable in weight and optical size: large text automatically uses
+// the tighter display cut.
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/inter-latin-var.woff2") format("woff2");
+}
+
+// Only the glyphs of 王心远, so the Chinese name matches the Latin text.
+@font-face {
+  font-family: "XW Name SC";
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url("../fonts/noto-sans-sc-name.woff2") format("woff2");
+  unicode-range: U+5FC3, U+738B, U+8FDC;
+}

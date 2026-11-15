@@ -1,0 +1,61 @@
+/*******************************************************************************
+ * News list (inside a glass sheet).
+ ******************************************************************************/
+
+.news {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.news__item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 7.75rem minmax(0, 1fr);
+  column-gap: 20px;
+  padding: 14px 22px;
+
+  & + &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 22px;
+    right: 22px;
+    height: 1px;
+    background: var(--line);
+  }
+}
+
+.news__date {
+  padding-top: 0.12em;
+  color: var(--fg-3);
+  font-size: 13.5px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.news__text {
+  color: var(--fg-2);
+  font-size: 15.5px;
+  line-height: 1.6;
+  text-wrap: pretty;
+
+  strong,
+  b {
+    color: var(--fg);
+    font-weight: 600;
+  }
+}
+
+@media (max-width: 599px) {
+  .news__item {
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 2px;
+    padding: 14px 18px;
+
+    & + &::before {
+      left: 18px;
+      right: 18px;
+    }
+  }
+}

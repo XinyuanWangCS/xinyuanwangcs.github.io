@@ -1,0 +1,25 @@
+{%- comment -%}
+  Shared body of the jekyll-archives layouts (year / tag / category).
+  Params: eyebrow, title, description.
+{%- endcomment -%}
+<div class="container">
+  <article class="page">
+    <header class="page__head">
+      <p class="page__eyebrow">{{ include.eyebrow }}</p>
+      <h1 class="page__title page__title--post">{{ include.title }}</h1>
+      <p class="page__desc">{{ include.description }}</p>
+    </header>
+    <div class="page__body">
+      <div class="sheet glass" data-light data-refract="sheet">
+      <ol class="news" role="list">
+        {%- for post in page.posts %}
+        <li class="news__item">
+          <time class="news__date" datetime="{{ post.date | date: '%Y-%m-%d' }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+          <div class="news__text"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></div>
+        </li>
+        {%- endfor %}
+      </ol>
+      </div>
+    </div>
+  </article>
+</div>

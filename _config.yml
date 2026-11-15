@@ -15,7 +15,7 @@ footer_text: >
 keywords: Xinyuan Wang, HKU, UCSD, AI, NLP, Agent, VLM  # add your own keywords or leave empty
 
 lang: en # the language of your site (for example: en, fr, cn, ru, etc.)
-icon: ⚛️  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
+icon: favicon.svg  # the emoji used as the favicon (alternatively, provide image name in /assets/img/)
 
 url: https://xinyuanwangcs.github.io #https://xywang.github.io # the base hostname & protocol for your site
 baseurl: # the subpath of your site, e.g. /blog/
@@ -171,7 +171,7 @@ collections:
     permalink: /projects/:path/
 
 news_scrollable: true # adds a vertical scroll bar if there are more than 3 news items
-news_limit: 5 # leave blank to include all the news in the `_news` folder
+news_limit: 8 # leave blank to include all the news in the `_news` folder
 
 # -----------------------------------------------------------------------------
 # Jekyll settings
