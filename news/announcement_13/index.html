@@ -42,15 +42,18 @@
     <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
     <!-- Styles & scripts -->
-    <link rel="stylesheet" href="/assets/css/main.css?v=1794744320">
+    <link rel="stylesheet" href="/assets/css/main.css?v=1794762100">
     <link rel="canonical" href="https://xinyuanwangcs.github.io/news/announcement_13/">
-    <script defer src="/assets/js/site.js?v=1794744320"></script>
+    <script defer src="/assets/js/site.js?v=1794762100"></script>
+    <script defer src="/assets/js/seaside.js?v=1794762100"></script>
+    <script defer src="/assets/js/pixels.js?v=1794762100"></script>
 
   </head>
 
   <!-- Body -->
   <body class="layout-post">
     <div class="ambient" aria-hidden="true"></div>
+    <canvas class="agent" aria-hidden="true" data-agent></canvas>
     <a class="skip-link" href="#main">Skip to content</a>
 
     <!-- Header -->    <header class="site-header" data-header>
@@ -68,8 +71,8 @@
           </li>
         </ul>
         <span class="dock__divider" aria-hidden="true"></span>
-        <button class="dock__item dock__theme" type="button" data-theme-toggle aria-label="Switch between dark and light theme" title="Switch theme">
-          <svg class="icon" viewbox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="8.25" fill="none" stroke="currentColor" stroke-width="1.6"></circle><path d="M12 3.75a8.25 8.25 0 0 1 0 16.5Z" fill="currentColor"></path></svg>
+        <button class="daynight" type="button" role="switch" aria-checked="false" aria-label="Dark theme" title="Switch theme" data-theme-toggle>
+          <canvas aria-hidden="true"></canvas>
         </button>
       </nav>
     </header>
@@ -102,6 +105,7 @@
 
     <!-- Footer -->    <footer class="site-footer">
       <div class="container">
+        <div class="shelf" aria-hidden="true" data-shelf><canvas></canvas></div>
         <div class="site-footer__inner">
           <p>© 2026 Xinyuan  Wang</p>
           <p class="site-footer__note">
