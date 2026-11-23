@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="dark">
 
   <!-- Head -->
   <head>
@@ -19,16 +19,17 @@
 
     <!-- Theme bootstrap: runs before first paint so there is no flash of the wrong theme -->
     <meta name="color-scheme" content="light dark">
-    <meta name="theme-color" content="#eef2f7">
+    <meta name="theme-color" content="#05080e">
     <script>
       (function () {
         var d = document.documentElement, t;
-        try { t = localStorage.getItem("theme"); } catch (e) {}
-        if (t !== "light" && t !== "dark") t = "light";
+        // dark unless the visitor has switched to light (see site.js)
+        try { t = localStorage.getItem("theme-choice"); } catch (e) {}
+        if (t !== "light" && t !== "dark") t = "dark";
         d.setAttribute("data-theme", t);
         d.classList.add("js");
         // Browser UI color; site.js keeps it in sync with --bg afterwards.
-        if (t === "dark") document.querySelector('meta[name="theme-color"]').setAttribute("content", "#05080e");
+        if (t === "light") document.querySelector('meta[name="theme-color"]').setAttribute("content", "#eef2f7");
         // If site.js never runs, don't leave scroll-reveal content hidden.
         setTimeout(function () { if (!window.__siteReady) d.classList.remove("js"); }, 3000);
       })();
@@ -42,11 +43,11 @@
     <link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
 
     <!-- Styles & scripts -->
-    <link rel="stylesheet" href="/assets/css/main.css?v=1794763315">
+    <link rel="stylesheet" href="/assets/css/main.css?v=1795397879">
     <link rel="canonical" href="https://xinyuanwangcs.github.io/news/">
-    <script defer src="/assets/js/site.js?v=1794763315"></script>
-    <script defer src="/assets/js/seaside.js?v=1794763315"></script>
-    <script defer src="/assets/js/pixels.js?v=1794763315"></script>
+    <script defer src="/assets/js/site.js?v=1795397879"></script>
+    <script defer src="/assets/js/seaside.js?v=1795397879"></script>
+    <script defer src="/assets/js/pixels.js?v=1795397879"></script>
 
   </head>
 
@@ -72,7 +73,7 @@
           </li>
         </ul>
         <span class="dock__divider" aria-hidden="true"></span>
-        <button class="daynight" type="button" role="switch" aria-checked="false" aria-label="Dark theme" title="Switch theme" data-theme-toggle>
+        <button class="daynight" type="button" role="switch" aria-checked="true" aria-label="Dark theme" title="Switch theme" data-theme-toggle>
           <canvas aria-hidden="true"></canvas>
         </button>
       </nav>
