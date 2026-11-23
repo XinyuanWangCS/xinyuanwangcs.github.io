@@ -3,20 +3,21 @@
 
     <!-- Theme bootstrap: runs before first paint so there is no flash of the wrong theme -->
     <meta name="color-scheme" content="light dark">
-    <meta name="theme-color" content="#eef2f7">
+    <meta name="theme-color" content="{% if site.enable_darkmode %}#05080e{% else %}#eef2f7{% endif %}">
     <script>
       (function () {
         var d = document.documentElement, t;
         {%- if site.enable_darkmode %}
-        try { t = localStorage.getItem("theme"); } catch (e) {}
-        if (t !== "light" && t !== "dark") t = "light";
+        // dark unless the visitor has switched to light (see site.js)
+        try { t = localStorage.getItem("theme-choice"); } catch (e) {}
+        if (t !== "light" && t !== "dark") t = "dark";
         {%- else %}
         t = "light";
         {%- endif %}
         d.setAttribute("data-theme", t);
         d.classList.add("js");
         // Browser UI color; site.js keeps it in sync with --bg afterwards.
-        if (t === "dark") document.querySelector('meta[name="theme-color"]').setAttribute("content", "#05080e");
+        if (t === "light") document.querySelector('meta[name="theme-color"]').setAttribute("content", "#eef2f7");
         // If site.js never runs, don't leave scroll-reveal content hidden.
         setTimeout(function () { if (!window.__siteReady) d.classList.remove("js"); }, 3000);
       })();

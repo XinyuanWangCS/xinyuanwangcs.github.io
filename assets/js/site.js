@@ -25,6 +25,8 @@
 
   /* 1. Theme ------------------------------------------------------------- */
 
+  // Dark unless the visitor switches to light. The choice is remembered, and
+  // the inline snippet in head.html applies it before first paint.
   var themeColor = document.querySelector('meta[name="theme-color"]');
 
   function syncThemeColor() {
@@ -35,7 +37,7 @@
   function setTheme(theme) {
     root.setAttribute("data-theme", theme);
     try {
-      localStorage.setItem("theme", theme);
+      localStorage.setItem("theme-choice", theme);
     } catch (e) {}
     syncThemeColor();
   }
