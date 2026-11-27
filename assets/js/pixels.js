@@ -903,13 +903,26 @@
       range.selectNodeContents(title);
       var lines = range.getClientRects(), last = lines[lines.length - 1];
       var room = last ? box(title.parentNode).right - (last.right + window.scrollX) : 0;
-      agentScale = window.innerWidth >= 900 && room >= 58 * 3 + 28 ? 3 : 2;
-      if (room >= 58 * agentScale + 28) {
-        // Inter's ascent is 0.969 em and its descent 0.242 em
+      agentScale = window.innerWidth >= 900 && room >= 58 * 3 + 16 * 3 ? 3 : 2;
+      if (room >= 58 * agentScale + 16 * agentScale) {
+        // centred on the title's capitals, a little way after it (Inter's
+        // ascent is 0.969 em, its descent 0.242 em and its capitals 0.727 em)
         var style = getComputedStyle(title), size = parseFloat(style.fontSize);
         var leading = (parseFloat(style.lineHeight) / size || 1.1) - 1.211;
         var baseline = box(title).bottom - (leading / 2 + 0.242) * size;
-        return { left: last.right + window.scrollX + 24, bottom: baseline + agentScale };
+        var left = last.right + window.scrollX + 16 * agentScale, right = left + 58 * agentScale;
+        var bottom = baseline - 0.364 * size + 16 * agentScale;
+        // but above whatever follows the title and would lie under it (judged
+        // by its text, as its box runs the full width), like the CV's
+        // Download PDF chip
+        for (var next = title.nextElementSibling; next; next = next.nextElementSibling) {
+          range.selectNodeContents(next);
+          var under = [].some.call(range.getClientRects(), function (r) {
+            return r.width && r.right + window.scrollX > left && r.left + window.scrollX < right;
+          });
+          if (under) bottom = Math.min(bottom, box(next).top - 8);
+        }
+        return { left: left, bottom: bottom };
       }
     }
     var portrait = document.querySelector(".hero__portrait"), text = document.querySelector(".hero__text");
